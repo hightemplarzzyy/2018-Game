@@ -1,6 +1,5 @@
 #include <window.h>
 #include <iostream>
-using namespace std;
 
 void window_resize(GLFWwindow *Window, int width, int height);
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
@@ -70,10 +69,10 @@ bool Window::init() {
 	glfwSetCursorPosCallback(m_Window, cursor_position_callback);
 
 	if (glewInit() != GLEW_OK) {
-		cout << "GLEW fail" << endl;
+		std::cout << "GLEW fail" << std::endl;
 		return false;
 	}
-	cout << "OpenGL " << glGetString(GL_VERSION) << endl;
+	std::cout << "OpenGL " << glGetString(GL_VERSION) << std::endl;
 	return true;
 }
 
@@ -84,18 +83,18 @@ void window_resize(GLFWwindow *Window, int width, int height) {
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods) {
 	Window *win = (Window*)glfwGetWindowUserPointer(window);
 	win->m_Keys[key] = action != GLFW_RELEASE;
-	//cout << "keyboard " << '"' << key << '"' << " Pressed!" << endl;
+	//std::cout << "keyboard " << '"' << key << '"' << " Pressed!" << std::endl;
 }
 
 void mouse_button_callback(GLFWwindow *window, int button, int action, int mods) {
 	Window *win = (Window*)glfwGetWindowUserPointer(window);
 	win->m_MouseButtons[button] = action != GLFW_RELEASE;
-	//cout << "mouse " << '"' << button << '"' << " Pressed!" << endl;
+	//std::cout << "mouse " << '"' << button << '"' << " Pressed!" << std::endl;
 }
 
 void cursor_position_callback(GLFWwindow *window, double xpos, double ypos) {
 	Window *win = (Window*)glfwGetWindowUserPointer(window);
 	win->m_X = xpos;
 	win->m_Y = ypos;
-	//cout << "x: " << xpos << " y: " << ypos << endl;
+	//std::cout << "x: " << xpos << " y: " << ypos << std::endl;
 }

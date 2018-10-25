@@ -14,6 +14,7 @@ private:
 	bool m_Keys[MAX_KEYS];
 	bool m_MouseButtons[MAX_BUTTONS];
 	double m_X, m_Y;
+
 public:
 	Window(const char *title, int width, int height);
 	~Window();
@@ -26,6 +27,7 @@ public:
 	bool isKeyPressed(unsigned int keycode) const;
 	bool isMouseButtonPressed(unsigned int button) const;
 	void getMousePosition(double &x, double &y) const;
+
 private:
 	bool init();
 	friend static void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
