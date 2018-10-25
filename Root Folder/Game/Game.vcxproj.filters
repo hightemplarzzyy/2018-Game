@@ -30,6 +30,21 @@
     <ClCompile Include="Source\maths\vec4.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Source\maths\mat4.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\graphics\shader.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\graphics\buffers\buffer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\graphics\buffers\indexbuffer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\graphics\buffers\vertexarray.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\graphics\window.h">
@@ -44,8 +59,30 @@
     <ClInclude Include="Source\maths\vec4.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Source\maths\maths.h">
+    <ClInclude Include="Source\maths\mat4.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Source\maths\maths_func.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\utilities\fileutils.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\graphics\shader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\graphics\buffers\buffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\graphics\buffers\indexbuffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\graphics\buffers\vertexarray.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Source\shaders\basic.vert" />
+    <None Include="Source\shaders\basic.frag" />
   </ItemGroup>
 </Project>

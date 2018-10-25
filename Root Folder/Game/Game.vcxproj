@@ -125,17 +125,32 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Source\graphics\buffers\buffer.cpp" />
+    <ClCompile Include="Source\graphics\buffers\indexbuffer.cpp" />
+    <ClCompile Include="Source\graphics\buffers\vertexarray.cpp" />
+    <ClCompile Include="Source\graphics\shader.cpp" />
     <ClCompile Include="Source\graphics\window.cpp" />
+    <ClCompile Include="Source\maths\mat4.cpp" />
     <ClCompile Include="Source\maths\vec2.cpp" />
     <ClCompile Include="Source\maths\vec3.cpp" />
     <ClCompile Include="Source\maths\vec4.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\graphics\buffers\buffer.h" />
+    <ClInclude Include="Source\graphics\buffers\indexbuffer.h" />
+    <ClInclude Include="Source\graphics\buffers\vertexarray.h" />
+    <ClInclude Include="Source\graphics\shader.h" />
     <ClInclude Include="Source\graphics\window.h" />
-    <ClInclude Include="Source\maths\maths.h" />
+    <ClInclude Include="Source\maths\mat4.h" />
+    <ClInclude Include="Source\maths\maths_func.h" />
     <ClInclude Include="Source\maths\vec2.h" />
     <ClInclude Include="Source\maths\vec3.h" />
     <ClInclude Include="Source\maths\vec4.h" />
+    <ClInclude Include="Source\utilities\fileutils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Source\shaders\basic.frag" />
+    <None Include="Source\shaders\basic.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
