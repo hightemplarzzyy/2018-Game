@@ -81,7 +81,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -125,32 +125,37 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Source\graphics\buffers\buffer.cpp" />
-    <ClCompile Include="Source\graphics\buffers\indexbuffer.cpp" />
-    <ClCompile Include="Source\graphics\buffers\vertexarray.cpp" />
-    <ClCompile Include="Source\graphics\shader.cpp" />
-    <ClCompile Include="Source\graphics\window.cpp" />
-    <ClCompile Include="Source\maths\mat4.cpp" />
-    <ClCompile Include="Source\maths\vec2.cpp" />
-    <ClCompile Include="Source\maths\vec3.cpp" />
-    <ClCompile Include="Source\maths\vec4.cpp" />
+    <ClCompile Include="Source\entity\models.cpp" />
+    <ClCompile Include="Render Engine\buffers\buffer.cpp" />
+    <ClCompile Include="Render Engine\buffers\indexbuffer.cpp" />
+    <ClCompile Include="Render Engine\buffers\vertexarray.cpp" />
+    <ClCompile Include="Render Engine\shaders\shader.cpp" />
+    <ClCompile Include="Render Engine\basics\window.cpp" />
+    <ClCompile Include="Render Engine\toolbox\maths\mat4.cpp" />
+    <ClCompile Include="Render Engine\toolbox\maths\vec2.cpp" />
+    <ClCompile Include="Render Engine\toolbox\maths\vec3.cpp" />
+    <ClCompile Include="Render Engine\toolbox\maths\vec4.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\graphics\buffers\buffer.h" />
-    <ClInclude Include="Source\graphics\buffers\indexbuffer.h" />
-    <ClInclude Include="Source\graphics\buffers\vertexarray.h" />
-    <ClInclude Include="Source\graphics\shader.h" />
-    <ClInclude Include="Source\graphics\window.h" />
-    <ClInclude Include="Source\maths\mat4.h" />
-    <ClInclude Include="Source\maths\maths_func.h" />
-    <ClInclude Include="Source\maths\vec2.h" />
-    <ClInclude Include="Source\maths\vec3.h" />
-    <ClInclude Include="Source\maths\vec4.h" />
-    <ClInclude Include="Source\utilities\fileutils.h" />
+    <ClInclude Include="Source\entity\models.h" />
+    <ClInclude Include="Render Engine\buffers\buffer.h" />
+    <ClInclude Include="Render Engine\buffers\indexbuffer.h" />
+    <ClInclude Include="Render Engine\buffers\vertexarray.h" />
+    <ClInclude Include="Source\main\camera.h" />
+    <ClInclude Include="Render Engine\shaders\shader.h" />
+    <ClInclude Include="Render Engine\basics\window.h" />
+    <ClInclude Include="Render Engine\toolbox\maths\mat4.h" />
+    <ClInclude Include="Render Engine\toolbox\maths\maths_func.h" />
+    <ClInclude Include="Render Engine\toolbox\maths\vec2.h" />
+    <ClInclude Include="Render Engine\toolbox\maths\vec3.h" />
+    <ClInclude Include="Render Engine\toolbox\maths\vec4.h" />
+    <ClInclude Include="Resource Management\utils\fileutils.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\shaders\basic.frag" />
     <None Include="Source\shaders\basic.vert" />
+    <None Include="Source\shaders\dragon.frag" />
+    <None Include="Source\shaders\dragon.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

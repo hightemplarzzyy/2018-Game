@@ -13,14 +13,9 @@ out DATA{
 
 }vs_out;
 
-//out vec4 pos;
-
 void main(){
-	gl_Position =  projection_matrix * model_matrix * position;
+	gl_Position =   projection_matrix * view_matrix * model_matrix * position;
 	vs_out.position =  model_matrix * position;
 	vs_out.color = color;
-
-	//gl_Position = projection_matrix * model_matrix * position;
-	//pos = model_matrix * position;
 
 }

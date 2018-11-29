@@ -18,71 +18,82 @@
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Source\graphics\window.cpp">
+    <ClCompile Include="Source\entity\models.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Source\maths\vec2.cpp">
+    <ClCompile Include="Render Engine\toolbox\maths\mat4.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Source\maths\vec3.cpp">
+    <ClCompile Include="Render Engine\toolbox\maths\vec2.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Source\maths\vec4.cpp">
+    <ClCompile Include="Render Engine\toolbox\maths\vec3.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Source\maths\mat4.cpp">
+    <ClCompile Include="Render Engine\toolbox\maths\vec4.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Source\graphics\shader.cpp">
+    <ClCompile Include="Render Engine\buffers\buffer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Source\graphics\buffers\buffer.cpp">
+    <ClCompile Include="Render Engine\buffers\indexbuffer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Source\graphics\buffers\indexbuffer.cpp">
+    <ClCompile Include="Render Engine\buffers\vertexarray.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Source\graphics\buffers\vertexarray.cpp">
+    <ClCompile Include="Render Engine\shaders\shader.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Render Engine\basics\window.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\graphics\window.h">
+    <ClInclude Include="Source\entity\models.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Source\maths\vec2.h">
+    <ClInclude Include="Render Engine\toolbox\maths\mat4.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Source\maths\vec3.h">
+    <ClInclude Include="Render Engine\toolbox\maths\maths_func.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Source\maths\vec4.h">
+    <ClInclude Include="Render Engine\toolbox\maths\vec2.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Source\maths\mat4.h">
+    <ClInclude Include="Render Engine\toolbox\maths\vec3.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Source\maths\maths_func.h">
+    <ClInclude Include="Render Engine\toolbox\maths\vec4.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Source\utilities\fileutils.h">
+    <ClInclude Include="Render Engine\buffers\buffer.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Source\graphics\shader.h">
+    <ClInclude Include="Render Engine\buffers\indexbuffer.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Source\graphics\buffers\buffer.h">
+    <ClInclude Include="Render Engine\buffers\vertexarray.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Source\graphics\buffers\indexbuffer.h">
+    <ClInclude Include="Render Engine\shaders\shader.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Source\graphics\buffers\vertexarray.h">
+    <ClInclude Include="Render Engine\basics\window.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\main\camera.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource Management\utils\fileutils.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\shaders\basic.vert" />
     <None Include="Source\shaders\basic.frag" />
+    <None Include="Source\shaders\dragon.frag" />
+    <None Include="Source\shaders\dragon.vert" />
   </ItemGroup>
 </Project>
