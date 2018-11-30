@@ -15,7 +15,7 @@ struct mat4 {
 	static mat4 identity();
 
 	mat4& multiply(const mat4 &other);
-	friend mat4 operator*(mat4 &left, mat4 right);
+	friend mat4 operator*(mat4 left, mat4 &right);
 	mat4& operator*=(const mat4& other);
 
 	static mat4 orthographic(float left, float right, float bottom, float top, float near, float far);

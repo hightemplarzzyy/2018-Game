@@ -4,8 +4,8 @@
 #include <GL/glew.h>
 #include <vector>
 
-#include "../maths/maths_func.h"
-#include "../utilities/fileutils.h"
+#include "../toolbox/maths/maths_func.h"
+#include "../../Resource Management/utils/fileutils.h"
 
 class Shader {
 private:

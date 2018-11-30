@@ -1,10 +1,11 @@
-#include <window.h>
 #include <iostream>
 
-void window_resize(GLFWwindow *Window, int width, int height);
+#include "window.h"
+
 void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
 void mouse_button_callback(GLFWwindow *window, int button, int action, int mods);
 void cursor_position_callback(GLFWwindow *window, double xpos, double ypos);
+void window_resize(GLFWwindow *window, int width, int height);
 
 Window::Window(const char * title,int width,int height) {
 	m_Title = title;
@@ -32,8 +33,13 @@ void Window::update(){
 	if (error != GL_NO_ERROR)
 		std::cout << "OpenGL Error: " << error << std::endl;
 
-	glfwPollEvents();
 	glfwSwapBuffers(m_Window);
+	glfwPollEvents();
+}
+
+void Window::clear() const {
+	
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 bool Window::isKeyPressed(unsigned int keycode) const {
@@ -53,17 +59,14 @@ void Window::getMousePosition(double &x, double &y) const {
 	y = m_Y;
 }
 
-void Window::clear() const {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-}
-
 bool Window::init() {
 	if (!glfwInit())
 		return false;
 	m_Window = glfwCreateWindow(m_Width, m_Height, m_Title, NULL, NULL);
 	glfwMakeContextCurrent(m_Window);
+	glEnable(GL_DEPTH_TEST);
 	glfwSetWindowUserPointer(m_Window,this);
-	glfwSetWindowSizeCallback(m_Window, window_resize);
+	glfwSetFramebufferSizeCallback(m_Window, window_resize);
 	glfwSetKeyCallback(m_Window, key_callback);
 	glfwSetMouseButtonCallback(m_Window, mouse_button_callback);
 	glfwSetCursorPosCallback(m_Window, cursor_position_callback);
@@ -76,7 +79,10 @@ bool Window::init() {
 	return true;
 }
 
-void window_resize(GLFWwindow *Window, int width, int height) {
+void window_resize(GLFWwindow *window, int width, int height) {
+	Window *win = (Window*)glfwGetWindowUserPointer(window);
+	win->m_Width = width;
+	win->m_Height = height;
 	glViewport(0, 0, width, height);
 }
 

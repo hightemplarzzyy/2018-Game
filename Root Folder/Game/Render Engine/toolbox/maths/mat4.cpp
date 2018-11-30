@@ -3,7 +3,7 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
-float toRadians(float degrees) {
+float toRadians(float degrees) {		//TODO:Refactor into math class
 	return degrees * M_PI / 180.0f;
 }
 
@@ -26,26 +26,23 @@ mat4 mat4::identity() {
 }
 
 mat4& mat4::multiply(const mat4 &other) {
-	mat4 result;
+	float data[16];
 	for(int y=0;y<4;y++)
 		for (int x = 0; x < 4; x++){
 			float sum=0.0f;
 			for(int e=0;e<4;e++){
-				sum += other.elements[x + e * 4] * elements[e + y * 4];
+				sum += elements[e + y * 4] * other.elements[x + e * 4];
 			}
-			result.elements[x + y * 4] = sum;
+			data[x + y * 4] = sum;
 			
 		}
-	for (int y = 0; y < 4; y++)
-		for (int x = 0; x < 4; x++) {
-			this->elements[x + y * 4] = result.elements[x + y * 4];
-		}
+	memcpy(elements, data, 4 * 4 * sizeof(float));
 	
 	return *this;
 }
 
-mat4 operator*(mat4 &left, mat4 right) {
-	return right.multiply(left);
+mat4 operator*(mat4 left, mat4 &right) {
+	return left.multiply(right);
 }
 
 mat4& mat4::operator*=(const mat4& other) {
@@ -57,11 +54,11 @@ mat4 mat4::orthographic(float left, float right, float bottom, float top, float 
 
 	result.elements[0 + 0 * 4] = 2.0f / (right - left);
 	result.elements[1 + 1 * 4] = 2.0f / (top - bottom);
-	result.elements[2 + 2 * 4] = 2.0f / (near - far);
+	result.elements[2 + 2 * 4] = -2.0f / (far - near);
 
-	result.elements[0 + 3 * 4] = (left + right) / (left - right);
-	result.elements[1 + 3 * 4] = (bottom + top) / (bottom - top);
-	result.elements[2 + 3 * 4] = (far + near) / (far - near);
+	result.elements[0 + 3 * 4] = -(right + left) / (right - left);
+	result.elements[1 + 3 * 4] = -(top - bottom) / (top - bottom);
+	result.elements[2 + 3 * 4] = -(far + near) / (far - near);
 
 	return result;
 
