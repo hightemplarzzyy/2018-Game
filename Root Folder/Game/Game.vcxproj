@@ -137,6 +137,15 @@
     <ClCompile Include="Render Engine\toolbox\maths\vec4.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Render Engine\shaders\dragonshader.h" />
+    <ClInclude Include="Render Engine\shaders\uniform.h" />
+    <ClInclude Include="Render Engine\shaders\uniform1f.h" />
+    <ClInclude Include="Render Engine\shaders\uniformbool.h" />
+    <ClInclude Include="Render Engine\shaders\uniformmat4.h" />
+    <ClInclude Include="Render Engine\shaders\uniformsampler.h" />
+    <ClInclude Include="Render Engine\shaders\uniformvec2.h" />
+    <ClInclude Include="Render Engine\shaders\uniformvec3.h" />
+    <ClInclude Include="Render Engine\shaders\uniformvec4.h" />
     <ClInclude Include="Source\entity\models.h" />
     <ClInclude Include="Render Engine\buffers\buffer.h" />
     <ClInclude Include="Render Engine\buffers\indexbuffer.h" />

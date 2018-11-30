@@ -3,14 +3,14 @@
 Shader::Shader(const char* vertexPath, const char* fragmentPath) 
 	: m_VertPath(vertexPath), m_FragPath(fragmentPath) {
 
-	m_ShaderID = load();
+	m_ShaderID = createShader();
 }
 
 Shader::~Shader() {
 	glDeleteProgram(m_ShaderID);
 }
 
-GLuint Shader::load() {
+GLuint Shader::createShader() {
 	GLuint program = glCreateProgram();
 	GLuint vertex = glCreateShader(GL_VERTEX_SHADER);
 	GLuint fragment = glCreateShader(GL_FRAGMENT_SHADER);
@@ -61,28 +61,28 @@ GLuint Shader::load() {
 	return program;
 }
 
-GLint Shader::getUniformLocation(const GLchar *name) {
-	return glGetUniformLocation(m_ShaderID, name);
-}
-
-void Shader::setUniform1f(const GLchar * name, float value) {
-	glUniform1f(getUniformLocation(name), value);
-}
-void Shader::setUniform1i(const GLchar * name, int value) {
-	glUniform1i(getUniformLocation(name), value);
-}
-void Shader::setUniform2f(const GLchar * name, const vec2 &v) {
-	glUniform2f(getUniformLocation(name),v.x,v.y);
-}
-void Shader::setUniform3f(const GLchar * name, const vec3 &v) {
-	glUniform3f(getUniformLocation(name), v.x, v.y, v.z);
-}
-void Shader::setUniform4f(const GLchar * name, const vec4 &v) {
-	glUniform4f(getUniformLocation(name), v.x, v.y, v.z, v.w);
-}
-void Shader::setUniformMat4(const GLchar * name, const mat4 &matrix) {
-	glUniformMatrix4fv(getUniformLocation(name), 1, GL_FALSE, matrix.elements);
-}
+//GLint Shader::getUniformLocation(const GLchar *name) {
+//	return glGetUniformLocation(m_ShaderID, name);
+//}
+//
+//void Shader::setUniform1f(const GLchar * name, float value) {
+//	glUniform1f(getUniformLocation(name), value);
+//}
+//void Shader::setUniform1i(const GLchar * name, int value) {
+//	glUniform1i(getUniformLocation(name), value);
+//}
+//void Shader::setUniform2f(const GLchar * name, const vec2 &v) {
+//	glUniform2f(getUniformLocation(name),v.x,v.y);
+//}
+//void Shader::setUniform3f(const GLchar * name, const vec3 &v) {
+//	glUniform3f(getUniformLocation(name), v.x, v.y, v.z);
+//}
+//void Shader::setUniform4f(const GLchar * name, const vec4 &v) {
+//	glUniform4f(getUniformLocation(name), v.x, v.y, v.z, v.w);
+//}
+//void Shader::setUniformMat4(const GLchar * name, const mat4 &matrix) {
+//	glUniformMatrix4fv(getUniformLocation(name), 1, GL_FALSE, matrix.elements);
+//}
 
 void Shader::enable() const {
 	glUseProgram(m_ShaderID);
