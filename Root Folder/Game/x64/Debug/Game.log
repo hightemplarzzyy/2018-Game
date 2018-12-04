@@ -1,0 +1,21 @@
+﻿  main.cpp
+c:\users\quincyking\desktop\2018-game\root folder\game\render engine\basics\window.h(2): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+  models.cpp
+c:\users\quincyking\desktop\2018-game\root folder\game\source\entity\models.h(4): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+  buffer.cpp
+c:\users\quincyking\desktop\2018-game\root folder\game\render engine\buffers\buffer.h(3): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+  indexbuffer.cpp
+c:\users\quincyking\desktop\2018-game\root folder\game\render engine\buffers\indexbuffer.h(3): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+  vertexarray.cpp
+c:\users\quincyking\desktop\2018-game\root folder\game\render engine\buffers\vertexarray.h(4): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+  shader.cpp
+c:\users\quincyking\desktop\2018-game\root folder\game\render engine\shaders\shader.h(4): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+  window.cpp
+c:\users\quincyking\desktop\2018-game\root folder\game\render engine\basics\window.h(2): fatal error C1083: Cannot open include file: 'GL/glew.h': No such file or directory
+  mat4.cpp
+c:\users\quincyking\desktop\2018-game\root folder\game\render engine\toolbox\maths\mat4.cpp(7): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+c:\users\quincyking\desktop\2018-game\root folder\game\render engine\toolbox\maths\mat4.cpp(68): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  vec2.cpp
+  vec3.cpp
+  vec4.cpp
+  Generating Code...
