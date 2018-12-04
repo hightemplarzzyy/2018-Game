@@ -128,6 +128,15 @@
     <ClInclude Include="Resource Management\glRequestProcessing\glrequestqueue.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Render Engine\textures\texture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\textures\texturemanager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\textures\textureloadrequest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\shaders\basic.vert" />

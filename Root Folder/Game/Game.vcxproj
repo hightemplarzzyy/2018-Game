@@ -147,6 +147,9 @@
     <ClInclude Include="Render Engine\shaders\uniformvec2.h" />
     <ClInclude Include="Render Engine\shaders\uniformvec3.h" />
     <ClInclude Include="Render Engine\shaders\uniformvec4.h" />
+    <ClInclude Include="Render Engine\textures\texture.h" />
+    <ClInclude Include="Render Engine\textures\textureloadrequest.h" />
+    <ClInclude Include="Render Engine\textures\texturemanager.h" />
     <ClInclude Include="Resource Management\glRequestProcessing\glrequest.h" />
     <ClInclude Include="Resource Management\glRequestProcessing\glrequestprocessor.h" />
     <ClInclude Include="Resource Management\glRequestProcessing\glrequestqueue.h" />
