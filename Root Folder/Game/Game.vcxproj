@@ -70,7 +70,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)Game\Source\maths;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Game\Source\graphics;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Game\Render Engine\toolbox\maths;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Game\Source\graphics;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\$(Configuration)\Intermediates\</IntDir>
@@ -125,6 +125,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Resource Management\glRequestProcessing\glrequestprocessor.cpp" />
     <ClCompile Include="Source\entity\models.cpp" />
     <ClCompile Include="Render Engine\buffers\buffer.cpp" />
     <ClCompile Include="Render Engine\buffers\indexbuffer.cpp" />
@@ -146,6 +147,12 @@
     <ClInclude Include="Render Engine\shaders\uniformvec2.h" />
     <ClInclude Include="Render Engine\shaders\uniformvec3.h" />
     <ClInclude Include="Render Engine\shaders\uniformvec4.h" />
+    <ClInclude Include="Render Engine\textures\texture.h" />
+    <ClInclude Include="Render Engine\textures\textureloadrequest.h" />
+    <ClInclude Include="Render Engine\textures\texturemanager.h" />
+    <ClInclude Include="Resource Management\glRequestProcessing\glrequest.h" />
+    <ClInclude Include="Resource Management\glRequestProcessing\glrequestprocessor.h" />
+    <ClInclude Include="Resource Management\glRequestProcessing\glrequestqueue.h" />
     <ClInclude Include="Source\entity\models.h" />
     <ClInclude Include="Render Engine\buffers\buffer.h" />
     <ClInclude Include="Render Engine\buffers\indexbuffer.h" />
