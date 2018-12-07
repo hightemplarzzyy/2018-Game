@@ -48,6 +48,9 @@
     <ClCompile Include="Render Engine\basics\window.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Render Engine\particles\particle.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\entity\models.h">
@@ -116,11 +119,45 @@
     <ClInclude Include="Render Engine\shaders\uniformbool.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Render Engine\particles\ParticleTexture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\texture\Texture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\toolbox\Colour.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\toolbox\Transformation.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\particles\particleMaster.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\particles\particleRender.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\particles\particleShader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\particles\particleColourShader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\particles\particle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\environment\environment.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\shaders\basic.vert" />
     <None Include="Source\shaders\basic.frag" />
     <None Include="Source\shaders\dragon.frag" />
     <None Include="Source\shaders\dragon.vert" />
+    <None Include="Render Engine\particles\particle.frag" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Render Engine\particles\particle.vert" />
   </ItemGroup>
 </Project>

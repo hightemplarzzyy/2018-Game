@@ -9,7 +9,7 @@ public:
 	UniformMat4 *projection_matrix = new UniformMat4("projection_matrix");
 	UniformMat4 *model_matrix = new UniformMat4("model_matrix");
 	UniformMat4 *view_matrix = new UniformMat4("view_matrix");
-	UniformVec3 *light_position = new UniformVec3("light_position");
+	UniformVec3 *light_position = new UniformVec3("light_colour");
 
 	DragonShader(const char* vertexPath, const char* fragmentPath) :Shader(vertexPath, fragmentPath) {
 		storeAllUniformLocation();

@@ -1,4 +1,4 @@
-#version 460 core
+#version 400 core
 
 out vec4 color;
 
@@ -19,7 +19,8 @@ void main(){
 	norm = normalize(fs_in.surfaceNormal);
 	toLight = normalize(light_position - fs_in.WorldPosition);
 
-	diffuse = max(dot(norm, toLight), 0.0);
+    diffuse = max(dot(norm, toLight), 0.0);
+	
+    color = fs_in.color1 * diffuse;
 
-	color = fs_in.color1 * diffuse;
 }

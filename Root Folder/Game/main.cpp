@@ -20,13 +20,13 @@ int main() {
 
 	Model dragon("Resource/dragon.obj");
 	
+	
 	DragonShader shader("source/shaders/dragon.vert", "source/shaders/dragon.frag");
 	shader.enable();
 	
-	shader.projection_matrix->load(mat4::perspective(45, (float)WINDOW_WIDTH/(float)WINDOW_HEIGHT, 0.1f, 300));
+	shader.projection_matrix->load(mat4::perspective(45, (float)WINDOW_WIDTH/(float)WINDOW_HEIGHT, 0.1f, 300.0f));
 	shader.light_position->load( vec3(0.0,10.0,5.0));
 	
-
 	Camera camera(&window);
 
 	while (!window.closed()) {

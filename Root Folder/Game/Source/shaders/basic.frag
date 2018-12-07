@@ -1,8 +1,9 @@
-#version 460 core
+#version 400 core
 
 out vec4 color;
 
 uniform vec2 light_position;
+float coe[3] = float[](2,3,4);
 
 in DATA{
 	vec4 position;
