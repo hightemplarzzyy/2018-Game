@@ -16,13 +16,6 @@ public:
 	Shader(const char* vertexPath, const char* fragmentPath);
 	~Shader();
 
-	//void setUniform1f(const GLchar * name, float value);
-	//void setUniform1i(const GLchar * name, int value);
-	//void setUniform2f(const GLchar * name, const vec2 &v);
-	//void setUniform3f(const GLchar * name, const vec3 &v);
-	//void setUniform4f(const GLchar * name, const vec4 &v);
-	//
-	//void setUniformMat4(const GLchar * name, const mat4 &matrix);
 	virtual void storeAllUniformLocation() = 0;
 	void enable() const;
 	void disable() const;
@@ -30,5 +23,4 @@ public:
 	GLuint getID();
 private:
 	GLuint createShader();
-	//GLint getUniformLocation(const GLchar *name);
 };
