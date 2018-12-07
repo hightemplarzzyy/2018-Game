@@ -70,14 +70,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)Game\Source\maths;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Game\Source\graphics;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Game\Render Engine\toolbox\maths;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Game\Source\graphics;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\$(Configuration)\Intermediates\</IntDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ExecutablePath>C:\OpenGL\GLFW\include;C:\OpenGL\GLEW\include;$(ExecutablePath)</ExecutablePath>
-    <LibraryPath>C:\OpenGL\GLFW\lib-vc2015;C:\OpenGL\GLEW\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -98,9 +94,6 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
-    <Link>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -132,7 +125,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Render Engine\particles\particle.cpp" />
+    <ClCompile Include="Resource Management\glRequestProcessing\glrequestprocessor.cpp" />
     <ClCompile Include="Source\entity\models.cpp" />
     <ClCompile Include="Render Engine\buffers\buffer.cpp" />
     <ClCompile Include="Render Engine\buffers\indexbuffer.cpp" />
@@ -145,13 +138,6 @@
     <ClCompile Include="Render Engine\toolbox\maths\vec4.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Render Engine\environment\environment.h" />
-    <ClInclude Include="Render Engine\particles\particleColourShader.h" />
-    <ClInclude Include="Render Engine\particles\particleMaster.h" />
-    <ClInclude Include="Render Engine\particles\particleRender.h" />
-    <ClInclude Include="Render Engine\particles\particle.h" />
-    <ClInclude Include="Render Engine\particles\particleShader.h" />
-    <ClInclude Include="Render Engine\particles\ParticleTexture.h" />
     <ClInclude Include="Render Engine\shaders\dragonshader.h" />
     <ClInclude Include="Render Engine\shaders\uniform.h" />
     <ClInclude Include="Render Engine\shaders\uniform1f.h" />
@@ -161,9 +147,12 @@
     <ClInclude Include="Render Engine\shaders\uniformvec2.h" />
     <ClInclude Include="Render Engine\shaders\uniformvec3.h" />
     <ClInclude Include="Render Engine\shaders\uniformvec4.h" />
-    <ClInclude Include="Render Engine\texture\Texture.h" />
-    <ClInclude Include="Render Engine\toolbox\Colour.h" />
-    <ClInclude Include="Render Engine\toolbox\Transformation.h" />
+    <ClInclude Include="Render Engine\textures\texture.h" />
+    <ClInclude Include="Render Engine\textures\textureloadrequest.h" />
+    <ClInclude Include="Render Engine\textures\texturemanager.h" />
+    <ClInclude Include="Resource Management\glRequestProcessing\glrequest.h" />
+    <ClInclude Include="Resource Management\glRequestProcessing\glrequestprocessor.h" />
+    <ClInclude Include="Resource Management\glRequestProcessing\glrequestqueue.h" />
     <ClInclude Include="Source\entity\models.h" />
     <ClInclude Include="Render Engine\buffers\buffer.h" />
     <ClInclude Include="Render Engine\buffers\indexbuffer.h" />
@@ -179,14 +168,10 @@
     <ClInclude Include="Resource Management\utils\fileutils.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Render Engine\particles\particle.frag" />
     <None Include="Source\shaders\basic.frag" />
     <None Include="Source\shaders\basic.vert" />
     <None Include="Source\shaders\dragon.frag" />
     <None Include="Source\shaders\dragon.vert" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Render Engine\particles\particle.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

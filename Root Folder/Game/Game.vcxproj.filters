@@ -48,7 +48,7 @@
     <ClCompile Include="Render Engine\basics\window.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Render Engine\particles\particle.cpp">
+    <ClCompile Include="Resource Management\glRequestProcessing\glrequestprocessor.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -119,34 +119,22 @@
     <ClInclude Include="Render Engine\shaders\uniformbool.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Render Engine\particles\ParticleTexture.h">
+    <ClInclude Include="Resource Management\glRequestProcessing\glrequest.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Render Engine\texture\Texture.h">
+    <ClInclude Include="Resource Management\glRequestProcessing\glrequestprocessor.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Render Engine\toolbox\Colour.h">
+    <ClInclude Include="Resource Management\glRequestProcessing\glrequestqueue.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Render Engine\toolbox\Transformation.h">
+    <ClInclude Include="Render Engine\textures\texture.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Render Engine\particles\particleMaster.h">
+    <ClInclude Include="Render Engine\textures\texturemanager.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Render Engine\particles\particleRender.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Render Engine\particles\particleShader.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Render Engine\particles\particleColourShader.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Render Engine\particles\particle.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Render Engine\environment\environment.h">
+    <ClInclude Include="Render Engine\textures\textureloadrequest.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -155,9 +143,5 @@
     <None Include="Source\shaders\basic.frag" />
     <None Include="Source\shaders\dragon.frag" />
     <None Include="Source\shaders\dragon.vert" />
-    <None Include="Render Engine\particles\particle.frag" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Render Engine\particles\particle.vert" />
   </ItemGroup>
 </Project>
