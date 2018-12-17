@@ -70,8 +70,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)Game\Render Engine\toolbox\maths;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Game\Source\graphics;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Game\Render Engine\toolbox\maths;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\stb_image;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Game\Source\graphics;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependencies\stb_image;$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\$(Configuration)\Intermediates\</IntDir>
   </PropertyGroup>
@@ -84,7 +84,7 @@
       <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;STB_IMAGE.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -125,6 +125,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Render Engine\textures\texture.cpp" />
+    <ClCompile Include="Render Engine\textures\texturemanager.cpp" />
     <ClCompile Include="Resource Management\glRequestProcessing\glrequestprocessor.cpp" />
     <ClCompile Include="Source\entity\models.cpp" />
     <ClCompile Include="Render Engine\buffers\buffer.cpp" />
@@ -148,6 +150,7 @@
     <ClInclude Include="Render Engine\shaders\uniformvec3.h" />
     <ClInclude Include="Render Engine\shaders\uniformvec4.h" />
     <ClInclude Include="Render Engine\textures\texture.h" />
+    <ClInclude Include="Render Engine\textures\texturedeleterequest.h" />
     <ClInclude Include="Render Engine\textures\textureloadrequest.h" />
     <ClInclude Include="Render Engine\textures\texturemanager.h" />
     <ClInclude Include="Resource Management\glRequestProcessing\glrequest.h" />

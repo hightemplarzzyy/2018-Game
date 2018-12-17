@@ -51,6 +51,12 @@
     <ClCompile Include="Resource Management\glRequestProcessing\glrequestprocessor.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Render Engine\textures\texture.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Render Engine\textures\texturemanager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\entity\models.h">
@@ -135,6 +141,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Render Engine\textures\textureloadrequest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\textures\texturedeleterequest.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
