@@ -11,7 +11,7 @@ class ParticleShader: public Shader{
 public:
 	UniformMat4 * projection_matrix = new UniformMat4("projection_matrix");
 	Uniform1f * numberOfRaws = new Uniform1f("numberOfRows");
-	UniformVec3 * light_position = new UniformVec3("light_position");
+	UniformVec3 * light_colour = new UniformVec3("light_colour");
 
 	ParticleShader(const char * vertexPath, const char * fragmentPath) :
 		Shader(vertexPath, fragmentPath) {
@@ -20,7 +20,7 @@ public:
 
 	virtual void storeAllUniformLocation() {
 		projection_matrix->storeLocation(m_ShaderID);
-		light_position->storeLocation(m_ShaderID);
+		light_colour->storeLocation(m_ShaderID);
 		numberOfRaws->storeLocation(m_ShaderID);
 	}
 };

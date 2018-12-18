@@ -2,12 +2,15 @@
 #define _PARTICLES_H_
 
 #include "../toolbox/maths/maths_func.h"
-#include "../toolbox/Colour.h"
+#include "../toolbox/Color.h"
 #include "../toolbox/Transformation.h"
 #include "../../Source/main/camera.h"
 #include "../environment/environment.h"
 
+
 #include "ParticleTexture.h"
+
+
 
 class Particle {
 private:
@@ -24,8 +27,8 @@ private:
 	float m_fadeIn = 0;				//从开始透明到完全显示的时刻(百分比）0~1
 	float m_fadeOut = 1;			//从完全显示到开始透明的时刻(百分比）0~1
 	float m_normalAlpha = 1;		//标准透明度
-	//TODO: Color没有定义
-	Colour * m_color;
+	
+	Color m_color;
 
 	bool m_rotate3D = false;
 	float m_rotX = 0;
@@ -49,7 +52,7 @@ private:
 public:
 	Particle(ParticleTexture texture, vec3 position, vec3 velocity, float gravityEffect,
 		float lifeLength, float rotation, float scale);
-	Particle(Colour colour, bool additive, vec3 position, vec3 velocity, float gravityEffec,
+	Particle(Color colour, bool additive, vec3 position, vec3 velocity, float gravityEffec,
 		float lifeLength, float rotation, float scale);
 	Particle(ParticleTexture texture, vec3 position, float scale, float deathAnimationTime);
 	Particle(ParticleTexture texture, float scale, float deathAnimationTime, Transformation transform,
@@ -97,7 +100,7 @@ public:
 		m_blend = blend;
 	}
 
-	inline Colour getColour() {
+	inline Color getColour() {
 		
 	}
 

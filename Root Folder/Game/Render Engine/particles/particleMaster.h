@@ -6,22 +6,25 @@
 
 #include "particle.h"
 #include "particleRender.h"
+#include "particleTexture.h"
+
 
 class ParticleMaster {
+
 private:
-	static std::map <ParticleTexture, std::vector<Particle>> particles;
-	static std::vector<Particle> colourParticles;
-	static std::vector<Particle> colourAdditiveParticles;
-	static ParticleRender renderer;
+	std::map <ParticleTexture, std::vector<Particle>> particles;
+	std::vector<Particle> colourParticles;
+	std::vector<Particle> colourAdditiveParticles;
+	ParticleRender renderer;
+
 public:
-	static void init(mat4 projectionMatrix);
-	static void update(Camera camera);
-	static void reset();
-	static void renderParticles(Camera Camera);
-	static void cleanUp();
-	static void addParticle(Particle particle);
-	static void addColourPartivle(Particle colourParticle, bool additive);
-	static void updateList(std::vector<Particle> list, Camera camera);
+	void init(mat4 projectionMatrix);
+	void update(Camera camera);
+	void reset();
+	void renderParticles(Camera Camera);
+	void addParticle(Particle particle);
+	void addColourPartivle(Particle colourParticle, bool additive);
+	void updateList(std::vector<Particle> list, Camera camera);
 };
 
 #endif // !_PARTICLES_MASTER_H_

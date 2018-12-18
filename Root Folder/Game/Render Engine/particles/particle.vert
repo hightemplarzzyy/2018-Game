@@ -2,6 +2,7 @@
 
 layout (location = 0) in vec2 positon;
 layout (location = 1) in mat4 model_matrix;
+//1,2,3,4 存储整个矩阵
 layout (location = 5) in vec4 texOffets;
 layout (location = 6) in float blendFactor;
 

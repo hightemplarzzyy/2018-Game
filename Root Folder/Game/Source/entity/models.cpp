@@ -79,7 +79,6 @@ void Model::LoadModel(const char *filepath) {
 
 void Model::render() {
 
-
 	VertexArray vao;
 	IndexBuffer ibo(&m_Indicies[0].x, m_Indicies.size() * 3);
 	vao.addBuffer(new Buffer(&m_Verticies[0].x, m_Verticies.size() * 3, 3),0);
@@ -91,5 +90,5 @@ void Model::render() {
 	glDrawElements(GL_TRIANGLES, ibo.getCount(), GL_UNSIGNED_SHORT, 0);
 	vao.unbind();
 	ibo.unbind();
-	return;
+	return; 
 }

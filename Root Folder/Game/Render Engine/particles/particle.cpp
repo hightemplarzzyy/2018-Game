@@ -4,52 +4,51 @@
 //TODO:需要手动添加到粒子列表中
 //TODO:deltatime的获取方法没有确定
 
-//Particle::Particle(ParticleTexture texture, vec3 position, vec3 velocity,
-//	float gravityEffect, float lifeLength, float rotation, float scale) {
-//	m_texture = texture;	//TODO:顶一个复制函数
-//	m_position = position;
-//	m_velocity = velocity;
-//	m_gravityEffect = gravityEffect;
-//	m_lifeLength = lifeLength;
-//	m_rotation = rotation;
-//	m_scale = scale;
-//	//ParticleMaster.addParticle(this);
-//}
-//
-//Particle::Particle(Colour colour, bool additive, vec3 position, vec3 velocity,
-//	float gravityEffec, float lifeLength, float rotation, float scale) {
-//	//TODO：COLOR 没有定义
-////	m_color = colour;
-//	m_position = position;
-//	m_velocity = velocity;
-//	m_gravityEffect = gravityEffec;
-//	m_lifeLength = lifeLength;
-//	m_rotation = rotation;
-//	m_scale = scale;
-//	//ParticleMaster.addColourParticle(this, additive);
-//}
-//
-//Particle::Particle(ParticleTexture texture, vec3 position, float scale, float deathAnimationTime) {
-//	m_texture = texture;
-//	m_position = position;
-//	m_scale = scale;
-//	m_lifeLength = deathAnimationTime;
-//	m_rotation = 0;
-//	m_gravityEffect = 0;
-//	//ParticleMaster.addParticle(this);
-//}
-//
-//Particle::Particle(ParticleTexture texture, float scale, float deathAnimationTime,
-//	Transformation transform, float heightOffset) {
-//	m_texture = texture;
-//	m_scale = scale;
-//	m_lifeLength = deathAnimationTime;
-//	*m_parent = transform;
-//	m_heightOffset = heightOffset;
-//	m_rotation = 0;
-//	m_gravityEffect = 0;
-//	//ParticleMaster.addParticle(this);
-//}
+Particle::Particle(ParticleTexture texture, vec3 position, vec3 velocity,
+	float gravityEffect, float lifeLength, float rotation, float scale) {
+	m_texture = texture;	//TODO:顶一个复制函数
+	m_position = position;
+	m_velocity = velocity;
+	m_gravityEffect = gravityEffect;
+	m_lifeLength = lifeLength;
+	m_rotation = rotation;
+	m_scale = scale;
+	//ParticleMaster.addParticle(this);
+}
+
+Particle::Particle(Color colour, bool additive, vec3 position, vec3 velocity,
+	float gravityEffec, float lifeLength, float rotation, float scale) {
+	m_color = colour;
+	m_position = position;
+	m_velocity = velocity;
+	m_gravityEffect = gravityEffec;
+	m_lifeLength = lifeLength;
+	m_rotation = rotation;
+	m_scale = scale;
+	//ParticleMaster.addColourParticle(this, additive);
+}
+
+Particle::Particle(ParticleTexture texture, vec3 position, float scale, float deathAnimationTime) {
+	m_texture = texture;
+	m_position = position;
+	m_scale = scale;
+	m_lifeLength = deathAnimationTime;
+	m_rotation = 0;
+	m_gravityEffect = 0;
+	//ParticleMaster.addParticle(this);
+}
+
+Particle::Particle(ParticleTexture texture, float scale, float deathAnimationTime,
+	Transformation transform, float heightOffset) {
+	m_texture = texture;
+	m_scale = scale;
+	m_lifeLength = deathAnimationTime;
+	*m_parent = transform;
+	m_heightOffset = heightOffset;
+	m_rotation = 0;
+	m_gravityEffect = 0;
+	//ParticleMaster.addParticle(this);
+}
 
 
 //TODO：没有设计好
@@ -63,9 +62,7 @@ bool Particle::update(Camera camera, float deltaTime) {
 
 	rotate(deltaTime);
 
-	if (m_color == nullptr) {
 
-	}
 	return true;
 }
 

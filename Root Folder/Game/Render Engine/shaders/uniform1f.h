@@ -7,8 +7,8 @@ class Uniform1f : public Uniform {
 
 public:
 	Uniform1f(std::string name) : Uniform(name) {};
-	void load(int f) {
-		glUniform1i(m_Location, f);
+	void load(float f) {
+		glUniform1f(m_Location, f);
 		return;
 	}
 };
