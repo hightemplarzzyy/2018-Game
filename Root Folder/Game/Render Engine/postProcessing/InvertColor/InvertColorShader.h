@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../shaders/shader.h"
-#include "../shaders/uniformvec2.h"
+#include "../../shaders/shader.h"
+#include "../../shaders/uniformvec2.h"
 
 class InvertColorShader :public Shader {
 public:

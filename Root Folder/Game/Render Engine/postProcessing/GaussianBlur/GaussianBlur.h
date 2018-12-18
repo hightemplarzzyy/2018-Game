@@ -1,8 +1,8 @@
 #ifndef _GAUSSIAN_BLUR_H_
 #define _GAUSSIAN_BLUR_H_
 
-#include "PostProcessingPipeline.h"
-#include "PostProcessingFilter.h"
+#include "../PostProcessingPipeline.h"
+#include "../PostProcessingFilter.h"
 #include "VerticalBlurShader.h"
 #include "HorizontalBlurShader.h"
 
@@ -18,11 +18,11 @@ private:
 
 public:
 	GaussianBlur(int width, int heigh,Window * window) {
-		vshader = new VerticalBlurShader("Render Engine/postProcessing/verticalBlur.vert", "Render Engine/postProcessing/blur.frag");
+		vshader = new VerticalBlurShader("Render Engine/postProcessing/GaussianBlur/verticalBlur.vert", "Render Engine/postProcessing/GaussianBlur/blur.frag");
 		vshader->enable();
 		vshader->height->load(float(heigh));
 		vshader->disable();
-		hshader = new HorizontalBlurShader("Render Engine/postProcessing/horizontalBlur.vert", "Render Engine/postProcessing/blur.frag");
+		hshader = new HorizontalBlurShader("Render Engine/postProcessing/GaussianBlur/horizontalBlur.vert", "Render Engine/postProcessing/GaussianBlur/blur.frag");
 		hshader->enable();
 		hshader->width->load(float(width));
 		hshader->disable();

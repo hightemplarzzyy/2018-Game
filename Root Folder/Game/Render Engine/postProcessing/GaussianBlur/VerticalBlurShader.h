@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../shaders/shader.h"
-#include "../shaders/uniform1f.h"
+#include "../../shaders/shader.h"
+#include "../../shaders/uniform1f.h"
 
 class VerticalBlurShader :public Shader {
 public:

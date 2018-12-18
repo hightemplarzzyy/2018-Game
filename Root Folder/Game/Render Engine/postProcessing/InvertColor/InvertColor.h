@@ -1,7 +1,7 @@
 #pragma once
 
-#include "PostProcessingPipeline.h"
-#include "PostProcessingFilter.h"
+#include "../PostProcessingPipeline.h"
+#include "../PostProcessingFilter.h"
 #include "InvertColorShader.h"
 
 
@@ -12,8 +12,8 @@ private:
 
 public:
 	InvertColor(int width, int heigh, Window * window) {
-		ishader = new InvertColorShader("Render Engine/postProcessing/InvertColor.vert",
-			"Render Engine/postProcessing/InvertColor.frag");
+		ishader = new InvertColorShader("Render Engine/postProcessing/InvertColor/InvertColor.vert",
+			"Render Engine/postProcessing/InvertColor/InvertColor.frag");
 		iFilter = new PostProcessingFilter(ishader, width, heigh,false,window);
 	}
 

@@ -11,8 +11,8 @@
 #include "Render Engine/textures/texture.h"
 #include "Source/entity/models.h"
 #include "Source/main/camera.h"
-#include "Render Engine/postProcessing/GaussianBlur.h"
-#include "Render Engine/postProcessing/InvertColor.h"
+#include "Render Engine/postProcessing/GaussianBlur/GaussianBlur.h"
+#include "Render Engine/postProcessing/InvertColor/InvertColor.h"
 #include "Render Engine/basics/terrain.h"
 #include "Render Engine/basics/terrainShader.h"
 
@@ -43,11 +43,7 @@ int main() {
 
 
 	//FBO
-	VertexArray vao;
-	float position[8] = { -1, 1, -1, -1, 1, 1, 1, -1 };
-	vao.addBuffer(new Buffer(position, 8, 2), 0);
-	InvertColorShader ishader = InvertColorShader("Render Engine/postProcessing/InvertColor.vert",
-		"Render Engine/postProcessing/InvertColor.frag");
+	
 	Fbo * fbo = FboBuilder(480,270).setWindow(&window).creat();
 
 	InvertColor i = InvertColor(480, 270, &window);
@@ -75,7 +71,7 @@ int main() {
 			choice = 3;
 		}
 
-		printf("%d", choice);
+//		printf("%d", choice);
 
 		if (choice != 3) {
 			fbo->bindFrameBuffer();
