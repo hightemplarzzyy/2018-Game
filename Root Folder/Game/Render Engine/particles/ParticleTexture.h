@@ -1,7 +1,7 @@
 #ifndef _PARTICLES_TEXTURE_H_
 #define _PARTICLES_TEXTURE_H_
 
-#include "../texture/Texture.h"
+#include "../textures/texture.h"
 
 class ParticleTexture {
 private:
@@ -11,15 +11,21 @@ private:
 	bool m_glow = false;
 
 public:
-	ParticleTexture() {};
-	ParticleTexture(Texture texture, int numberOfRows, bool additive) {};
-	ParticleTexture(const ParticleTexture & pt) {};
-	ParticleTexture setGlowy();
+	//TODO:默认构造函数有一定风险
+	ParticleTexture() = default;
 
-	bool operator < (const ParticleTexture & left) {
-		return m_numberOfRows < left.m_numberOfRows;
+	ParticleTexture(Texture texture, int numberOfRows, bool additive) {
+		m_texture = texture;
+		m_numberOfRows = numberOfRows;
+		m_additive = additive;
+	};
+
+	ParticleTexture & setGlowy() {
+		m_glow = true;
+		return *this;
 	}
 
+	//为了能够放入MAP中
 	friend bool operator < (const ParticleTexture & right, const ParticleTexture & left) {
 		return right.m_numberOfRows < left.m_numberOfRows;
 	}

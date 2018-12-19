@@ -4,8 +4,8 @@
 
 #include <vector>
 
-#include "../toolbox/maths/maths_func.h"
-#include "../buffers/vertexarray.h"
+#include "../Render Engine/toolbox/maths/maths_func.h"
+#include "../Render Engine/buffers/vertexarray.h"
 #include "Perlin.h"
 
 

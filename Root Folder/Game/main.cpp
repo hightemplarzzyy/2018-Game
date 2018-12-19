@@ -15,8 +15,8 @@
 #include "Source/main/camera.h"
 #include "Render Engine/postProcessing/GaussianBlur/GaussianBlur.h"
 #include "Render Engine/postProcessing/InvertColor/InvertColor.h"
-#include "Render Engine/basics/terrain.h"
-#include "Render Engine/basics/terrainShader.h"
+#include "temp/terrain.h"
+#include "temp/terrainShader.h"
 #include "Render Engine/bloom/bloomEffect.h"
 #include "World/dayNightCycle/HorizonColourCycle.h"
 #include "World/dayNightCycle/LightColorCycle.h"
@@ -42,7 +42,8 @@ int main() {
 	Terrain t;
 	t.create();
 
-	TerrainShader tshader("Render Engine/basics/terrain.vert", "Render Engine/basics/terrain.frag");
+
+	TerrainShader tshader("temp/terrain.vert", "temp/terrain.frag");
 	tshader.enable();
 	tshader.lightpos->load(vec3(0, 100, 50));
 	tshader.perspective->load(mat4::perspective(45, (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, 0.1f, 300));
@@ -52,13 +53,11 @@ int main() {
 
 
 	//FBO
-	
 	Fbo * fbo = FboBuilder(480,270).setWindow(&window).creat();
 
 	InvertColor i = InvertColor(480, 270, &window);
 	GaussianBlur g = GaussianBlur(480, 270, &window);
 	BloomEffect e = BloomEffect(480, 270, &window);
-
 
 	Camera camera(&window);
 

@@ -4,9 +4,10 @@
 //TODO:需要手动添加到粒子列表中
 //TODO:deltatime的获取方法没有确定
 
+//
 Particle::Particle(ParticleTexture texture, vec3 position, vec3 velocity,
 	float gravityEffect, float lifeLength, float rotation, float scale) {
-	m_texture = texture;	//TODO:顶一个复制函数
+	m_texture = texture;	
 	m_position = position;
 	m_velocity = velocity;
 	m_gravityEffect = gravityEffect;
@@ -14,18 +15,6 @@ Particle::Particle(ParticleTexture texture, vec3 position, vec3 velocity,
 	m_rotation = rotation;
 	m_scale = scale;
 	//ParticleMaster.addParticle(this);
-}
-
-Particle::Particle(Color colour, bool additive, vec3 position, vec3 velocity,
-	float gravityEffec, float lifeLength, float rotation, float scale) {
-	m_color = colour;
-	m_position = position;
-	m_velocity = velocity;
-	m_gravityEffect = gravityEffec;
-	m_lifeLength = lifeLength;
-	m_rotation = rotation;
-	m_scale = scale;
-	//ParticleMaster.addColourParticle(this, additive);
 }
 
 Particle::Particle(ParticleTexture texture, vec3 position, float scale, float deathAnimationTime) {
@@ -43,11 +32,24 @@ Particle::Particle(ParticleTexture texture, float scale, float deathAnimationTim
 	m_texture = texture;
 	m_scale = scale;
 	m_lifeLength = deathAnimationTime;
-	*m_parent = transform;
 	m_heightOffset = heightOffset;
 	m_rotation = 0;
 	m_gravityEffect = 0;
+	//TODO:tansform没有
 	//ParticleMaster.addParticle(this);
+}
+
+Particle::Particle(Color colour, bool additive, vec3 position, vec3 velocity,
+	float gravityEffec, float lifeLength, float rotation, float scale) {
+	m_color = colour;
+	m_position = position;
+	m_velocity = velocity;
+	m_gravityEffect = gravityEffec;
+	m_lifeLength = lifeLength;
+	m_rotation = rotation;
+	m_scale = scale;
+	m_isColor = true;
+	//ParticleMaster.addColourParticle(this, additive);
 }
 
 
@@ -59,8 +61,13 @@ bool Particle::update(Camera camera, float deltaTime) {
 	else{
 		followParent();
 	}
-
 	rotate(deltaTime);
+	if (m_isColor && !m_manualStages) {
+		updateTextureCoordInfo();
+	}
+	
+
+	
 
 
 	return true;

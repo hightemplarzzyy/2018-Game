@@ -24,9 +24,9 @@ void VertexArray::addBuffer(Buffer *buffer, GLuint index) {
 
 //添加实例化离散的缓存
 //所有的数据都默认为GLFLOAT
-//默认实例变化都为1
-//index表示添加缓存的位置
-//dataFormat表示了数据在缓冲里面的格式
+//默认实例变化都为 1
+//参数：index表示添加缓存的位置
+//参数：dataFormat表示了数据在缓冲里面的格式
 void VertexArray::addInterLeavedBuffer(Buffer * buffer, int index, const std::vector<int> & dataFormat) {
 
 	bind();

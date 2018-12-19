@@ -29,6 +29,7 @@ private:
 	float m_normalAlpha = 1;		//标准透明度
 	
 	Color m_color;
+	bool m_isColor = false;
 
 	bool m_rotate3D = false;
 	float m_rotX = 0;
@@ -46,97 +47,102 @@ private:
 
 	bool m_decays = true;			//衰减度
 	//TODO 怎么定义没确定
-	Transformation * m_parent= nullptr;			
+	Transformation * m_parent= nullptr;		
+
 	float m_heightOffset = 0;
 
 public:
+	//纹理类粒子
 	Particle(ParticleTexture texture, vec3 position, vec3 velocity, float gravityEffect,
 		float lifeLength, float rotation, float scale);
-	Particle(Color colour, bool additive, vec3 position, vec3 velocity, float gravityEffec,
-		float lifeLength, float rotation, float scale);
+	//纹理类粒子
 	Particle(ParticleTexture texture, vec3 position, float scale, float deathAnimationTime);
+	//纹理类粒子
 	Particle(ParticleTexture texture, float scale, float deathAnimationTime, Transformation transform,
 		float heightOffset);
+	//颜色类粒子
+	Particle(Color colour, bool additive, vec3 position, vec3 velocity, float gravityEffec,
+		float lifeLength, float rotation, float scale);
 
-	inline void setHeighOffset(float offset) {
+	void setHeighOffset(float offset) {
 		m_heightOffset = offset; 
 	}
 
-	inline void set3dRotation(float speed) {
+	void set3dRotation(float speed) {
 		m_rotate3D = true;
 		//TODO：角度常量没有定义
 		m_rotX = rand() * 360;
 		m_rotXSpeed = speed;
 	}
 
-	inline void setPosition(vec3 pos) {
+	void setPosition(vec3 pos) {
 		m_position = pos;
 	}
 
-	inline void kill() {
+	void kill() {
 		m_decays = true;
 	}
 
-	inline void setFade(float normalAlpha, float fadeIn, float fadeOut) {
+	void setFade(float normalAlpha, float fadeIn, float fadeOut) {
 		m_normalAlpha = normalAlpha;
 		m_fadeIn = fadeIn;
 		m_fadeOut = fadeOut;
 	}
 
-	inline void setManualStage(bool manual) {
+	void setManualStage(bool manual) {
 		m_manualStages = manual;
 	}
 
-	inline void setStage(int index) {
+	void setStage(int index) {
 		m_manualStages = true;
 		setTextureOffset(m_texOffset1, index);
 		setTextureOffset(m_texOffset2, index);
 	}
 
-	inline void setStages(int preIndex, int nextIndex, float blend) {
+	void setStages(int preIndex, int nextIndex, float blend) {
 		m_manualStages = true;
 		setTextureOffset(m_texOffset1, preIndex);
 		setTextureOffset(m_texOffset2, nextIndex);
 		m_blend = blend;
 	}
 
-	inline Color getColour() {
-		
+	Color getColour() {
+		return m_color;
 	}
 
-	inline float getDistance() {
+	float getDistance() {
 		return m_distance;
 	}
 
-	inline vec2 getTexOffset1() {
+	vec2 getTexOffset1() {
 		return m_texOffset1;
 	}
 
-	inline vec2 getTexOffset2() {
+	vec2 getTexOffset2() {
 		return m_texOffset2;
 	}
 
-	inline float getBlend() {
+	float getBlend() {
 		return m_blend;
 	}
 
-	inline ParticleTexture getTexture() {
+	ParticleTexture getTexture() {
 		return m_texture;
 	}
 
-	inline vec3 getPosition() {
+	vec3 getPosition() {
 		return m_position;
 	}
 
-	inline float getRotation() {
+	float getRotation() {
 		return m_rotation;
 	}
 
-	inline float getRotX() {
+	float getRotX() {
 		return m_rotX;
 	}
 
-	inline float getScale() {
+	float getScale() {
 		return m_scale;
 	}
 

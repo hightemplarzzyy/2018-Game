@@ -1,11 +1,11 @@
 #pragma once
 
-#include "../shaders/shader.h"
-#include "../shaders/uniformvec3.h"
-#include "../shaders/uniformvec4.h"
-#include "../shaders/uniformmat4.h"
+#include "../Render Engine/shaders/shader.h"
+#include "../Render Engine/shaders/uniformvec3.h"
+#include "../Render Engine/shaders/uniformvec4.h"
+#include "../Render Engine/shaders/uniformmat4.h"
 
-#include "../toolbox/maths/maths_func.h"
+#include "../Render Engine/toolbox/maths/maths_func.h"
 
 class TerrainShader :public Shader {
 public:
