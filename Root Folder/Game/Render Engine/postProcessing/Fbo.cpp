@@ -2,12 +2,11 @@
 
 
 Fbo::Fbo(int width, int height,DepthBufferType depthtype, bool useColourBuffer, 
-	bool linear, bool clamp, bool alpha, bool antialiased, int samples, Window * window) {
+	bool linear, bool clamp, bool alpha, bool antialiased, int samples) {
 	m_width = width;
 	m_height = height;
 	m_alpha = alpha;
 	m_antiliased = antialiased;
-	m_window = window;
 	initialiseFrameBuffer(depthtype, useColourBuffer, linear, clamp, samples);
 }
 
@@ -53,7 +52,7 @@ void Fbo::bindFrameBuffer() {
 
 void Fbo::unbindFrameBuffer() {
 	glBindFramebuffer(GL_FRAMEBUFFER,0);
-	glViewport(0, 0, m_window->getWidth(), m_window->getHeight());
+	glViewport(0, 0, DisplayManager::getScreenWidth(), DisplayManager::getScreenHeigh());
 }
 
 void Fbo::bindToRead() {
@@ -157,7 +156,7 @@ void Fbo::blitToScreen() {
 
 	//将读缓冲的数据写入绘制缓冲中
 	glBlitFramebuffer(0, 0, m_width, m_height,
-		0, 0, m_window->getWidth(), m_window->getHeight(),
+		0, 0, DisplayManager::getScreenWidth(), DisplayManager::getScreenHeigh(),
 		GL_COLOR_BUFFER_BIT, GL_NEAREST);
 }
 

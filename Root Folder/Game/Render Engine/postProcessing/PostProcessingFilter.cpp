@@ -8,22 +8,21 @@ float PostProcessingFilter::positions[8] = {
 int PostProcessingFilter::VERTEX_COUNT = 4;
 
 PostProcessingFilter::PostProcessingFilter(Shader * shader, int width, int heigh, 
-	bool alpha, Window * window) {
+	bool alpha) {
 	m_shader = shader;
-	m_window = window;
-	m_fbo = FboBuilder(width, heigh).withAphaChannel(alpha).setWindow(window).setDepthBuffer(NONE).creat();
+	m_fbo = FboBuilder(width, heigh).withAphaChannel(alpha).setDepthBuffer(NONE).creat();
 	m_vao.addBuffer(new Buffer(positions, 8, 2), 0);
 }
 
-PostProcessingFilter::PostProcessingFilter(Shader * shader, Window * window) {
+PostProcessingFilter::PostProcessingFilter(Shader * shader) {
 	m_shader = shader;
-	m_fbo = FboBuilder(window->getWidth(), window->getHeight()).setWindow(window).creat();
+	m_fbo = FboBuilder(DisplayManager::getScreenWidth(), DisplayManager::getScreenHeigh()).creat();
 	m_vao.addBuffer(new Buffer(positions, 8, 2), 0);
 }
 
 //inputTexture这个参数的问题
 //有多个参数直接使用{ }放进去就好了 不用单独声明一个vector
-GLuint PostProcessingFilter::applyFilter(bool renderToScreen, std::vector<GLuint> inputTextures, Window * window) {
+GLuint PostProcessingFilter::applyFilter(bool renderToScreen, std::vector<GLuint> inputTextures) {
 	prepare(renderToScreen, inputTextures);
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, VERTEX_COUNT);
 	finishRendering(renderToScreen);

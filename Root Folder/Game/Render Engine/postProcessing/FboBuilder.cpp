@@ -4,11 +4,6 @@ FboBuilder::FboBuilder(int width, int height):
 	m_width(width),m_height(height){
 }
 
-FboBuilder & FboBuilder::setWindow(Window * window) {
-	m_window = window;
-	return *this;
-}
-
 
 FboBuilder & FboBuilder::setDepthBuffer(DepthBufferType type) {
 	m_depthBuffer = type;
@@ -43,7 +38,7 @@ FboBuilder & FboBuilder::noColourBuffer() {
 
 Fbo * FboBuilder::creat() {
 	return new Fbo(m_width, m_height, m_depthBuffer, m_colourBufer, m_linearFilter, m_clampEdege,
-		m_alphaChannel, m_antialiased, m_samples, m_window);
+		m_alphaChannel, m_antialiased, m_samples);
 }
 
 

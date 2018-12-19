@@ -2,7 +2,7 @@
 #define _POSTPROCESSING_PIPELINE_H_
 
 class PostProcessingPipeline {
-	virtual void carryOutProcessing(GLuint colourTextture, GLuint depthTexture, bool renderToScreen,Window * window) = 0;
+	virtual void carryOutProcessing(GLuint colourTextture, GLuint depthTexture, bool renderToScreen) = 0;
 	virtual GLuint getOutputTexture() = 0;
 	virtual void cleanUp() = 0;
 };

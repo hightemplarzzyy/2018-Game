@@ -125,6 +125,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Render Engine\basics\DisplayManager.cpp" />
     <ClCompile Include="Render Engine\bloom\BloomCombineFilter.h" />
     <ClCompile Include="Render Engine\bloom\BloomCombineShader.h" />
     <ClCompile Include="Render Engine\environment\environment.cpp" />
@@ -157,6 +158,7 @@
     <ClCompile Include="World\dayNightCycle\MistColorCycle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Render Engine\basics\DIsplayManager.h" />
     <ClInclude Include="Render Engine\basics\terrain.h" />
     <ClInclude Include="Render Engine\basics\terrainShader.h" />
     <ClInclude Include="Render Engine\bloom\bloomEffect.h" />

@@ -11,20 +11,20 @@ private:
 	PostProcessingFilter * iFilter;
 
 public:
-	InvertColor(int width, int heigh, Window * window) {
+	InvertColor(int width, int heigh) {
 		ishader = new InvertColorShader("Render Engine/postProcessing/InvertColor/InvertColor.vert",
 			"Render Engine/postProcessing/InvertColor/InvertColor.frag");
-		iFilter = new PostProcessingFilter(ishader, width, heigh,false,window);
+		iFilter = new PostProcessingFilter(ishader, width, heigh,false);
 	}
 
 	virtual GLuint getOutputTexture() {
 		return iFilter->getOutputTexture();
 	}
 
-	virtual void carryOutProcessing(GLuint colourTextture, GLuint depthTexture, bool renderToScreen, Window * window) {
+	virtual void carryOutProcessing(GLuint colourTextture, GLuint depthTexture, bool renderToScreen) {
 
 		
-		iFilter->applyFilter(false, { colourTextture }, window);
+		iFilter->applyFilter(false, { colourTextture });
 
 		if (renderToScreen) {
 			iFilter->blitToScreen();

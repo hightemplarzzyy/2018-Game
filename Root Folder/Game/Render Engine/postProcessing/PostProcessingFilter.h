@@ -14,14 +14,13 @@ private:
 	VertexArray m_vao;
 	Shader * m_shader;
 	Fbo * m_fbo;
-	Window * m_window;
 
 public:
-	PostProcessingFilter(Shader * shader, int width, int heigh, bool alpha, Window * window);
-	PostProcessingFilter(Shader * shader, Window * window);
+	PostProcessingFilter(Shader * shader, int width, int heigh, bool alpha);
+	PostProcessingFilter(Shader * shader);
 	//inputTexture这个参数的问题
 	//有多个参数直接使用{ }放进去就好了 不用单独声明一个vector
-	GLuint applyFilter(bool renderToScreen, std::vector<GLuint> inputTextures, Window * window);
+	GLuint applyFilter(bool renderToScreen, std::vector<GLuint> inputTextures);
 	GLuint getOutputTexture();
 	void blitToScreen();
 	void cleanUp();

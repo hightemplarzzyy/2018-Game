@@ -4,7 +4,7 @@
 
 #include "windows.h"
 
-#include "Render Engine/basics/window.h"
+#include "Render Engine/basics/DIsplayManager.h"
 #include "Render Engine/toolbox/maths/maths_func.h"
 #include "Render Engine/shaders/dragonshader.h"
 #include "Render Engine/buffers/buffer.h"
@@ -28,8 +28,9 @@
 
 
 int main() {
-	Window window("Game", WINDOW_WIDTH, WINDOW_HEIGHT);
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	//Window window("Game", WINDOW_WIDTH, WINDOW_HEIGHT);
+	
+	DisplayManager::cretaDisplay();
 
 	std::vector <vec3> vertexes;
 	std::vector <vec3> normals;
@@ -53,13 +54,13 @@ int main() {
 
 
 	//FBO
-	Fbo * fbo = FboBuilder(480,270).setWindow(&window).creat();
+	Fbo * fbo = FboBuilder(480,270).creat();
 
-	InvertColor i = InvertColor(480, 270, &window);
-	GaussianBlur g = GaussianBlur(480, 270, &window);
-	BloomEffect e = BloomEffect(480, 270, &window);
+	InvertColor i = InvertColor(480, 270);
+	GaussianBlur g = GaussianBlur(480, 270);
+	BloomEffect e = BloomEffect(480, 270);
 
-	Camera camera(&window);
+	Camera camera(DisplayManager::window);
 
 	int choice = 3;
 
@@ -67,7 +68,7 @@ int main() {
 
 	float preTime = GetTickCount();
 
-	while (!window.closed()) {
+	while (!DisplayManager::closedDisplay()) {
 		
 
 		float nowTime = (GetTickCount() - preTime) / dayTime;
@@ -84,16 +85,16 @@ int main() {
 		camera.move();
 
 		//切换后处理
-		if (window.isKeyPressed(GLFW_KEY_1)) {//高斯模糊
+		if (DisplayManager::isKeyPressed(GLFW_KEY_1)) {//高斯模糊
 			choice = 1;
 		}
-		else if (window.isKeyPressed(GLFW_KEY_2)) {//反相
+		else if (DisplayManager::isKeyPressed(GLFW_KEY_2)) {//反相
 			choice = 2;
 		}
-		else if (window.isKeyPressed(GLFW_KEY_3)) {//没有后处理
+		else if (DisplayManager::isKeyPressed(GLFW_KEY_3)) {//没有后处理
 			choice = 3;
 		}
-		else if (window.isKeyPressed(GLFW_KEY_4)) {
+		else if (DisplayManager::isKeyPressed(GLFW_KEY_4)) {
 			choice = 4;
 		}
 
@@ -104,7 +105,7 @@ int main() {
 		}
 		glClearColor(nowSkyColor.getR(), nowSkyColor.getG(), nowSkyColor.getB(), 1.0);
 
-		window.clear();//不清除会有残影
+		DisplayManager::clearDisplay();//不清除会有残影
 
 		tshader.enable();
 		tshader.view->load(camera.CreateViewMatrix());
@@ -117,17 +118,17 @@ int main() {
 			fbo->unbindFrameBuffer();
 
 			if (choice == 1) {
-				g.carryOutProcessing(fbo->getColourTexture(), 0, true, &window);
+				g.carryOutProcessing(fbo->getColourTexture(), 0, true);
 			}
 			else if(choice == 2){
-				i.carryOutProcessing(fbo->getColourTexture(), 0, true, &window);
+				i.carryOutProcessing(fbo->getColourTexture(), 0, true);
 			}
 			else{
-				e.carryOutProcessing(fbo->getColourTexture(), 0, true, &window);
+				e.carryOutProcessing(fbo->getColourTexture(), 0, true);
 			}
 		}
 		
-		window.update();
+		DisplayManager::updateDisplay();
 	}
 
 	return 0;

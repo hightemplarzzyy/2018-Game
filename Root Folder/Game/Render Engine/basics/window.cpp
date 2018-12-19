@@ -114,6 +114,7 @@ bool Window::init() {
 	return true;
 }
 
+//只有再窗口大小改变的时候才会执行
 void window_resize(GLFWwindow *window, int width, int height) {
 	Window *win = (Window*)glfwGetWindowUserPointer(window);
 	win->m_Width = width;

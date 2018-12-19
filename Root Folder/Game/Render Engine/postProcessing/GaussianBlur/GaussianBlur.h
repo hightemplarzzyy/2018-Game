@@ -17,7 +17,7 @@ private:
 	PostProcessingFilter * horizontalBlur;
 
 public:
-	GaussianBlur(int width, int heigh,Window * window) {
+	GaussianBlur(int width, int heigh) {
 		vshader = new VerticalBlurShader("Render Engine/postProcessing/GaussianBlur/verticalBlur.vert", "Render Engine/postProcessing/GaussianBlur/blur.frag");
 		vshader->enable();
 		vshader->height->load(float(heigh));
@@ -26,8 +26,8 @@ public:
 		hshader->enable();
 		hshader->width->load(float(width));
 		hshader->disable();
-		verticalBlur = new PostProcessingFilter(vshader, width, heigh, false, window);
-		horizontalBlur = new PostProcessingFilter(hshader, width, heigh, false, window);
+		verticalBlur = new PostProcessingFilter(vshader, width, heigh, false);
+		horizontalBlur = new PostProcessingFilter(hshader, width, heigh, false);
 	}
 
 	~GaussianBlur() {
@@ -41,10 +41,10 @@ public:
 		return horizontalBlur->getOutputTexture();
 	}
 
-	virtual void carryOutProcessing(GLuint colourTextture, GLuint depthTexture, bool renderToScreen,Window * window) {
+	virtual void carryOutProcessing(GLuint colourTextture, GLuint depthTexture, bool renderToScreen) {
 		
-		GLuint vertBlurred = verticalBlur->applyFilter(false, { colourTextture }, window);
-		horizontalBlur->applyFilter(false, { vertBlurred }, window);
+		GLuint vertBlurred = verticalBlur->applyFilter(false, { colourTextture });
+		horizontalBlur->applyFilter(false, { vertBlurred });
 
 		if (renderToScreen) {
 			horizontalBlur->blitToScreen();

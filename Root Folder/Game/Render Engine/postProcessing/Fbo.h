@@ -1,7 +1,7 @@
 #ifndef _FBO_H_
 #define _FBO_H_
 
-#include "../basics/window.h"
+#include "../basics/DIsplayManager.h"
 
 enum DepthBufferType {
 	RENDER_BUFFER, TEXTURE, NONE
@@ -16,8 +16,6 @@ private:
 
 	bool m_alpha;
 
-	Window * m_window;
-
 	GLuint m_frameBuffer;
 
 	GLuint m_colourTexture;
@@ -30,7 +28,7 @@ private:
 
 public:
 	Fbo(int width, int height, DepthBufferType depthtype, bool useColourBuffer, bool linear,
-		bool clamp, bool alpha, bool antialiased, int samples, Window * window);
+		bool clamp, bool alpha, bool antialiased, int samples);
 
 	int getWidth() { return m_width; }
 	int getHeight() { return m_height; }

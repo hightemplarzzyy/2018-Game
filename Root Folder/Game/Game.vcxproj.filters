@@ -108,6 +108,9 @@
     <ClCompile Include="temp\terrain.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Render Engine\basics\DisplayManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\entity\models.h">
@@ -294,6 +297,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="temp\terrainShader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\basics\DIsplayManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

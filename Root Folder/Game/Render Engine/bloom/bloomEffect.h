@@ -17,7 +17,7 @@ private:
 
 public:
 
-	BloomEffect(int blurWidth, int blurHeight, Window * window) {
+	BloomEffect(int blurWidth, int blurHeight) {
 		m_bloomshader = new BloomCombineShader(
 			"Render Engine/postProcessing/basicPostProcessing.vert",
 			"Render Engine/bloom/combine.frag"
@@ -27,9 +27,9 @@ public:
 			"Render Engine/bloom/brightPass.frag"
 		);
 
-		m_brightFilter = new PostProcessingFilter(m_brightpassshader, window);
-		m_gaussian = new GaussianBlur(blurWidth, blurHeight, window);
-		m_combineFilter = new PostProcessingFilter(m_bloomshader, window);
+		m_brightFilter = new PostProcessingFilter(m_brightpassshader);
+		m_gaussian = new GaussianBlur(blurWidth, blurHeight);
+		m_combineFilter = new PostProcessingFilter(m_bloomshader);
 	}
 
 	~BloomEffect() {
@@ -40,11 +40,11 @@ public:
 		delete m_brightpassshader;
 	}
 
-	virtual void carryOutProcessing(GLuint colourTextture, GLuint depthTexture, bool renderToScreen, Window * window) {
-		m_brightFilter->applyFilter(false, { colourTextture }, window);
-		m_gaussian->carryOutProcessing(m_brightFilter->getOutputTexture(), depthTexture, false, window);
+	virtual void carryOutProcessing(GLuint colourTextture, GLuint depthTexture, bool renderToScreen) {
+		m_brightFilter->applyFilter(false, { colourTextture });
+		m_gaussian->carryOutProcessing(m_brightFilter->getOutputTexture(), depthTexture, false);
 		GLuint gaussianTexture = m_gaussian->getOutputTexture();
-		m_combineFilter->applyFilter(renderToScreen, { colourTextture,gaussianTexture }, window);
+		m_combineFilter->applyFilter(renderToScreen, { colourTextture,gaussianTexture });
 	}
 
 	virtual GLuint getOutputTexture() {

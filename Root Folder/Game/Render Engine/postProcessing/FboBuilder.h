@@ -12,8 +12,6 @@ public:
 private:
 	int m_width;
 	int m_height;
-
-	Window * m_window;
 	
 	DepthBufferType m_depthBuffer	= NONE;
 	bool m_clampEdege				= true;
@@ -26,7 +24,6 @@ private:
 public:
 
 	FboBuilder(int width, int height);
-	FboBuilder & setWindow(Window * window);
 	FboBuilder & setDepthBuffer(DepthBufferType type);
 	FboBuilder & repeatTexture();
 	FboBuilder & antialias(int samples);
