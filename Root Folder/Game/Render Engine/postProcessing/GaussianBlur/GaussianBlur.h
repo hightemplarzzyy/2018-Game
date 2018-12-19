@@ -6,7 +6,7 @@
 #include "VerticalBlurShader.h"
 #include "HorizontalBlurShader.h"
 
-
+//不要当作参数传入，请使用引用
 class GaussianBlur :public PostProcessingPipeline {
 private:
 	
@@ -28,6 +28,13 @@ public:
 		hshader->disable();
 		verticalBlur = new PostProcessingFilter(vshader, width, heigh, false, window);
 		horizontalBlur = new PostProcessingFilter(hshader, width, heigh, false, window);
+	}
+
+	~GaussianBlur() {
+		delete vshader;
+		delete hshader;
+		delete verticalBlur;
+		delete horizontalBlur;
 	}
 
 	virtual GLuint getOutputTexture() {

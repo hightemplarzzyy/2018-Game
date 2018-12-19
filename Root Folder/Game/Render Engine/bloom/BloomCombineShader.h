@@ -9,7 +9,15 @@ public:
 	UniformSampler * originalTexture = new UniformSampler("originalTexture");
 	UniformSampler * blurredTexture = new UniformSampler("bloomTexture");
 
-	BloomCombineShader(const char * vertPath, const char * fragPath)
+	BloomCombineShader(const char * vertexPath, const char * fragmentPath) :
+		Shader(vertexPath, fragmentPath) {
+		storeAllUniformLocation();
+	}
+
+	virtual void storeAllUniformLocation() {
+		originalTexture->storeLocation(m_ShaderID);
+		blurredTexture->storeLocation(m_ShaderID);
+	}
 	
 };
 

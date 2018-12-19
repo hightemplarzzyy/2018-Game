@@ -4,7 +4,7 @@
 #include "../PostProcessingFilter.h"
 #include "InvertColorShader.h"
 
-
+//不要当作参数传入，请使用引用
 class InvertColor:public PostProcessingPipeline {
 private:
 	InvertColorShader * ishader;
@@ -23,6 +23,7 @@ public:
 
 	virtual void carryOutProcessing(GLuint colourTextture, GLuint depthTexture, bool renderToScreen, Window * window) {
 
+		
 		iFilter->applyFilter(false, { colourTextture }, window);
 
 		if (renderToScreen) {
@@ -32,5 +33,10 @@ public:
 
 	virtual void cleanUp() {
 		iFilter->cleanUp();
+	}
+
+	~InvertColor() {
+		delete ishader;
+		delete iFilter;
 	}
 };

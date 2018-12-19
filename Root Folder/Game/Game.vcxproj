@@ -151,6 +151,10 @@
     <ClCompile Include="Render Engine\toolbox\maths\vec2.cpp" />
     <ClCompile Include="Render Engine\toolbox\maths\vec3.cpp" />
     <ClCompile Include="Render Engine\toolbox\maths\vec4.cpp" />
+    <ClCompile Include="World\dayNightCycle\HorizonColourCycle.cpp" />
+    <ClCompile Include="World\dayNightCycle\LightColorCycle.cpp" />
+    <ClCompile Include="World\dayNightCycle\LightColorCycle.h" />
+    <ClCompile Include="World\dayNightCycle\MistColorCycle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Render Engine\basics\Perlin.h" />
@@ -211,14 +215,20 @@
     <ClInclude Include="Render Engine\toolbox\maths\vec3.h" />
     <ClInclude Include="Render Engine\toolbox\maths\vec4.h" />
     <ClInclude Include="Resource Management\utils\fileutils.h" />
+    <ClInclude Include="World\dayNightCycle\ColorCycle.h" />
+    <ClInclude Include="World\dayNightCycle\HorizonColourCycle.h" />
+    <ClInclude Include="World\dayNightCycle\MistColorCycle.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Render Engine\basics\terrain.frag" />
     <None Include="Render Engine\basics\terrain.vert" />
+    <None Include="Render Engine\bloom\brightPass.frag" />
+    <None Include="Render Engine\bloom\combine.frag" />
     <None Include="Render Engine\particles\particle.frag" />
     <None Include="Render Engine\particles\particle.vert" />
     <None Include="Render Engine\particles\particleColour.frag" />
     <None Include="Render Engine\particles\particleColour.vert" />
+    <None Include="Render Engine\postProcessing\basicPostProcessing.vert" />
     <None Include="Render Engine\postProcessing\blur.frag" />
     <None Include="Render Engine\postProcessing\GaussianBlur\blur.frag" />
     <None Include="Render Engine\postProcessing\GaussianBlur\horizontalBlur.vert" />

@@ -2,10 +2,11 @@
 #define _BLOOM_COMBINE_FILTER_
 
 #include "../postProcessing/PostProcessingFilter.h"
+#include "../basics/window.h"
+#include "BloomCombineShader.h"
 
 class BloomCombineFilter :public PostProcessingFilter {
-public:
-	
+
 };
 
 #endif // !_BLOOM_COMBINE_FILTER_

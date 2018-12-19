@@ -96,6 +96,18 @@
     <ClCompile Include="Render Engine\bloom\BloomCombineFilter.h">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="World\dayNightCycle\HorizonColourCycle.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="World\dayNightCycle\LightColorCycle.h">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="World\dayNightCycle\LightColorCycle.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="World\dayNightCycle\MistColorCycle.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\entity\models.h">
@@ -272,6 +284,15 @@
     <ClInclude Include="Render Engine\postProcessing\InvertColor\InvertColorShader.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="World\dayNightCycle\ColorCycle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="World\dayNightCycle\HorizonColourCycle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="World\dayNightCycle\MistColorCycle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\shaders\basic.vert" />
@@ -294,6 +315,9 @@
     <None Include="Render Engine\postProcessing\GaussianBlur\verticalBlur.vert" />
     <None Include="Render Engine\postProcessing\GaussianBlur\horizontalBlur.vert" />
     <None Include="Render Engine\postProcessing\GaussianBlur\blur.frag" />
+    <None Include="Render Engine\postProcessing\basicPostProcessing.vert" />
+    <None Include="Render Engine\bloom\combine.frag" />
+    <None Include="Render Engine\bloom\brightPass.frag" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Render Engine\postProcessing\verticalBlurVertex.glsl" />

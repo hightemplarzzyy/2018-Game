@@ -21,6 +21,8 @@ PostProcessingFilter::PostProcessingFilter(Shader * shader, Window * window) {
 	m_vao.addBuffer(new Buffer(positions, 8, 2), 0);
 }
 
+//inputTexture这个参数的问题
+//有多个参数直接使用{ }放进去就好了 不用单独声明一个vector
 GLuint PostProcessingFilter::applyFilter(bool renderToScreen, std::vector<GLuint> inputTextures, Window * window) {
 	prepare(renderToScreen, inputTextures);
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, VERTEX_COUNT);
