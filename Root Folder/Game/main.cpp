@@ -9,6 +9,7 @@
 #include "Render Engine/textures/texture.h"
 #include "Source/entity/models.h"
 #include "Source/main/camera.h"
+#include "World/time/Calendar.h"
 
 
 #define WINDOW_WIDTH 1280
@@ -32,6 +33,7 @@ int main() {
 	
 
 	Camera camera(&window);
+	Calendar cal(0, 7 / 24);
 
 	while (!window.closed()) {
 		window.clear();
@@ -46,6 +48,7 @@ int main() {
 		shader.view_matrix->load(camera.CreateViewMatrix());
 
 		window.update();
+		cal.update(0.1, &window);
 	}
 
 	return 0;

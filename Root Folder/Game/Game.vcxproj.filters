@@ -57,6 +57,9 @@
     <ClCompile Include="Render Engine\textures\texturemanager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="World\time\Calendar.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\entity\models.h">
@@ -144,6 +147,21 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Render Engine\textures\texturedeleterequest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource Management\utils\binarywriter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource Management\utils\binaryreader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource Management\languages\gametext.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource Management\languages\language.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="World\time\Calendar.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
