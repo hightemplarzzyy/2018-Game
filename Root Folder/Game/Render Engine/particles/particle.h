@@ -35,7 +35,7 @@ private:
 	float m_rotX = 0;
 	float m_rotXSpeed = 0;
 
-	float m_elapsedTime;			//已经过去的时间
+	float m_elapsedTime =0 ;		//已经过去的时间
 
 	ParticleTexture m_texture;
 
@@ -46,12 +46,14 @@ private:
 	bool m_manualStages = false;
 
 	bool m_decays = true;			//衰减度
-	//TODO 怎么定义没确定
+	
+	//TODO：没有做
 	Transformation * m_parent= nullptr;		
 
 	float m_heightOffset = 0;
 
 public:
+	Particle() = default;
 	//纹理类粒子
 	Particle(ParticleTexture texture, vec3 position, vec3 velocity, float gravityEffect,
 		float lifeLength, float rotation, float scale);
@@ -70,8 +72,7 @@ public:
 
 	void set3dRotation(float speed) {
 		m_rotate3D = true;
-		//TODO：角度常量没有定义
-		m_rotX = rand() * 360;
+		m_rotX = rand() % 360;
 		m_rotXSpeed = speed;
 	}
 
@@ -146,19 +147,19 @@ public:
 		return m_scale;
 	}
 
-	bool update(Camera camera,float deltaTime);
+	bool update(Camera camera);
 
 	//计算透明度
 	//随着流逝时间粒子的透明度不断降低
 	float getTransparency();
 
 private:
-	void moveParticleNaturally(float deltaTime);
-	void rotate(float deltaTime);
+	void moveParticleNaturally();
+	void rotate();
 	void followParent();
 	void updateTextureCoordInfo();
 	void setTextureOffset(vec2 & offset, int index);
-	//TODO:添加添加粒子的方法考虑到c++特性
+	//TODO：添加添加粒子的方法
 	
 };
 

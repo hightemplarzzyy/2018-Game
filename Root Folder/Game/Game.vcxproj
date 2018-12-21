@@ -70,8 +70,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)Game\Render Engine\toolbox\maths;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Game\Source\graphics;$(SolutionDir)Dependencies\stb_image;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(SolutionDir)Dependencies\stb_image;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Game\Render Engine\toolbox\maths;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Game\Source\graphics;$(SolutionDir)Dependencies\stb_image;C:\OpenGL\SOIL\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(SolutionDir)Dependencies\stb_image;C:\OpenGL\SOIL\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\$(Configuration)\Intermediates\</IntDir>
   </PropertyGroup>
@@ -84,7 +84,7 @@
       <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>STB_IMAGE.lib;opengl32.lib;glfw3.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SOIL.lib;STB_IMAGE.lib;opengl32.lib;glfw3.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -215,6 +215,7 @@
     <ClInclude Include="Render Engine\toolbox\maths\vec3.h" />
     <ClInclude Include="Render Engine\toolbox\maths\vec4.h" />
     <ClInclude Include="Resource Management\utils\fileutils.h" />
+    <ClInclude Include="temp\particleTextureShader.h" />
     <ClInclude Include="temp\Perlin.h" />
     <ClInclude Include="temp\terrain.h" />
     <ClInclude Include="temp\terrainShader.h" />

@@ -3,6 +3,7 @@
 #include "../../Render Engine/toolbox/maths/maths_func.h"
 #include "../../Render Engine/basics/window.h"
 
+
 class Camera {
 private:
 	vec3 m_Position;
@@ -42,6 +43,10 @@ public:
 			m_Yaw += 0.6f;
 		}
 	};
+
+	vec3 getPosition() {
+		return vec3();
+	}
 
 	mat4 CreateViewMatrix() {
 		mat4 view_matrix(1.0);

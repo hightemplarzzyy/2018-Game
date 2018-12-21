@@ -2,7 +2,7 @@
 
 out vec4 out_colour;
 
-in vec2 textureCoordsl
+in vec2 textureCoords;
 in vec4 pass_colour;
 
 uniform sampler2D particleTexture;

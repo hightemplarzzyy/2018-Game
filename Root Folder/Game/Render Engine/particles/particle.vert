@@ -12,7 +12,7 @@ out float blend;
 out float worldHeight;
 
 uniform mat4 projection_matrix;
-uniform mat4 float numberOfRows;
+uniform float numberOfRows;
 
 void main(){
     //转换坐标系

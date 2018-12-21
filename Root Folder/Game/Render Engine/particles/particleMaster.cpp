@@ -2,24 +2,22 @@
 #include "particleRender.h"
 
 
-void ParticleMaster::init(mat4 projectionMatrix) {
+void ParticleMaster::init(mat4 & projectionMatrix) {
 	renderer = ParticleRender(projectionMatrix);
 }
 
-void ParticleMaster::updateList(std::vector<Particle> list, Camera camera) {
+void ParticleMaster::updateList(std::vector<Particle> & list, Camera & camera) {
 	
 	std::vector<Particle> ::iterator it;
 	for (it = list.begin(); it != list.end(); it++) {
-		//TODO:deltaTime没有对接上 等对接后再修改参数
-		bool isStillAlice = it->update(camera,1);
+		bool isStillAlice = it->update(camera);
 		if (!isStillAlice) {
 			list.erase(it);
 		}
 	}
-
 }
 
-void ParticleMaster::update(Camera camera) {
+void ParticleMaster::update(Camera &camera) {
 
 	std::map <ParticleTexture, std::vector<Particle>>::iterator it;
 
@@ -29,7 +27,6 @@ void ParticleMaster::update(Camera camera) {
 			it = particles.erase(it);
 		}
 	}
-
 	updateList(colourParticles, camera);
 	updateList(colourAdditiveParticles,camera);
 }
@@ -40,15 +37,15 @@ void ParticleMaster::reset() {
 	colourAdditiveParticles.clear();
 }
 
-void ParticleMaster::renderParticles(Camera Camera) {
+void ParticleMaster::renderParticles(Camera & Camera) {
 	renderer.render(particles, colourParticles, colourAdditiveParticles,Camera);
 }
 
-void ParticleMaster::addParticle(Particle particle){
+void ParticleMaster::addParticle(Particle & particle){
 	particles[particle.getTexture()].push_back(particle);
 }
 
-void ParticleMaster::addColourPartivle(Particle colourParticle, bool additive) {
+void ParticleMaster::addColourPartivle(Particle & colourParticle, bool additive) {
 	if (additive) {
 		colourAdditiveParticles.push_back(colourParticle);
 	}

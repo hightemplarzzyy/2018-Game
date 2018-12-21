@@ -1,7 +1,8 @@
 #include "DisplayManager.h"
+#include <iostream>
 
-int DisplayManager::SCREEN_WIDTH = 1920;
-int DisplayManager::SCREEN_HEIGHT = 1080;
+int DisplayManager::SCREEN_WIDTH = 1280;
+int DisplayManager::SCREEN_HEIGHT = 720;
 const char * DisplayManager::SCREEN_TITLE = "Game";
 float DisplayManager::ASPECTRATIO;
 
@@ -29,6 +30,7 @@ bool DisplayManager::closedDisplay() {
 
 void DisplayManager::updateDisplay() {
 	updateDelta();
+//	printf("Time: %f, Delta: %f\n", TIME, DELTA);
 	window->update();
 }
 
@@ -79,5 +81,9 @@ float DisplayManager::getDelta() {
 
 float DisplayManager::getTime() {
 	return TIME;
+}
+
+float DisplayManager::getAspectRatio() {
+	return ASPECTRATIO;
 }
 

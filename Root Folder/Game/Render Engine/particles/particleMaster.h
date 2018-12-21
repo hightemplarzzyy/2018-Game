@@ -18,13 +18,13 @@ private:
 	ParticleRender renderer;
 
 public:
-	void init(mat4 projectionMatrix);
-	void update(Camera camera);
+	void init(mat4 & projectionMatrix);
+	void update(Camera & camera);
 	void reset();
-	void renderParticles(Camera Camera);
-	void addParticle(Particle particle);
-	void addColourPartivle(Particle colourParticle, bool additive);
-	void updateList(std::vector<Particle> list, Camera camera);
+	void renderParticles(Camera & Camera);
+	void addParticle(Particle &particle);
+	void addColourPartivle(Particle & colourParticle, bool additive);
+	void updateList(std::vector<Particle> & list, Camera & camera);
 };
 
 #endif // !_PARTICLES_MASTER_H_

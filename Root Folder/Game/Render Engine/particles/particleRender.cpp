@@ -13,41 +13,45 @@ ParticleRender::ParticleRender(const mat4 & projectionMatrix) {
 }
 
 void ParticleRender::initShaders(const mat4 & projectionMatrix) {
+	
+	m_shader = new ParticleShader("Render Engine/particles/particle.vert", "Render Engine/particles/particle.frag");
 
-	m_shader.enable();
-	m_shader.projection_matrix->load(projectionMatrix);
-	m_shader.disable();
+	m_shader->enable();
+	m_shader->projection_matrix->load(projectionMatrix);
+	m_shader->disable();
 
-	m_colourShader.enable();
-	m_colourShader.projection_matrix->load(projectionMatrix);
-	m_colourShader.disable();
+	m_colourShader = new ParticleColourShader("Render Engine/particles/particleColour.vert", "Render Engine/particles/particleColour.frag");
+	
+	m_colourShader->enable();
+	m_colourShader->projection_matrix->load(projectionMatrix);
+	m_colourShader->disable();
 
 }
 
-void ParticleRender::bindTexture(ParticleTexture texture) {
+void ParticleRender::bindTexture(ParticleTexture & texture) {
 	bindTexture(texture.getTextureID(), texture.isAdditive(), texture.getGlows());
-	m_shader.numberOfRaws->load(texture.getNumberOfRows());
+	m_shader->numberOfRaws->load(texture.getNumberOfRows());
 }
 
 void ParticleRender::bindTexture(int textureId, bool additive, bool glow) {
 	if (additive) {//需要混淆颜色
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-		m_shader.light_colour->load(m_lightGlowColour);
+		m_shader->light_colour->load(m_lightGlowColour);
 	}
 	else {
 		if (glow) {
-			m_shader.light_colour->load(m_lightGlowColour);
+			m_shader->light_colour->load(m_lightGlowColour);
 		}
 		else {
-			m_shader.light_colour->load(m_lightColour);
+			m_shader->light_colour->load(m_lightColour);
 		}
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
-	glActiveTexture(GL_TEXTURE);
+	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textureId);
 }
 
-void ParticleRender::updateModelViewMatrix(Particle partice, mat4 viewMatrix, float * data) {
+void ParticleRender::updateModelViewMatrix(Particle & partice, mat4 & viewMatrix, float * data) {
 	mat4 modelMatrix = mat4::translation(partice.getPosition());
 
 	//TODO：意义不明,暂且保留
@@ -70,7 +74,7 @@ void ParticleRender::updateModelViewMatrix(Particle partice, mat4 viewMatrix, fl
 	}
 }
 
-void ParticleRender::updateTexCoordInfo(Particle particle, float* data) {
+void ParticleRender::updateTexCoordInfo(Particle & particle, float* data) {
 	data[m_point++] = particle.getTexOffset1().x;
 	data[m_point++] = particle.getTexOffset1().y;
 	data[m_point++] = particle.getTexOffset2().x;
@@ -78,7 +82,7 @@ void ParticleRender::updateTexCoordInfo(Particle particle, float* data) {
 	data[m_point++] = particle.getBlend();
 }
 
-void ParticleRender::updateColourCoordInfo(Particle particle, float* data) {
+void ParticleRender::updateColourCoordInfo(Particle & particle, float* data) {
 	data[m_point++] = particle.getTexOffset1().x;
 	data[m_point++] = particle.getTexOffset1().y;
 	data[m_point++] = particle.getTexOffset2().x;
@@ -86,8 +90,8 @@ void ParticleRender::updateColourCoordInfo(Particle particle, float* data) {
 	data[m_point++] = 1;
 }
 
-void ParticleRender::renderTexturedParticles(ParticleTexture texture,
-	std::map<ParticleTexture, std::vector<Particle>> particles, mat4 viewMatrix) {
+void ParticleRender::renderTexturedParticles(ParticleTexture & texture,
+	std::map<ParticleTexture, std::vector<Particle>> & particles, mat4 & viewMatrix) {
 
 	std::vector <Particle> particleList = particles[texture];
 	bindTexture(texture);
@@ -110,14 +114,14 @@ void ParticleRender::renderTexturedParticles(ParticleTexture texture,
 	m_vao.unbind();
 }
 
-void ParticleRender::renderColourParticles(std::vector<Particle> colourParticles,
-	mat4 viewMatrix, bool additive) {
+void ParticleRender::renderColourParticles(std::vector<Particle> & colourParticles,
+	mat4 & viewMatrix, bool additive) {
 	if (additive) {
-		m_colourShader.light_colour->load(m_lightGlowColour);
+		m_colourShader->light_colour->load(m_lightGlowColour);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 	}
 	else {
-		m_colourShader.light_colour->load(m_lightColour);
+		m_colourShader->light_colour->load(m_lightColour);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 
@@ -131,7 +135,7 @@ void ParticleRender::renderColourParticles(std::vector<Particle> colourParticles
 		buf[m_point++] = colourParticles[i].getTransparency();
 	}
 
-	std::vector <int> colourFormate = { 4,4,4,4,4,1,1 };
+	std::vector <int> colourFormate = { 4,4,4,4,4,1 };
 	m_vao.addInterLeavedBuffer(new Buffer(buf, colourParticles.size() * INSTANCE_DATA_SIZE, 4), 1,colourFormate);
 	
 	m_vao.bind();
@@ -161,7 +165,8 @@ void ParticleRender::calculateLightingFactor() {
 }
 
 void ParticleRender::prepare() {
-	//TODO:背面消隐,再ToolBox里面，没添加
+	m_vao.bind();
+	OpenglUtils::cullBackFaces(false);
 	glEnable(GL_BLEND);
 	glDepthMask(false);
 	calculateLightingFactor();
@@ -169,31 +174,50 @@ void ParticleRender::prepare() {
 
 void ParticleRender::finishRendering() {
 	glDepthMask(true);
-	//TODO:背面消隐,再ToolBox里面，没添加
+	OpenglUtils::cullBackFaces(true);
 	glDisable(GL_BLEND);
+	m_vao.unbind();
 }
 
-void ParticleRender::render(std::map<ParticleTexture, std::vector<Particle>> particles,
-	std::vector<Particle> colourParticles, std::vector<Particle> additiveColourParticles, Camera camera) {
+void ParticleRender::render(std::map<ParticleTexture, std::vector<Particle>> & particles,
+	std::vector<Particle> & colourParticles, std::vector<Particle> & additiveColourParticles, Camera & camera) {
 
 	mat4 viewMatrix = camera.CreateViewMatrix();
 	
 	prepare();
 
-	m_shader.enable();
+	m_shader->enable();
 	std::map<ParticleTexture, std::vector<Particle>>::iterator it;
 	for (it = particles.begin(); it != particles.end(); it++) {
-		renderTexturedParticles(it->first, particles, viewMatrix);
+		ParticleTexture temp = it->first;
+		renderTexturedParticles(temp, particles, viewMatrix);
 	}
-	m_shader.disable();
+	m_shader->disable();
 
-	m_colourShader.enable();
+	m_colourShader->enable();
 	glActiveTexture(GL_TEXTURE0);
 	//TODO:加载三角形贴图
 	//glBindTexture()
 	renderColourParticles(colourParticles, viewMatrix, false);
 	renderColourParticles(additiveColourParticles, viewMatrix, true);
-	m_colourShader.disable();
+	m_colourShader->disable();
+
+	finishRendering();
+}
+
+void ParticleRender::render(std::map<ParticleTexture, std::vector<Particle>> & particles, Camera & camera) {
+
+	mat4 viewMatrix = camera.CreateViewMatrix();
+
+	prepare();
+
+	m_shader->enable();
+	std::map<ParticleTexture, std::vector<Particle>>::iterator it;
+	for (it = particles.begin(); it != particles.end(); it++) {
+		ParticleTexture temp = it->first;
+		renderTexturedParticles(temp, particles, viewMatrix);
+	}
+	m_shader->disable();
 
 	finishRendering();
 }

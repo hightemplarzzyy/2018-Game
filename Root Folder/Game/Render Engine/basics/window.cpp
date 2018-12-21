@@ -142,7 +142,7 @@ void cursor_position_callback(GLFWwindow *window, double xpos, double ypos) {
 }
 
 
-void APIENTRY glDebugOutput(GLenum source,
+void GLAPIENTRY glDebugOutput(GLenum source,
 	GLenum type,
 	GLuint id,
 	GLenum severity,

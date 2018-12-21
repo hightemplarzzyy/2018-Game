@@ -38,6 +38,7 @@ public:
 
 	static float getTime();
 	static float getDelta();
+	static float getAspectRatio();
 
 	static bool isKeyPressed(unsigned int keycode);
 	static bool isMouseButtonPressed(unsigned int button);

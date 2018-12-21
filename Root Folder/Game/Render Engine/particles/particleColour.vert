@@ -11,7 +11,7 @@ out vec4 pass_colour;
 uniform mat4 projection_matrix;
 uniform vec3 light_colour;
 
-void mian(){
+void main(){
   textureCoords = position + vec2(0.5,0.5);
   textureCoords.y = 1.0f - textureCoords.y;
   pass_colour = vec4(colour.rgb * light_colour,alpha);

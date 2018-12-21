@@ -302,6 +302,9 @@
     <ClInclude Include="Render Engine\basics\DIsplayManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="temp\particleTextureShader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\shaders\basic.vert" />

@@ -10,6 +10,7 @@
 #include "particleShader.h"
 #include "particleColourShader.h"
 #include "ParticleTexture.h"
+#include "../toolbox/OpenglUtils.h"
 
 
 class ParticleRender {
@@ -22,8 +23,8 @@ private:
 	
 	VertexArray m_vao;
 
-	ParticleShader m_shader = ParticleShader("particle.vert", "particle.frag");
-	ParticleColourShader m_colourShader = ParticleColourShader("particleColour.vert", "particleColour.frag");
+	ParticleShader * m_shader;
+	ParticleColourShader * m_colourShader;
 
 	vec3 m_lightColour;
 	vec3 m_lightGlowColour = vec3(1.0f, 1.0f, 1.0f);
@@ -32,22 +33,23 @@ public:
 	ParticleRender() {};
 	ParticleRender(const mat4 & projectionMatrix);
 
-	void render(std::map<ParticleTexture, std::vector<Particle>> particles,
-		std::vector<Particle> colourParticles, std::vector<Particle> additiveColourParticles,
-		Camera camera);
+	void render(std::map<ParticleTexture, std::vector<Particle>> & particles,
+		std::vector<Particle> &colourParticles, std::vector<Particle> &additiveColourParticles,
+		Camera &camera);
+	void render(std::map<ParticleTexture, std::vector<Particle>> & particles, Camera &camera);
 	
 private:
 	void initShaders(const mat4 & projectionMatrix);
 	void calculateLightingFactor();
-	void renderTexturedParticles(ParticleTexture texture, std::map<ParticleTexture, std::vector<Particle>> particles,
-		mat4 viewMatrix);
-	void renderColourParticles(std::vector<Particle> colourParticles,
-		mat4 viewMatrix, bool additive);
-	void updateTexCoordInfo(Particle particle, float* data);
-	void updateColourCoordInfo(Particle particle, float* data);
-	void bindTexture(ParticleTexture texture);
+	void renderTexturedParticles(ParticleTexture & texture, std::map<ParticleTexture, std::vector<Particle>> &particles,
+		mat4 & viewMatrix);
+	void renderColourParticles(std::vector<Particle> &colourParticles,
+		mat4 & viewMatrix, bool additive);
+	void updateTexCoordInfo(Particle & particle, float* data);
+	void updateColourCoordInfo(Particle & particle, float* data);
+	void bindTexture(ParticleTexture & texture);
 	void bindTexture(int textureId, bool additive, bool glow);
-	void updateModelViewMatrix(Particle partice, mat4 viewMatrix, float * data);
+	void updateModelViewMatrix(Particle & partice, mat4 & viewMatrix, float * data);
 	void prepare();
 	void finishRendering();
 	
