@@ -72,6 +72,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(SolutionDir)Game\Render Engine\toolbox\maths;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Game\Source\graphics;$(SolutionDir)Dependencies\stb_image;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(SolutionDir)Dependencies\stb_image;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Game\Render Engine\toolbox\maths;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\stb_image;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Game\Source\graphics;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependencies\stb_image;$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\$(Configuration)\Intermediates\</IntDir>
   </PropertyGroup>
@@ -85,6 +87,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>STB_IMAGE.lib;opengl32.lib;glfw3.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;STB_IMAGE.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -124,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="World\time\Calendar.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Render Engine\basics\DisplayManager.cpp" />
     <ClCompile Include="Render Engine\bloom\BloomCombineFilter.h" />
@@ -138,6 +142,8 @@
     <ClCompile Include="Render Engine\textures\texturemanager.cpp" />
     <ClCompile Include="Render Engine\toolbox\Color.cpp" />
     <ClCompile Include="Render Engine\toolbox\OpenglUtils.cpp" />
+    <ClCompile Include="Render Engine\textures\texture.cpp" />
+    <ClCompile Include="Render Engine\textures\texturemanager.cpp" />
     <ClCompile Include="Resource Management\glRequestProcessing\glrequestprocessor.cpp" />
     <ClCompile Include="Source\entity\models.cpp" />
     <ClCompile Include="Render Engine\buffers\buffer.cpp" />
@@ -179,6 +185,8 @@
     <ClInclude Include="Render Engine\postProcessing\PostProcessingFilter.h" />
     <ClInclude Include="Render Engine\postProcessing\PostProcessingPipeline.h" />
     <ClInclude Include="Render Engine\postProcessing\VerticalBlurShader.h" />
+=======
+    <ClInclude Include="World\time\Calendar.h" />
     <ClInclude Include="Render Engine\shaders\dragonshader.h" />
     <ClInclude Include="Render Engine\shaders\uniform.h" />
     <ClInclude Include="Render Engine\shaders\uniform1f.h" />
@@ -198,6 +206,10 @@
     <ClInclude Include="Resource Management\glRequestProcessing\glrequest.h" />
     <ClInclude Include="Resource Management\glRequestProcessing\glrequestprocessor.h" />
     <ClInclude Include="Resource Management\glRequestProcessing\glrequestqueue.h" />
+    <ClInclude Include="Resource Management\languages\gametext.h" />
+    <ClInclude Include="Resource Management\languages\language.h" />
+    <ClInclude Include="Resource Management\utils\binaryreader.h" />
+    <ClInclude Include="Resource Management\utils\binarywriter.h" />
     <ClInclude Include="Source\entity\models.h" />
     <ClInclude Include="Render Engine\buffers\buffer.h" />
     <ClInclude Include="Render Engine\buffers\indexbuffer.h" />
