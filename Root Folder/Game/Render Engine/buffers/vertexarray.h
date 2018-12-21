@@ -13,6 +13,7 @@ public:
 	VertexArray();
 	~VertexArray();
 	void addBuffer(Buffer *buffer, GLuint index);
+	void addInterLeavedBuffer(Buffer * buffer, int index, const std::vector<int> & dataFormat);
 	void bind() const;
 	void unbind() const;
 };

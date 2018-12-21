@@ -64,7 +64,7 @@ public:
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 		//unsigned char* d = *(data.getBuffer());
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, data.getWidth(), data.getHeight(),
-			0, GL_BGRA, GL_UNSIGNED_BYTE, data.getBuffer());
+			0, GL_RGBA, GL_UNSIGNED_BYTE, data.getBuffer());
 
 		if (builder.isMipmap())
 		{

@@ -25,7 +25,7 @@ mat4 mat4::identity() {
 	return mat4(1.0f);
 }
 
-mat4& mat4::multiply(const mat4 &other) {
+mat4& mat4::multiply(const mat4 & other) {
 	float data[16];
 	for(int y=0;y<4;y++)
 		for (int x = 0; x < 4; x++){

@@ -3,7 +3,7 @@
 #include "../../Resource Management/utils/fileutils.h"
 #include "../toolbox/maths/maths_func.h"
 
-//ÎÆÀíÊı¾İÀà
+//çº¹ç†æ•°æ®ç±»
 class TextureData
 {
 private:
@@ -28,7 +28,7 @@ public:
 
 class Texture;
 
-//ÎÆÀíÅäÖÃÆ÷Àà
+//çº¹ç†é…ç½®å™¨ç±»
 class TextureBuilder
 {
 private:
@@ -73,7 +73,7 @@ public:
 	*/
 	Texture create();
 
-	//TODO ÔÚºóÌ¨Ïß³Ì´´½¨ÎÆÀí
+	//TODO åœ¨åå°çº¿ç¨‹åˆ›å»ºçº¹ç†
 	//Texture createInBackground()
 	//{
 	//	Texture texture;
@@ -81,7 +81,7 @@ public:
 	//	return texture;
 	//}
 
-	////TODO ÔÚÖ÷Ïß³ÌÖĞ´´½¨ÎÆÀí
+	////TODO åœ¨ä¸»çº¿ç¨‹ä¸­åˆ›å»ºçº¹ç†
 	//Texture createInSecondThread() 
 	//{
 	//	Texture texture;

@@ -51,12 +51,55 @@
     <ClCompile Include="Resource Management\glRequestProcessing\glrequestprocessor.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Render Engine\particles\particle.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Render Engine\particles\particleRender.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Render Engine\environment\environment.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Render Engine\toolbox\Color.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Render Engine\postProcessing\Fbo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Render Engine\postProcessing\FboBuilder.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Render Engine\postProcessing\PostProcessingFilter.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Render Engine\toolbox\OpenglUtils.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
     <ClCompile Include="Render Engine\textures\texture.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Render Engine\textures\texturemanager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Render Engine\bloom\BloomCombineShader.h">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Render Engine\bloom\BloomCombineFilter.h">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="World\dayNightCycle\HorizonColourCycle.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="World\dayNightCycle\LightColorCycle.h">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="World\dayNightCycle\LightColorCycle.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="World\dayNightCycle\MistColorCycle.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Render Engine\basics\DisplayManager.cpp">
     <ClCompile Include="World\time\Calendar.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -146,6 +189,97 @@
     <ClInclude Include="Render Engine\textures\textureloadrequest.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Render Engine\particles\particle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\particles\particleColourShader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\particles\particleRender.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\particles\particleShader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\particles\ParticleTexture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\environment\environment.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\toolbox\Transformation.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\toolbox\Color.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\postProcessing\PostProcessingPipeline.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\postProcessing\PostProcessingFilter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\postProcessing\Fbo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\postProcessing\FboBuilder.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\bloom\bloomEffect.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\toolbox\OpenglUtils.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\postProcessing\GaussianBlur.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\postProcessing\VerticalBlurShader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\postProcessing\HorizontalBlurShader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\textures\texturedeleterequest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\basics\terrain.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\basics\terrainShader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\postProcessing\InvertColorShader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\postProcessing\InvertColor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\postProcessing\GaussianBlur\GaussianBlur.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\postProcessing\GaussianBlur\HorizontalBlurShader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\postProcessing\GaussianBlur\VerticalBlurShader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\postProcessing\InvertColor\InvertColor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\postProcessing\InvertColor\InvertColorShader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="World\dayNightCycle\ColorCycle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="World\dayNightCycle\HorizonColourCycle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="World\dayNightCycle\MistColorCycle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\basics\DIsplayManager.h">
     <ClInclude Include="Render Engine\textures\texturedeleterequest.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -170,5 +304,27 @@
     <None Include="Source\shaders\basic.frag" />
     <None Include="Source\shaders\dragon.frag" />
     <None Include="Source\shaders\dragon.vert" />
+    <None Include="Render Engine\particles\particle.frag" />
+    <None Include="Render Engine\particles\particle.vert" />
+    <None Include="Render Engine\particles\particleColour.vert" />
+    <None Include="Render Engine\particles\particleColour.frag" />
+    <None Include="Render Engine\postProcessing\blur.frag" />
+    <None Include="Render Engine\postProcessing\horizontalBlur.vert" />
+    <None Include="Render Engine\postProcessing\verticalBlur.vert" />
+    <None Include="Render Engine\basics\terrain.frag" />
+    <None Include="Render Engine\basics\terrain.vert" />
+    <None Include="Render Engine\postProcessing\InvertColor.frag" />
+    <None Include="Render Engine\postProcessing\InvertColor.vert" />
+    <None Include="Render Engine\postProcessing\InvertColor\InvertColor.frag" />
+    <None Include="Render Engine\postProcessing\InvertColor\InvertColor.vert" />
+    <None Include="Render Engine\postProcessing\GaussianBlur\verticalBlur.vert" />
+    <None Include="Render Engine\postProcessing\GaussianBlur\horizontalBlur.vert" />
+    <None Include="Render Engine\postProcessing\GaussianBlur\blur.frag" />
+    <None Include="Render Engine\postProcessing\basicPostProcessing.vert" />
+    <None Include="Render Engine\bloom\combine.frag" />
+    <None Include="Render Engine\bloom\brightPass.frag" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Render Engine\postProcessing\verticalBlurVertex.glsl" />
   </ItemGroup>
 </Project>

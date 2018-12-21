@@ -70,6 +70,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(SolutionDir)Game\Render Engine\toolbox\maths;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Game\Source\graphics;$(SolutionDir)Dependencies\stb_image;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(SolutionDir)Dependencies\stb_image;$(LibraryPath)</LibraryPath>
     <IncludePath>$(SolutionDir)Game\Render Engine\toolbox\maths;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\stb_image;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Game\Source\graphics;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Dependencies\stb_image;$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
@@ -84,6 +86,7 @@
       <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
+      <AdditionalDependencies>STB_IMAGE.lib;opengl32.lib;glfw3.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;STB_IMAGE.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -126,6 +129,19 @@
   <ItemGroup>
     <ClCompile Include="World\time\Calendar.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Render Engine\basics\DisplayManager.cpp" />
+    <ClCompile Include="Render Engine\bloom\BloomCombineFilter.h" />
+    <ClCompile Include="Render Engine\bloom\BloomCombineShader.h" />
+    <ClCompile Include="Render Engine\environment\environment.cpp" />
+    <ClCompile Include="Render Engine\particles\particle.cpp" />
+    <ClCompile Include="Render Engine\particles\particleRender.cpp" />
+    <ClCompile Include="Render Engine\postProcessing\Fbo.cpp" />
+    <ClCompile Include="Render Engine\postProcessing\FboBuilder.cpp" />
+    <ClCompile Include="Render Engine\postProcessing\PostProcessingFilter.cpp" />
+    <ClCompile Include="Render Engine\textures\texture.cpp" />
+    <ClCompile Include="Render Engine\textures\texturemanager.cpp" />
+    <ClCompile Include="Render Engine\toolbox\Color.cpp" />
+    <ClCompile Include="Render Engine\toolbox\OpenglUtils.cpp" />
     <ClCompile Include="Render Engine\textures\texture.cpp" />
     <ClCompile Include="Render Engine\textures\texturemanager.cpp" />
     <ClCompile Include="Resource Management\glRequestProcessing\glrequestprocessor.cpp" />
@@ -139,8 +155,37 @@
     <ClCompile Include="Render Engine\toolbox\maths\vec2.cpp" />
     <ClCompile Include="Render Engine\toolbox\maths\vec3.cpp" />
     <ClCompile Include="Render Engine\toolbox\maths\vec4.cpp" />
+    <ClCompile Include="World\dayNightCycle\HorizonColourCycle.cpp" />
+    <ClCompile Include="World\dayNightCycle\LightColorCycle.cpp" />
+    <ClCompile Include="World\dayNightCycle\LightColorCycle.h" />
+    <ClCompile Include="World\dayNightCycle\MistColorCycle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Render Engine\basics\DIsplayManager.h" />
+    <ClInclude Include="Render Engine\basics\terrain.h" />
+    <ClInclude Include="Render Engine\basics\terrainShader.h" />
+    <ClInclude Include="Render Engine\bloom\bloomEffect.h" />
+    <ClInclude Include="Render Engine\environment\environment.h" />
+    <ClInclude Include="Render Engine\particles\particle.h" />
+    <ClInclude Include="Render Engine\particles\particleColourShader.h" />
+    <ClInclude Include="Render Engine\particles\particleRender.h" />
+    <ClInclude Include="Render Engine\particles\particleShader.h" />
+    <ClInclude Include="Render Engine\particles\particleTexture.h" />
+    <ClInclude Include="Render Engine\postProcessing\Fbo.h" />
+    <ClInclude Include="Render Engine\postProcessing\FboBuilder.h" />
+    <ClInclude Include="Render Engine\postProcessing\GaussianBlur.h" />
+    <ClInclude Include="Render Engine\postProcessing\GaussianBlur\GaussianBlur.h" />
+    <ClInclude Include="Render Engine\postProcessing\GaussianBlur\HorizontalBlurShader.h" />
+    <ClInclude Include="Render Engine\postProcessing\GaussianBlur\VerticalBlurShader.h" />
+    <ClInclude Include="Render Engine\postProcessing\HorizontalBlurShader.h" />
+    <ClInclude Include="Render Engine\postProcessing\InvertColor.h" />
+    <ClInclude Include="Render Engine\postProcessing\InvertColorShader.h" />
+    <ClInclude Include="Render Engine\postProcessing\InvertColor\InvertColor.h" />
+    <ClInclude Include="Render Engine\postProcessing\InvertColor\InvertColorShader.h" />
+    <ClInclude Include="Render Engine\postProcessing\PostProcessingFilter.h" />
+    <ClInclude Include="Render Engine\postProcessing\PostProcessingPipeline.h" />
+    <ClInclude Include="Render Engine\postProcessing\VerticalBlurShader.h" />
+=======
     <ClInclude Include="World\time\Calendar.h" />
     <ClInclude Include="Render Engine\shaders\dragonshader.h" />
     <ClInclude Include="Render Engine\shaders\uniform.h" />
@@ -155,6 +200,9 @@
     <ClInclude Include="Render Engine\textures\texturedeleterequest.h" />
     <ClInclude Include="Render Engine\textures\textureloadrequest.h" />
     <ClInclude Include="Render Engine\textures\texturemanager.h" />
+    <ClInclude Include="Render Engine\toolbox\Color.h" />
+    <ClInclude Include="Render Engine\toolbox\OpenglUtils.h" />
+    <ClInclude Include="Render Engine\toolbox\Transformation.h" />
     <ClInclude Include="Resource Management\glRequestProcessing\glrequest.h" />
     <ClInclude Include="Resource Management\glRequestProcessing\glrequestprocessor.h" />
     <ClInclude Include="Resource Management\glRequestProcessing\glrequestqueue.h" />
@@ -175,12 +223,37 @@
     <ClInclude Include="Render Engine\toolbox\maths\vec3.h" />
     <ClInclude Include="Render Engine\toolbox\maths\vec4.h" />
     <ClInclude Include="Resource Management\utils\fileutils.h" />
+    <ClInclude Include="World\dayNightCycle\ColorCycle.h" />
+    <ClInclude Include="World\dayNightCycle\HorizonColourCycle.h" />
+    <ClInclude Include="World\dayNightCycle\MistColorCycle.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Render Engine\basics\terrain.frag" />
+    <None Include="Render Engine\basics\terrain.vert" />
+    <None Include="Render Engine\bloom\brightPass.frag" />
+    <None Include="Render Engine\bloom\combine.frag" />
+    <None Include="Render Engine\particles\particle.frag" />
+    <None Include="Render Engine\particles\particle.vert" />
+    <None Include="Render Engine\particles\particleColour.frag" />
+    <None Include="Render Engine\particles\particleColour.vert" />
+    <None Include="Render Engine\postProcessing\basicPostProcessing.vert" />
+    <None Include="Render Engine\postProcessing\blur.frag" />
+    <None Include="Render Engine\postProcessing\GaussianBlur\blur.frag" />
+    <None Include="Render Engine\postProcessing\GaussianBlur\horizontalBlur.vert" />
+    <None Include="Render Engine\postProcessing\GaussianBlur\verticalBlur.vert" />
+    <None Include="Render Engine\postProcessing\horizontalBlur.vert" />
+    <None Include="Render Engine\postProcessing\InvertColor.frag" />
+    <None Include="Render Engine\postProcessing\InvertColor.vert" />
+    <None Include="Render Engine\postProcessing\InvertColor\InvertColor.frag" />
+    <None Include="Render Engine\postProcessing\InvertColor\InvertColor.vert" />
+    <None Include="Render Engine\postProcessing\verticalBlur.vert" />
     <None Include="Source\shaders\basic.frag" />
     <None Include="Source\shaders\basic.vert" />
     <None Include="Source\shaders\dragon.frag" />
     <None Include="Source\shaders\dragon.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Render Engine\postProcessing\verticalBlurVertex.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
