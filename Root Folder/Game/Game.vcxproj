@@ -124,6 +124,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="World\time\Calendar.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Render Engine\textures\texture.cpp" />
     <ClCompile Include="Render Engine\textures\texturemanager.cpp" />
@@ -140,6 +141,7 @@
     <ClCompile Include="Render Engine\toolbox\maths\vec4.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="World\time\Calendar.h" />
     <ClInclude Include="Render Engine\shaders\dragonshader.h" />
     <ClInclude Include="Render Engine\shaders\uniform.h" />
     <ClInclude Include="Render Engine\shaders\uniform1f.h" />
@@ -156,6 +158,10 @@
     <ClInclude Include="Resource Management\glRequestProcessing\glrequest.h" />
     <ClInclude Include="Resource Management\glRequestProcessing\glrequestprocessor.h" />
     <ClInclude Include="Resource Management\glRequestProcessing\glrequestqueue.h" />
+    <ClInclude Include="Resource Management\languages\gametext.h" />
+    <ClInclude Include="Resource Management\languages\language.h" />
+    <ClInclude Include="Resource Management\utils\binaryreader.h" />
+    <ClInclude Include="Resource Management\utils\binarywriter.h" />
     <ClInclude Include="Source\entity\models.h" />
     <ClInclude Include="Render Engine\buffers\buffer.h" />
     <ClInclude Include="Render Engine\buffers\indexbuffer.h" />
