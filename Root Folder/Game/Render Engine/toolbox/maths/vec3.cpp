@@ -48,6 +48,31 @@ vec3& vec3::divide(const vec3& other) {
 	return *this;
 }
 
+vec3& vec3::scale(float scaleSize) {
+	x *= scaleSize;
+	y *= scaleSize;
+	z *= scaleSize;
+	return *this;
+}
+
+vec3& vec3::normalize() {
+	float LEN = length();
+	if (LEN != 0) {
+		x /= LEN;
+		y /= LEN;
+		z /= LEN;
+	}
+	return *this;
+}
+
+float vec3::lengthSquared() {
+	return x * x + y * y + z * z;
+}
+
+float vec3::length() {
+	return sqrt(lengthSquared());
+}
+
 vec3 operator+(vec3 left, const vec3& right) {
 	return left.add(right);
 }
@@ -80,6 +105,12 @@ vec3& vec3::operator/=(const vec3& other) {
 	return divide(other);
 }
 
+vec3 cross(const vec3 &left, const vec3 &right) {
+	return vec3(left.y * right.z - left.z * right.y,
+		left.z * right.x - left.x * right.z,
+		left.x * right.y - left.y * right.x);
+}
+
 bool vec3::operator==(const vec3& other) {
 	return  x == other.x && y == other.y && z == other.z;
 }
@@ -92,6 +123,8 @@ std::ostream& operator<<(std::ostream& stream, const vec3& vector) {
 	stream << "vec3: (" << vector.x << ", " << vector.y << ", " << vector.z << ')';
 	return stream;
 }
+
+
 
 vec3i::vec3i() {
 	x = 0;

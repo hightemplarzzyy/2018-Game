@@ -8,7 +8,8 @@ GLfloat ParticleRender::vertices[8] = { -0.5f, 0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0
 
 ParticleRender::ParticleRender(const mat4 & projectionMatrix) {
 	//添加材质贴图顶点
-	m_vao.addBuffer(new Buffer(&vertices[0], 8, 2), 1);
+	m_vao = new VertexArray;
+	m_vao->addBuffer(new Buffer(&vertices[0], 8, 2), 0);
 	initShaders(projectionMatrix);
 }
 
@@ -51,67 +52,54 @@ void ParticleRender::bindTexture(int textureId, bool additive, bool glow) {
 	glBindTexture(GL_TEXTURE_2D, textureId);
 }
 
-void ParticleRender::updateModelViewMatrix(Particle & partice, mat4 & viewMatrix, float * data) {
-	mat4 modelMatrix = mat4::translation(partice.getPosition());
-
-	//TODO：意义不明,暂且保留
-	for (int i = 0; i < 3; i++) {
-		for (int j = 0; j < 3; j++) {
-			int p1 = i * 4 + j;
-			int p2 = j * 4 + i;
-			modelMatrix.elements[p1] = viewMatrix.elements[p2];
-		}
-	}
-
-	mat4 modelViewMatrix = viewMatrix * modelMatrix;
-	modelViewMatrix *= mat4::rotation(partice.getRotation(), vec3(0.0f, 0.0f, 1.0f));
-	modelViewMatrix *= mat4::rotation(partice.getRotX(), vec3(0.0f, 1.0f, 0.0f));
-	float scale = partice.getScale();
-	modelViewMatrix *= mat4::scale(vec3(scale, scale, scale));
-
-	for (int i = 0; i < 16; i++) {
-		data[i + m_point++] = modelViewMatrix.elements[i];
-	}
-}
-
-void ParticleRender::updateTexCoordInfo(Particle & particle, float* data) {
-	data[m_point++] = particle.getTexOffset1().x;
-	data[m_point++] = particle.getTexOffset1().y;
-	data[m_point++] = particle.getTexOffset2().x;
-	data[m_point++] = particle.getTexOffset2().y;
-	data[m_point++] = particle.getBlend();
-}
-
-void ParticleRender::updateColourCoordInfo(Particle & particle, float* data) {
-	data[m_point++] = particle.getTexOffset1().x;
-	data[m_point++] = particle.getTexOffset1().y;
-	data[m_point++] = particle.getTexOffset2().x;
-	data[m_point++] = particle.getTexOffset2().y;
-	data[m_point++] = 1;
-}
 
 void ParticleRender::renderTexturedParticles(ParticleTexture & texture,
 	std::map<ParticleTexture, std::vector<Particle>> & particles, mat4 & viewMatrix) {
 
-	std::vector <Particle> particleList = particles[texture];
+	//std::vector <Particle> particleList = particles[texture];
+
 	bindTexture(texture);
 
 	//所有粒子的信息放在缓存中
-	GLfloat * buf = new GLfloat[particleList.size() * INSTANCE_DATA_SIZE];
+	std::vector <GLfloat> buf;
+	buf.resize(particles[texture].size() * INSTANCE_DATA_SIZE);
 
 	m_point = 0;
-	for (int i = 0; i < particleList.size(); i++) {
-		updateModelViewMatrix(particleList[i], viewMatrix, buf);
-		updateTexCoordInfo(particleList[i], buf);
+	for (int i = 0; i < particles[texture].size(); i++) {
+
+		//传入矩阵
+		mat4 model = mat4::translation(vec3(particles[texture][i].getPosition()));
+		float scaleSize = particles[texture][i].getScale();
+		model *= mat4::scale(vec3(scaleSize, scaleSize, scaleSize));
+		//TODO:这里没有乘view矩阵 因为在着色器里面有一个
+		model *= mat4::rotation(particles[texture][i].getRotation(), vec3(0, 0, 1));
+		model *= mat4::rotation(particles[texture][i].getRotX(), vec3(0, 1, 0));
+		for (int j = 0; j < 16; j++) {
+			buf[m_point++] = model.elements[j];
+		}
+
+		//传入偏移坐标
+		vec2 offset1 = particles[texture][i].getTexOffset1();
+		vec2 offset2 = particles[texture][i].getTexOffset2();
+
+		buf[m_point++] = offset1.x;
+		buf[m_point++] = offset1.y;
+		buf[m_point++] = offset2.x;
+		buf[m_point++] = offset2.y;
+
+		//传入混合值
+		buf[m_point++] = particles[texture][i].getBlend();
 	}
 
+	//绑定数据格式
 	std::vector<int> textureFormate = { 4,4,4,4,4,1 };
-	m_vao.addInterLeavedBuffer(new Buffer(buf, particleList.size() * INSTANCE_DATA_SIZE, 4)
-		, 1, textureFormate);
+	m_vao->addInterLeavedBuffer(new Buffer(&buf[0], particles[texture].size() * INSTANCE_DATA_SIZE, 4), 1, textureFormate);
+	m_shader->numberOfRaws->load(texture.getNumberOfRows());
 
-	m_vao.bind();
-	glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, particleList.size());
-	m_vao.unbind();
+	//绘制粒子
+	m_vao->bind();
+	glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, particles[texture].size());
+	m_vao->unbind();
 }
 
 void ParticleRender::renderColourParticles(std::vector<Particle> & colourParticles,
@@ -126,21 +114,41 @@ void ParticleRender::renderColourParticles(std::vector<Particle> & colourParticl
 	}
 
 	//所有粒子的信息放在缓存中
-	GLfloat * buf = new GLfloat[colourParticles .size() * INSTANCE_DATA_SIZE];
+	std::vector <GLfloat> buf;
+	buf.resize(colourParticles.size() * INSTANCE_DATA_SIZE);
 
 	m_point = 0;
 	for (int i = 0; i < colourParticles.size(); i++) {
-		updateModelViewMatrix(colourParticles[i],viewMatrix, buf);
-		updateColourCoordInfo(colourParticles[i], buf);
-		buf[m_point++] = colourParticles[i].getTransparency();
+		//传入矩阵
+		mat4 model = mat4::translation(vec3(colourParticles[i].getPosition()));
+		float scaleSize = colourParticles[i].getScale();
+		model *= mat4::scale(vec3(scaleSize, scaleSize, scaleSize));
+		//TODO:这里没有乘view矩阵 因为在着色器里面有一个
+		model *= mat4::rotation(colourParticles[i].getRotation(), vec3(0, 0, 1));
+		model *= mat4::rotation(colourParticles[i].getRotX(), vec3(0, 1, 0));
+		for (int j = 0; j < 16; j++) {
+			buf[m_point++] = model.elements[j];
+		}
+
+		//传入偏移坐标
+		vec2 offset1 = colourParticles[i].getTexOffset1();
+		vec2 offset2 = colourParticles[i].getTexOffset2();
+
+		buf[m_point++] = offset1.x;
+		buf[m_point++] = offset1.y;
+		buf[m_point++] = offset2.x;
+		buf[m_point++] = offset2.y;
+
+		//传入混合值
+		buf[m_point++] = 1;
 	}
 
 	std::vector <int> colourFormate = { 4,4,4,4,4,1 };
-	m_vao.addInterLeavedBuffer(new Buffer(buf, colourParticles.size() * INSTANCE_DATA_SIZE, 4), 1,colourFormate);
+	m_vao->addInterLeavedBuffer(new Buffer(&buf[0], colourParticles.size() * INSTANCE_DATA_SIZE, 4), 1,colourFormate);
 	
-	m_vao.bind();
+	m_vao->bind();
 	glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, colourParticles.size());
-	m_vao.unbind();
+	m_vao->unbind();
 }
 
 void ParticleRender::calculateLightingFactor() {
@@ -165,7 +173,7 @@ void ParticleRender::calculateLightingFactor() {
 }
 
 void ParticleRender::prepare() {
-	m_vao.bind();
+	m_vao->bind();
 	OpenglUtils::cullBackFaces(false);
 	glEnable(GL_BLEND);
 	glDepthMask(false);
@@ -176,7 +184,7 @@ void ParticleRender::finishRendering() {
 	glDepthMask(true);
 	OpenglUtils::cullBackFaces(true);
 	glDisable(GL_BLEND);
-	m_vao.unbind();
+	m_vao->unbind();
 }
 
 void ParticleRender::render(std::map<ParticleTexture, std::vector<Particle>> & particles,
@@ -205,19 +213,3 @@ void ParticleRender::render(std::map<ParticleTexture, std::vector<Particle>> & p
 	finishRendering();
 }
 
-void ParticleRender::render(std::map<ParticleTexture, std::vector<Particle>> & particles, Camera & camera) {
-
-	mat4 viewMatrix = camera.CreateViewMatrix();
-
-	prepare();
-
-	m_shader->enable();
-	std::map<ParticleTexture, std::vector<Particle>>::iterator it;
-	for (it = particles.begin(); it != particles.end(); it++) {
-		ParticleTexture temp = it->first;
-		renderTexturedParticles(temp, particles, viewMatrix);
-	}
-	m_shader->disable();
-
-	finishRendering();
-}

@@ -1,7 +1,5 @@
 #include "terrain.h"
 
-vec3 cross(const vec3 & left, const vec3 &right);
-
 Terrain::Terrain() {
 	m_mapHeight = 100;
 	m_mapWidth = 100;
@@ -120,10 +118,4 @@ void Terrain::render() {
 	m_vao.unbind();
 }
 
-
-vec3 cross(const vec3 & left, const vec3 &right) {
-	return vec3(left.y * right.z - left.z * right.y,
-		left.z * right.x - left.x * right.z,
-		left.x * right.y - left.y * right.x);
-}
 

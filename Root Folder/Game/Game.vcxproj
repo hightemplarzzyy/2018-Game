@@ -130,7 +130,6 @@
     <ClCompile Include="Render Engine\bloom\BloomCombineShader.h" />
     <ClCompile Include="Render Engine\environment\environment.cpp" />
     <ClCompile Include="Render Engine\particles\particle.cpp" />
-    <ClCompile Include="Render Engine\particles\particleMaster.cpp" />
     <ClCompile Include="Render Engine\particles\particleRender.cpp" />
     <ClCompile Include="Render Engine\postProcessing\Fbo.cpp" />
     <ClCompile Include="Render Engine\postProcessing\FboBuilder.cpp" />
@@ -150,8 +149,6 @@
     <ClCompile Include="Render Engine\toolbox\maths\vec2.cpp" />
     <ClCompile Include="Render Engine\toolbox\maths\vec3.cpp" />
     <ClCompile Include="Render Engine\toolbox\maths\vec4.cpp" />
-    <ClCompile Include="temp\Perlin.cpp" />
-    <ClCompile Include="temp\terrain.cpp" />
     <ClCompile Include="World\dayNightCycle\HorizonColourCycle.cpp" />
     <ClCompile Include="World\dayNightCycle\LightColorCycle.cpp" />
     <ClCompile Include="World\dayNightCycle\LightColorCycle.h" />
@@ -165,7 +162,6 @@
     <ClInclude Include="Render Engine\environment\environment.h" />
     <ClInclude Include="Render Engine\particles\particle.h" />
     <ClInclude Include="Render Engine\particles\particleColourShader.h" />
-    <ClInclude Include="Render Engine\particles\particleMaster.h" />
     <ClInclude Include="Render Engine\particles\particleRender.h" />
     <ClInclude Include="Render Engine\particles\particleShader.h" />
     <ClInclude Include="Render Engine\particles\particleTexture.h" />
@@ -215,10 +211,6 @@
     <ClInclude Include="Render Engine\toolbox\maths\vec3.h" />
     <ClInclude Include="Render Engine\toolbox\maths\vec4.h" />
     <ClInclude Include="Resource Management\utils\fileutils.h" />
-    <ClInclude Include="temp\particleTextureShader.h" />
-    <ClInclude Include="temp\Perlin.h" />
-    <ClInclude Include="temp\terrain.h" />
-    <ClInclude Include="temp\terrainShader.h" />
     <ClInclude Include="World\dayNightCycle\ColorCycle.h" />
     <ClInclude Include="World\dayNightCycle\HorizonColourCycle.h" />
     <ClInclude Include="World\dayNightCycle\MistColorCycle.h" />
@@ -247,8 +239,6 @@
     <None Include="Source\shaders\basic.vert" />
     <None Include="Source\shaders\dragon.frag" />
     <None Include="Source\shaders\dragon.vert" />
-    <None Include="temp\terrain.frag" />
-    <None Include="temp\terrain.vert" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Render Engine\postProcessing\verticalBlurVertex.glsl" />

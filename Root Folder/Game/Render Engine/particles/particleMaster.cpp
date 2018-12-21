@@ -1,6 +1,11 @@
 #include "particleMaster.h"
 #include "particleRender.h"
 
+std::map <ParticleTexture, std::vector<Particle>> ParticleMaster::particles;
+std::vector<Particle> ParticleMaster::colourParticles;
+std::vector<Particle> ParticleMaster::colourAdditiveParticles;
+ParticleRender ParticleMaster::renderer;
+
 
 void ParticleMaster::init(mat4 & projectionMatrix) {
 	renderer = ParticleRender(projectionMatrix);

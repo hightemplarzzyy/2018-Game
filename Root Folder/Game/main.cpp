@@ -15,15 +15,11 @@
 #include "Source/main/camera.h"
 #include "Render Engine/postProcessing/GaussianBlur/GaussianBlur.h"
 #include "Render Engine/postProcessing/InvertColor/InvertColor.h"
-#include "temp/terrain.h"
-#include "temp/terrainShader.h"
 #include "Render Engine/bloom/bloomEffect.h"
 #include "World/dayNightCycle/HorizonColourCycle.h"
 #include "World/dayNightCycle/LightColorCycle.h"
-#include "Render Engine/textures/texture.h"
 #include "Render Engine/particles/particleTexture.h"
 #include "Render Engine/particles/particleRender.h"
-#include "SOIL.h"
 
 #define WINDOW_WIDTH 1280	
 #define WINDOW_HEIGHT 720
@@ -36,29 +32,9 @@ mat4 model = mat4(1.0);
 Particle p;
 std::vector<Particle> plist;
 
-void DataUpdate(Camera camera) {
-	int i = 0;
-	for (int j = 0; j < 20; j++) {
-		plist[j].update(camera);
-		float scale = plist[j].getScale();
-		model = mat4::scale(vec3(scale,scale,scale));
-		model *= mat4::translation(plist[j].getPosition());
-		for (int z = 0; z < 16; z++) {
-			buf[i++] = model.elements[z];
-		}
-		vec2 offset1 = plist[j].getTexOffset1();
-		vec2 offset2 = plist[j].getTexOffset2();
-		std::cout << offset1 << " " << offset2 << std::endl;
-		buf[i++] = offset1.x;
-		buf[i++] = offset1.y;
-		buf[i++] = offset2.x;
-		buf[i++] = offset2.y;
-		buf[i++] = plist[j].getTransparency();
-	}
-}
 
 int main() {
-	//Window window("Game", WINDOW_WIDTH, WINDOW_HEIGHT);
+	
 	
 	DisplayManager::cretaDisplay();
 
@@ -68,21 +44,6 @@ int main() {
 
 	HorizonColorCycle h;
 	LightColorCycle l;
-
-	
-
-	//地形生成
-	//Terrain terrain;
-	//terrain.create();
-
-	//TerrainShader tshader("temp/terrain.vert", "temp/terrain.frag");
-	//tshader.enable();
-	//tshader.lightpos->load(vec3(0, 100, 50));
-	//tshader.perspective->load(mat4::perspective(45, DisplayManager::getAspectRatio(), 0.1f, 300));
-	//tshader.NowlightColor->load(vec4(0.6, 0.7, 0.8,1.0));
-	//tshader.model->load(mat4::translation(vec3(0, -16,0)));
-	//tshader.disable();
-
 
 	//FBO
 	Fbo * fbo = FboBuilder(TEXTURE_WIDTH,TEXTURE_HEIGHT).creat();
@@ -103,10 +64,7 @@ int main() {
 	
 	VertexArray t_vao;
 	GLfloat texPos[8] = { -0.5f, 0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f, -0.5f };
-	GLfloat texPos2[8] = { 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 1.0f };
 	t_vao.addBuffer(new Buffer(texPos, 8, 2), 0);
-//	t_vao.addBuffer(new Buffer(texPos2, 8, 2), 1);
-//	InvertColorShader ishader = InvertColorShader("temp/particleTexture.vert", "temp/particleTexture.frag");
 
 	ParticleShader pshader = ParticleShader("Render Engine/particles/particle.vert",
 		"Render Engine/particles/particle.frag");
@@ -119,8 +77,9 @@ int main() {
 	TextureBuilder tb("cosmic.png");
 	Texture t = tb.create();
 	ParticleTexture pt = ParticleTexture(t, 4, false);
+	std::map<ParticleTexture, std::vector<Particle>> pm;
+	ParticleRender pr = ParticleRender(camera.CreateViewMatrix());
 
-//	ParticleRender pr = ParticleRender(camera.CreateViewMatrix());
 	vec3 originalPos = vec3(0, 0, 0);
 	float posx, posy, posz;
 	float speedx, speedy, speedz;
@@ -138,13 +97,9 @@ int main() {
 		p.setFade(1.0f, 0.3, 0.7);
 		plist.push_back(p);
 	}
-	
-	model = mat4::translation(p.getPosition());
 
-	buf.resize(21 * 20);
-	DataUpdate(camera);
-	t_vao.addInterLeavedBuffer(new Buffer(&buf[0], 21*20, 1), 1, { 4,4,4,4,4,1 });
-	
+	pm[pt] = plist;
+
 	while (!DisplayManager::closedDisplay()) {
 		
 		 
@@ -160,12 +115,6 @@ int main() {
 		Color nowLightColor = l.getColor(nowTime);
 
 		camera.move();
-		p.update(camera);
-		float scale = p.getScale();
-		/*model = mat4::scale(vec3(scale,scale,scale));
-		model *= mat4::translation(p.getPosition());*/
-		DataUpdate(camera);
-		
 
 		//切换后处理
 		if (DisplayManager::isKeyPressed(GLFW_KEY_1)) {//高斯模糊
@@ -190,24 +139,9 @@ int main() {
 
 		DisplayManager::clearDisplay();//不清除会有残影
 
+		//渲染粒子
+		pr.render(pm, camera);
 
-
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, t.getID());
-
-		Buffer * pbuf = new Buffer(&buf[0], 21 * 20, 1);
-		t_vao.addInterLeavedBuffer(pbuf, 1, { 4,4,4,4,4,1 });
-		delete pbuf;
-
-		pshader.enable();
-		pshader.light_colour->load(nowLightColor.getColor());
-		t_vao.bind();
-		glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, 20);
-		t_vao.unbind();
-		pshader.disable();
-		glDisable(GL_BLEND);
 
 		if (choice != 3) {
 			fbo->unbindFrameBuffer();

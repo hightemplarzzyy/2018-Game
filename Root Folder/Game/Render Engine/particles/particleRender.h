@@ -21,7 +21,7 @@ private:
 
 	int m_point = 0;
 	
-	VertexArray m_vao;
+	VertexArray * m_vao;
 
 	ParticleShader * m_shader;
 	ParticleColourShader * m_colourShader;
@@ -36,7 +36,28 @@ public:
 	void render(std::map<ParticleTexture, std::vector<Particle>> & particles,
 		std::vector<Particle> &colourParticles, std::vector<Particle> &additiveColourParticles,
 		Camera &camera);
-	void render(std::map<ParticleTexture, std::vector<Particle>> & particles, Camera &camera);
+
+
+	//TODO:临时渲染函数
+	void render(std::map<ParticleTexture, std::vector<Particle>> & particles, Camera & camera) {
+
+		prepare();
+
+		m_shader->enable();
+		std::map<ParticleTexture, std::vector<Particle>>::iterator it;
+		for (it = particles.begin(); it != particles.end(); it++) {
+			ParticleTexture temp = it->first;
+			//TODO:不应该这里更新的，但是管理粒子的还没写，暂时顶替，演示用
+			for (int i = 0; i < it->second.size(); i++) {
+				it->second[i].update(camera);
+			}
+			mat4 view = camera.CreateViewMatrix();
+			renderTexturedParticles(temp, particles, view);
+		}
+		m_shader->disable();
+
+		finishRendering();
+	}
 	
 private:
 	void initShaders(const mat4 & projectionMatrix);
@@ -45,11 +66,8 @@ private:
 		mat4 & viewMatrix);
 	void renderColourParticles(std::vector<Particle> &colourParticles,
 		mat4 & viewMatrix, bool additive);
-	void updateTexCoordInfo(Particle & particle, float* data);
-	void updateColourCoordInfo(Particle & particle, float* data);
 	void bindTexture(ParticleTexture & texture);
 	void bindTexture(int textureId, bool additive, bool glow);
-	void updateModelViewMatrix(Particle & partice, mat4 & viewMatrix, float * data);
 	void prepare();
 	void finishRendering();
 	

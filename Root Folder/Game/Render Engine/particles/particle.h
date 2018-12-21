@@ -150,7 +150,7 @@ public:
 	bool update(Camera camera);
 
 	//计算透明度
-	//随着流逝时间粒子的透明度不断降低
+	//随着流逝时间粒子的透明度不断变化
 	float getTransparency();
 
 private:
