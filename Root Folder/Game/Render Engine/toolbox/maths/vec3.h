@@ -20,12 +20,14 @@ struct vec3 {
 	float length();
 
 
+
 	friend vec3 operator+(vec3 left, const vec3& right);
 	friend vec3 operator-(vec3 left, const vec3& right);
 	friend vec3 operator*(vec3 left, const vec3& right);
 	friend vec3 operator/(vec3 left, const vec3& right);
 
 	friend vec3 cross(const vec3 &left, const vec3 &right);
+	friend float dot(const vec3 &left, const vec3 &right);
 
 	vec3& operator+=(const vec3& other);
 	vec3& operator-=(const vec3& other);

@@ -44,7 +44,7 @@ public:
 
 	Color getColor(float time) {
 		std::map<float, Color> ::iterator it;
-		float pre, next;
+		float pre = 0, next = 0;
 		for (it = m_colors.begin(); it != m_colors.end(); it++) {
 			if (it->first > time) {
 				next = it->first;

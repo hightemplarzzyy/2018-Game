@@ -1,5 +1,8 @@
 #include "particleRender.h"
 #include "../environment/environment.h"
+#include "../../Resource Management/resourceManagement/ParticleAtlasCache.h"
+
+#include <ostream>
 
 int ParticleRender::MAX_PARTICLES = 10000;
 int ParticleRender::INSTANCE_DATA_SIZE = 21;
@@ -31,7 +34,7 @@ void ParticleRender::initShaders(const mat4 & projectionMatrix) {
 
 void ParticleRender::bindTexture(ParticleTexture & texture) {
 	bindTexture(texture.getTextureID(), texture.isAdditive(), texture.getGlows());
-	m_shader->numberOfRaws->load(texture.getNumberOfRows());
+	m_shader->numberOfRaws->load(float(texture.getNumberOfRows()));
 }
 
 void ParticleRender::bindTexture(int textureId, bool additive, bool glow) {
@@ -94,7 +97,7 @@ void ParticleRender::renderTexturedParticles(ParticleTexture & texture,
 	//绑定数据格式
 	std::vector<int> textureFormate = { 4,4,4,4,4,1 };
 	m_vao->addInterLeavedBuffer(new Buffer(&buf[0], particles[texture].size() * INSTANCE_DATA_SIZE, 4), 1, textureFormate);
-	m_shader->numberOfRaws->load(texture.getNumberOfRows());
+	m_shader->numberOfRaws->load(float(texture.getNumberOfRows()));
 
 	//绘制粒子
 	m_vao->bind();
@@ -130,17 +133,17 @@ void ParticleRender::renderColourParticles(std::vector<Particle> & colourParticl
 			buf[m_point++] = model.elements[j];
 		}
 
-		//传入偏移坐标
-		vec2 offset1 = colourParticles[i].getTexOffset1();
-		vec2 offset2 = colourParticles[i].getTexOffset2();
-
-		buf[m_point++] = offset1.x;
-		buf[m_point++] = offset1.y;
-		buf[m_point++] = offset2.x;
-		buf[m_point++] = offset2.y;
-
-		//传入混合值
+		//传入颜色
+		Color color = colourParticles[i].getColour();
+		printf("%f %f %f\n", color.getR(), color.getG(), color.getB());
+		buf[m_point++] = color.getR();
+		buf[m_point++] = color.getG();
+		buf[m_point++] = color.getB();
 		buf[m_point++] = 1;
+		
+		//传入混合值
+		buf[m_point++] = colourParticles[i].getTransparency();
+
 	}
 
 	std::vector <int> colourFormate = { 4,4,4,4,4,1 };
@@ -160,14 +163,11 @@ void ParticleRender::calculateLightingFactor() {
 	vec3 diffuse = EnvironmentVariables::lightColor.getColor();
 
 	float factor = EnvironmentVariables::diffuseWeighting * brightness;
-	diffuse.x *= factor;
-	diffuse.y *= factor;
-	diffuse.z *= factor;
+	diffuse.scale(factor);
 
 	vec3 ambient = EnvironmentVariables::lightColor.getColor();
-	ambient.x *= EnvironmentVariables::ambientWeighting;
-	ambient.y *= EnvironmentVariables::ambientWeighting;
-	ambient.z *= EnvironmentVariables::ambientWeighting;
+
+	ambient.scale(EnvironmentVariables::ambientWeighting);
 
 	m_lightColour = diffuse + ambient;
 }
@@ -191,23 +191,30 @@ void ParticleRender::render(std::map<ParticleTexture, std::vector<Particle>> & p
 	std::vector<Particle> & colourParticles, std::vector<Particle> & additiveColourParticles, Camera & camera) {
 
 	mat4 viewMatrix = camera.CreateViewMatrix();
-	
+
 	prepare();
 
 	m_shader->enable();
+
 	std::map<ParticleTexture, std::vector<Particle>>::iterator it;
 	for (it = particles.begin(); it != particles.end(); it++) {
+		//TODO:有粒子不能更新的风险
 		ParticleTexture temp = it->first;
 		renderTexturedParticles(temp, particles, viewMatrix);
 	}
+
 	m_shader->disable();
 
 	m_colourShader->enable();
 	glActiveTexture(GL_TEXTURE0);
 	//TODO:加载三角形贴图
-	//glBindTexture()
-	renderColourParticles(colourParticles, viewMatrix, false);
-	renderColourParticles(additiveColourParticles, viewMatrix, true);
+	glBindTexture(GL_TEXTURE_2D, ParticleAtlasCache::TRIANGLE.getID());
+	if (colourParticles.size() != 0) {
+		renderColourParticles(colourParticles, viewMatrix, false);
+	}
+	if (additiveColourParticles.size() != 0) {
+		renderColourParticles(additiveColourParticles, viewMatrix, true);
+	}
 	m_colourShader->disable();
 
 	finishRendering();

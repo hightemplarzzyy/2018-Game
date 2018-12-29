@@ -9,7 +9,7 @@
 class ParticleColourShader :public Shader {
 public:
 	UniformMat4 * projection_matrix = new UniformMat4("projection_matrix");
-	UniformVec3 * light_colour = new UniformVec3("light_position");
+	UniformVec3 * light_colour = new UniformVec3("light_colour");
 
 	ParticleColourShader(const char * vertexPath, const char * fragmentPath) :
 		Shader(vertexPath, fragmentPath) {

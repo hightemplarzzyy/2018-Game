@@ -102,6 +102,15 @@
     <ClCompile Include="Render Engine\basics\DisplayManager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Render Engine\particles\particleMaster.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Render Engine\particles\ParticleSystem.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource Management\resourceManagement\ParticleAtlasCache.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\entity\models.h">
@@ -279,6 +288,33 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Render Engine\basics\DIsplayManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\particles\particleMaster.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\particleSpawns\CircleSpawn.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\particleSpawns\LineSpawn.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\particleSpawns\CuboidSpawn.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\particleSpawns\ParticleSpawn.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\particleSpawns\PointSpawn.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\particleSpawns\SphereSpawn.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\particles\ParticleSystem.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource Management\resourceManagement\ParticleAtlasCache.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

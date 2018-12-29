@@ -2,8 +2,6 @@
 
 #include <vector>
 
-#include "windows.h"
-
 #include "Render Engine/basics/DIsplayManager.h"
 #include "Render Engine/toolbox/maths/maths_func.h"
 #include "Render Engine/shaders/dragonshader.h"
@@ -20,6 +18,11 @@
 #include "World/dayNightCycle/LightColorCycle.h"
 #include "Render Engine/particles/particleTexture.h"
 #include "Render Engine/particles/particleRender.h"
+#include "Render Engine/particles/ParticleSystem.h"
+#include "Render Engine/particles/particleMaster.h"
+#include "Render Engine/particleSpawns/PointSpawn.h"
+#include "Render Engine/particleSpawns/CircleSpawn.h"
+#include "Resource Management/resourceManagement/ParticleAtlasCache.h"
 
 #define WINDOW_WIDTH 1280	
 #define WINDOW_HEIGHT 720
@@ -32,15 +35,15 @@ mat4 model = mat4(1.0);
 Particle p;
 std::vector<Particle> plist;
 
+using namespace std;
 
 int main() {
-	
-	
+
+
 	DisplayManager::cretaDisplay();
 
-	std::vector <vec3> vertexes;
-	std::vector <vec3> normals;
-	std::vector<vec3> colors;
+	//加载所有粒子贴图
+	ParticleAtlasCache::loadALL();
 
 	HorizonColorCycle h;
 	LightColorCycle l;
@@ -48,6 +51,7 @@ int main() {
 	//FBO
 	Fbo * fbo = FboBuilder(TEXTURE_WIDTH,TEXTURE_HEIGHT).creat();
 
+	//后处理器
 	InvertColor i = InvertColor(TEXTURE_WIDTH, TEXTURE_HEIGHT);
 	GaussianBlur g = GaussianBlur(TEXTURE_WIDTH, TEXTURE_HEIGHT);
 	BloomEffect e = BloomEffect(TEXTURE_WIDTH, TEXTURE_HEIGHT);
@@ -56,55 +60,29 @@ int main() {
 
 	int choice = 3;
 
-	float dayTime = 30000;//30S
+	float dayTime = 10000;//30S
 
 	float preTime = GetTickCount();
 
 
-	
-	VertexArray t_vao;
-	GLfloat texPos[8] = { -0.5f, 0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.5f, -0.5f };
-	t_vao.addBuffer(new Buffer(texPos, 8, 2), 0);
+	//例子发射器
+	PointSpawn * pSpwan = new PointSpawn();
+	CircleSpawn * pCSpwan = new CircleSpawn(vec3(0, 0, 1), 3);
+	ParticleSystem tpEmiter = ParticleSystem(ParticleAtlasCache::getAtlas(1), pCSpwan, 2000, 1, 0, 10, 0.2);
+	ParticleSystem cpEmiter = ParticleSystem(Color(0.8, 0.0, 0.0), false, pCSpwan, 2000, 0.5, 0, 10, 0.2);
+	ParticleSystem acpEmiter = ParticleSystem(Color(0.8, 0.0, 0.0), true, pCSpwan, 2000, 0.5, 0, 10, 0.2);
+	tpEmiter.generateParticles(vec3(-0.5, -0.5, 0), 0.2);
+	cpEmiter.generateParticles(vec3(0.5, 0.5, 0), 0.5);
+	acpEmiter.generateParticles(vec3(-0.5, 0.5, 0), 0.5);
 
-	ParticleShader pshader = ParticleShader("Render Engine/particles/particle.vert",
-		"Render Engine/particles/particle.frag");
-	pshader.enable();
-	pshader.projection_matrix->load(camera.CreateViewMatrix());
-	pshader.numberOfRaws->load(4);
-	pshader.disable();
 
-	//Texture Test
-	TextureBuilder tb("cosmic.png");
-	Texture t = tb.create();
-	ParticleTexture pt = ParticleTexture(t, 4, false);
-	std::map<ParticleTexture, std::vector<Particle>> pm;
-	ParticleRender pr = ParticleRender(camera.CreateViewMatrix());
+	ParticleMaster::init(camera.CreateViewMatrix());
 
-	vec3 originalPos = vec3(0, 0, 0);
-	float posx, posy, posz;
-	float speedx, speedy, speedz;
-	for (int i = 0; i < 20; i++) {
-		posx = float(rand() % 200) / 1000;
-		posy = float(rand() % 200) / 1000;
-		posz = -float(i)/20;
-		speedx = float(rand() % 400) / 1000;
-		speedy = float(rand() % 400) / 1000;
-		speedz = 0;
-		if (rand() % 2 == 0) {
-			speedx = -speedx;
-		}
-		p = Particle(pt, vec3(posx,posy,posz), vec3(speedx,speedy,speedz), 0.008, 0.16 * 9, 20, 0.2f);
-		p.setFade(1.0f, 0.3, 0.7);
-		plist.push_back(p);
-	}
-
-	pm[pt] = plist;
 
 	while (!DisplayManager::closedDisplay()) {
-		
-		 
+				 
 		float nowTime = (GetTickCount() - preTime) / dayTime;
-		if (nowTime > 0.999) {
+		if (nowTime > 0.999) { 
 			preTime = GetTickCount();
 			if (nowTime > 1.0) {
 				nowTime = 1.0f;
@@ -113,7 +91,7 @@ int main() {
 
 		Color nowSkyColor = h.getColor(nowTime);
 		Color nowLightColor = l.getColor(nowTime);
-
+	
 		camera.move();
 
 		//切换后处理
@@ -129,9 +107,7 @@ int main() {
 		else if (DisplayManager::isKeyPressed(GLFW_KEY_4)) {
 			choice = 4;
 		}
-
-
-
+			   
 		if (choice != 3) {//需要后处理
 			fbo->bindFrameBuffer();
 		}
@@ -139,8 +115,12 @@ int main() {
 
 		DisplayManager::clearDisplay();//不清除会有残影
 
+
+		
 		//渲染粒子
-		pr.render(pm, camera);
+		ParticleMaster::renderParticles(camera);
+		//更新粒子
+		ParticleMaster::update(camera);
 
 
 		if (choice != 3) {

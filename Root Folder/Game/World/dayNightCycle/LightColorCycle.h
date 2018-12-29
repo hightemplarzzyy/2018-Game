@@ -1,5 +1,4 @@
-#ifndef _COLOR_CYCLE_H_
-#define _COLOR_CYCLE_H_
+#pragma once
 
 #include "ColorCycle.h"
 
@@ -22,7 +21,7 @@ public:
 	}
 };
 
-#endif // !_COLOR_CYCLE_H_
+
 
 
 

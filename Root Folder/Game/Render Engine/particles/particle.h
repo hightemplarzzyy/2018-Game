@@ -72,7 +72,7 @@ public:
 
 	void set3dRotation(float speed) {
 		m_rotate3D = true;
-		m_rotX = rand() % 360;
+		m_rotX = float(rand() % 360);
 		m_rotXSpeed = speed;
 	}
 
