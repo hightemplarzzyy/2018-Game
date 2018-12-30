@@ -30,7 +30,7 @@ private:
 	vec3 m_lightGlowColour = vec3(1.0f, 1.0f, 1.0f);
 
 public:
-	ParticleRender() {};
+	ParticleRender()= default;
 	ParticleRender(const mat4 & projectionMatrix);
 
 	void render(std::map<ParticleTexture, std::vector<Particle>> & particles,

@@ -65,6 +65,13 @@ vec3& vec3::normalize() {
 	return *this;
 }
 
+vec3& vec3::negate() {
+	x = -x;
+	y = -y;
+	z = -z;
+	return *this;
+}
+
 
 
 float vec3::lengthSquared() {

@@ -17,6 +17,5 @@ public:
 	HorizonColorCycle() :
 		ColorCycle(NIGHT_COLOR, DAY_COLOR, DAWN_COLOR, DUSK_COLOR,
 			MIDNIGHT_END, MIDDAY_START, MIDDAY_END) {
-
 	}
 };

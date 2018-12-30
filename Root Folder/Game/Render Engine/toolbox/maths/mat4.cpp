@@ -100,9 +100,9 @@ mat4 mat4::perspective(float fov, float aspectRatio, float near, float far) {
 
 	result.elements[0 + 0 * 4] = a;
 	result.elements[1 + 1 * 4] = q;
-	result.elements[2 + 2 * 4] = (-near - far) / (near - far);
-	result.elements[3 + 2 * 4] = 1.0f;
-	result.elements[2 + 3 * 4] = (2.0f * near * far) / (near - far);
+	result.elements[2 + 2 * 4] = - (near + far) / (far - near);
+	result.elements[3 + 2 * 4] = - 1.0f;
+	result.elements[2 + 3 * 4] = -(2.0f * near * far) / (far - near);
 	result.elements[3 + 3 * 4] = 0;
 
 	return result;

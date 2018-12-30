@@ -68,4 +68,32 @@ public:
 
 		return vec3(direction.x, direction.y, direction.z);
 	}
+
+	//记得delete创建的向量
+	static vec3 * converToScreenSpace(vec3 position, mat4 viewMatrix, mat4 projMatrix) {
+		vec4 coords = vec4(position.x, position.y, position.z, 1.0f);
+		coords = coords * viewMatrix * projMatrix;
+		return clipSpaceToScreenSpace(coords);
+	}
+
+	//记得delete创建的向量
+	static vec3 * clipSpaceToScreenSpace(vec4 coords) {
+		if (coords.w < 0) {
+			return NULL;
+		}
+		return new vec3(
+			((coords.x / coords.w) + 1) / 2.0f,
+			1 - ((coords.y / coords.w) + 1) / 2.0f,
+			coords.z);
+	}
+
+	static float clamp(float value, float min, float max) {
+		float mid = value > min ? value : min;
+		return mid < max ? mid : max;
+	}
+
+	static float smoothStep(float edge0, float edge1, float x) {
+		float t = clamp((x - edge0) / (edge1 - edge0), 0.0f, 1.0f);
+		return t * t *(3.0f - 2.0f*t);
+	}
 };

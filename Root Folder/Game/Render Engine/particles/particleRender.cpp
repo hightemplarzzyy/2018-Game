@@ -103,6 +103,7 @@ void ParticleRender::renderTexturedParticles(ParticleTexture & texture,
 	m_vao->bind();
 	glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, particles[texture].size());
 	m_vao->unbind();
+
 }
 
 void ParticleRender::renderColourParticles(std::vector<Particle> & colourParticles,
@@ -135,7 +136,7 @@ void ParticleRender::renderColourParticles(std::vector<Particle> & colourParticl
 
 		//传入颜色
 		Color color = colourParticles[i].getColour();
-		printf("%f %f %f\n", color.getR(), color.getG(), color.getB());
+		//printf("%f %f %f\n", color.getR(), color.getG(), color.getB());
 		buf[m_point++] = color.getR();
 		buf[m_point++] = color.getG();
 		buf[m_point++] = color.getB();
@@ -156,18 +157,16 @@ void ParticleRender::renderColourParticles(std::vector<Particle> & colourParticl
 
 void ParticleRender::calculateLightingFactor() {
 
-	vec3 lightDir = EnvironmentVariables::lightDirection;
+	vec3 lightDir = EnvironmentVariables::getLightDirection();
 
 	float brightness = 0 > -lightDir.y ? 0 : -lightDir.y;
 
-	vec3 diffuse = EnvironmentVariables::lightColor.getColor();
-
-	float factor = EnvironmentVariables::diffuseWeighting * brightness;
+	vec3 diffuse = EnvironmentVariables::getLightColor().getColor();
+	float factor = EnvironmentVariables::getDiffuseWeighting() * brightness;
 	diffuse.scale(factor);
 
-	vec3 ambient = EnvironmentVariables::lightColor.getColor();
-
-	ambient.scale(EnvironmentVariables::ambientWeighting);
+	vec3 ambient = EnvironmentVariables::getLightColor().getColor();
+	ambient.scale(EnvironmentVariables::getAmbientWeighting());
 
 	m_lightColour = diffuse + ambient;
 }
@@ -207,7 +206,6 @@ void ParticleRender::render(std::map<ParticleTexture, std::vector<Particle>> & p
 
 	m_colourShader->enable();
 	glActiveTexture(GL_TEXTURE0);
-	//TODO:加载三角形贴图
 	glBindTexture(GL_TEXTURE_2D, ParticleAtlasCache::TRIANGLE.getID());
 	if (colourParticles.size() != 0) {
 		renderColourParticles(colourParticles, viewMatrix, false);

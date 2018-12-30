@@ -123,7 +123,7 @@ void Particle::followParent() {
 //粒子的贴图为n*n的纹理贴图，每次取其中的一个小块，更新取得坐标
 void Particle::updateTextureCoordInfo() {
 	float lifeFactor = m_elapsedTime / m_lifeLength; 
-	printf(" m_elapsedTime = %f ,m_lifeLength = %f , lifeFactor = %f\n", m_elapsedTime, m_lifeLength, lifeFactor);
+	//printf(" m_elapsedTime = %f ,m_lifeLength = %f , lifeFactor = %f\n", m_elapsedTime, m_lifeLength, lifeFactor);
 	if (lifeFactor >= 1.0f) {
 		m_elapsedTime = 0;
 	}

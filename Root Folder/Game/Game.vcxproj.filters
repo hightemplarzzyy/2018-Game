@@ -84,9 +84,6 @@
     <ClCompile Include="Render Engine\bloom\BloomCombineShader.h">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Render Engine\bloom\BloomCombineFilter.h">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="World\dayNightCycle\HorizonColourCycle.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -109,6 +106,27 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Resource Management\resourceManagement\ParticleAtlasCache.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Render Engine\lenseFlare\FlareRender.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Render Engine\lenseFlare\FlareManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Render Engine\lenseFlare\LenseFlare.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Render Engine\sun\Sun.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="World\dayNightCycle\SunCycle.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="World\dayNightCycle\SkyColorCycle.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="World\dayNightCycle\DayNightCycle.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -317,6 +335,42 @@
     <ClInclude Include="Resource Management\resourceManagement\ParticleAtlasCache.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Render Engine\radialBlur\RadialBlurShader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\radialBlur\RadialBlur.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\lenseFlare\FlareTexture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\guiRendering\GuiShader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\lenseFlare\FlareRender.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\toolbox\Query.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\lenseFlare\FlareManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\lenseFlare\LenseFlare.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Render Engine\sun\Sun.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="World\dayNightCycle\SunCycle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="World\dayNightCycle\DayNightCycle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="World\dayNightCycle\SkyColorCycle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\shaders\basic.vert" />
@@ -342,6 +396,9 @@
     <None Include="Render Engine\postProcessing\basicPostProcessing.vert" />
     <None Include="Render Engine\bloom\combine.frag" />
     <None Include="Render Engine\bloom\brightPass.frag" />
+    <None Include="Render Engine\radialBlur\RadialBlur.frag" />
+    <None Include="Render Engine\guiRendering\gui.frag" />
+    <None Include="Render Engine\guiRendering\gui.vert" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Render Engine\postProcessing\verticalBlurVertex.glsl" />

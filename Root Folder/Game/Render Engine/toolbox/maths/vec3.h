@@ -15,6 +15,7 @@ struct vec3 {
 	vec3& divide(const vec3& other);
 	vec3& scale(float scaleSize);
 	vec3& normalize();
+	vec3& negate();
 
 	float lengthSquared();
 	float length();
