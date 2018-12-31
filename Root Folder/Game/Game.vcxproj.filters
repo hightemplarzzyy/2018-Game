@@ -97,6 +97,7 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Render Engine\basics\DisplayManager.cpp">
+    <ClCompile Include="World\time\Calendar.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Render Engine\particles\particleMaster.cpp">
@@ -306,6 +307,22 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Render Engine\basics\DIsplayManager.h">
+    <ClInclude Include="Render Engine\textures\texturedeleterequest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource Management\utils\binarywriter.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource Management\utils\binaryreader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource Management\languages\gametext.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource Management\languages\language.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="World\time\Calendar.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Render Engine\particles\particleMaster.h">
