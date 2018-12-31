@@ -168,6 +168,9 @@
     <ClInclude Include="Render Engine\basics\terrain.h" />
     <ClInclude Include="Render Engine\basics\terrainShader.h" />
     <ClInclude Include="Render Engine\bloom\bloomEffect.h" />
+    <ClInclude Include="Render Engine\depthOfField\CombineFilter.h" />
+    <ClInclude Include="Render Engine\depthOfField\DepthOfFieldEffect.h" />
+    <ClInclude Include="Render Engine\depthOfField\DepthOfFieldShader.h" />
     <ClInclude Include="Render Engine\environment\environment.h" />
     <ClInclude Include="Render Engine\guiRendering\GuiShader.h" />
     <ClInclude Include="Render Engine\lenseFlare\FlareManager.h" />
@@ -250,6 +253,7 @@
     <None Include="Render Engine\basics\terrain.vert" />
     <None Include="Render Engine\bloom\brightPass.frag" />
     <None Include="Render Engine\bloom\combine.frag" />
+    <None Include="Render Engine\depthOfField\combine.frag" />
     <None Include="Render Engine\guiRendering\gui.frag" />
     <None Include="Render Engine\guiRendering\gui.vert" />
     <None Include="Render Engine\particles\particle.frag" />

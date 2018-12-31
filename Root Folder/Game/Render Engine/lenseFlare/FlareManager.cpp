@@ -59,7 +59,6 @@ void FlareManager::render(vec3 sunDirection) {
 	}
 	updateFlarePositions(toCenter, *pSunCoords);
 	m_render.render(m_flareTexture, m_flareCoordinates, brightness);
-	//delete pSunCoords;
 }
 
 void FlareManager::cleanUp() {

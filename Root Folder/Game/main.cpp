@@ -14,9 +14,9 @@
 #include "World/dayNightCycle/DayNightCycle.h"
 #include "Render Engine/lenseFlare/LenseFlare.h"
 #include "Render Engine/environment/environment.h"
-
-
-
+#include "Render Engine/postProcessing/FboBuilder.h"
+#include "Render Engine/radialBlur/RadialBlur.h"
+#include "Render Engine/depthOfField/DepthOfFieldEffect.h"
 
 #define WINDOW_WIDTH 1280	
 #define WINDOW_HEIGHT 720
@@ -36,9 +36,11 @@ int main() {
 	dn.addSun();
 	dn.update();
 
+	Fbo * fbo = FboBuilder(TEXTURE_WIDTH, TEXTURE_HEIGHT).creat();
+	RadialBlur rb = RadialBlur(TEXTURE_WIDTH, TEXTURE_HEIGHT);
+
 	LenseFlare lense = LenseFlare(mat4::perspective(45.0f, DisplayManager::getAspectRatio(), 0.1f, 300.0f),camera.CreateViewMatrix());
-
-
+	
 	while (!DisplayManager::closedDisplay()) {
 		
 		//刷新太阳位置
@@ -47,11 +49,18 @@ int main() {
 	
 		camera.move();
 
-		glClearColor(0.0f, 0.0f, 0.0f, 1.0);
+
+		fbo->bindFrameBuffer();
+
+		glClearColor(0.0, 0.0f, 0.0f, 1.0);
 		DisplayManager::clearDisplay();//不清除会有残影
 
 //		lense.doOcclusionTest();
 		lense.render(EnvironmentVariables::getLightDirection(), true);
+
+		fbo->unbindFrameBuffer();
+
+		rb.applyFilter(true, { fbo->getColourTexture() });
 		
 		DisplayManager::updateDisplay();
 	}

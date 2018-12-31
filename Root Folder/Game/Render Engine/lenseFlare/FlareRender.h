@@ -19,7 +19,6 @@ private:
 	Query * m_query;	//ÕÚµ²²éÑ¯
 	float m_coverage = 1;
 
-
 public:
 	FlareRender();
 	~FlareRender();
