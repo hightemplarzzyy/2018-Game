@@ -22,6 +22,7 @@ void FileUtils::write_file_a(const char * filepath, const char * content)
 	fwrite(content, sizeof(char), sizeof(content), file);
 	fclose(file);
 }
+
 void FileUtils::write_file_w(const char * filepath, const char * content)
 {
 	FILE* file;

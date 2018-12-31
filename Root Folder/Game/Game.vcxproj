@@ -145,6 +145,9 @@
     <ClCompile Include="Render Engine\toolbox\OpenglUtils.cpp" />
     <ClCompile Include="Resource Management\glRequestProcessing\glrequestprocessor.cpp" />
     <ClCompile Include="Resource Management\resourceManagement\ParticleAtlasCache.cpp" />
+    <ClCompile Include="Resource Management\save\save.cpp" />
+    <ClCompile Include="Resource Management\save\saveslot.cpp" />
+    <ClCompile Include="Resource Management\utils\fileutils.cpp" />
     <ClCompile Include="Source\entity\models.cpp" />
     <ClCompile Include="Render Engine\buffers\buffer.cpp" />
     <ClCompile Include="Render Engine\buffers\indexbuffer.cpp" />
@@ -227,7 +230,14 @@
     <ClInclude Include="Resource Management\glRequestProcessing\glrequest.h" />
     <ClInclude Include="Resource Management\glRequestProcessing\glrequestprocessor.h" />
     <ClInclude Include="Resource Management\glRequestProcessing\glrequestqueue.h" />
+    <ClInclude Include="Resource Management\languages\gametext.h" />
+    <ClInclude Include="Resource Management\languages\language.h" />
     <ClInclude Include="Resource Management\resourceManagement\ParticleAtlasCache.h" />
+    <ClInclude Include="Resource Management\save\save.h" />
+    <ClInclude Include="Resource Management\save\saveslot.h" />
+    <ClInclude Include="Resource Management\utils\binaryreader.h" />
+    <ClInclude Include="Resource Management\utils\binarywriter.h" />
+    <ClInclude Include="Resource Management\utils\fileutils.h" />
     <ClInclude Include="Source\entity\models.h" />
     <ClInclude Include="Render Engine\buffers\buffer.h" />
     <ClInclude Include="Render Engine\buffers\indexbuffer.h" />
@@ -240,7 +250,6 @@
     <ClInclude Include="Render Engine\toolbox\maths\vec2.h" />
     <ClInclude Include="Render Engine\toolbox\maths\vec3.h" />
     <ClInclude Include="Render Engine\toolbox\maths\vec4.h" />
-    <ClInclude Include="Resource Management\utils\fileutils.h" />
     <ClInclude Include="World\dayNightCycle\ColorCycle.h" />
     <ClInclude Include="World\dayNightCycle\DayNightCycle.h" />
     <ClInclude Include="World\dayNightCycle\HorizonColourCycle.h" />
