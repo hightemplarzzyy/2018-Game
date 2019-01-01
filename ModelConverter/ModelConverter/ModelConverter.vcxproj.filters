@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ModelConverter.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="components\ComponentFactor.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="structures\Blueprint.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="structures\Material.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="structures\MaterialCache.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="structures\ModelSection.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="structures\SubBlueprint.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="structures\Triangle.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="structures\Vertex.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\InputStream.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\OBJLoader.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="components\Component.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="components\ComponentFactor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="components\DynamicGrowingComp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="components\EatingComp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="components\FoodComp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="components\GrowingComp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="components\InfoComp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="components\LifeComp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="components\SpreaderComp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="structures\Blueprint.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="structures\Material.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="structures\ModelSection.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="structures\SubBlueprint.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="structures\Triangle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="structures\Vec3.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="structures\Vertex.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\InputStream.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\OBJLoader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="out\output.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\acer0.mtl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="res\acer0.obj" />
+  </ItemGroup>
+</Project>

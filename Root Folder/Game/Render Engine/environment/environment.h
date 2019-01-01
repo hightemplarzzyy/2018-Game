@@ -12,11 +12,12 @@ public:
 	static Color horizonColour;
 	static Color skyColour;
 	static vec3 VISIBLE_SUN_DIR;
-	static vec2 MIST_VALS;			//Îí
+	static vec2 MIST_VALS;			//ÃŽÃ­
 	static Color MIST_COL;
 	static float SHADOW_DARKNESS;
 
-	//TODO£ºÈÕÒ¹Ñ­»·
+
+	//TODOÂ£ÂºÃˆÃ•Ã’Â¹Ã‘Â­Â»Â·
 
 private:
 	static float LARGE_NUMBER;
@@ -46,8 +47,6 @@ public:
 private:
 	static vec3 getSunPosition(vec3 sunDirection);
 	static vec2 * getSunScreenCoords();
-
-
 
 
 

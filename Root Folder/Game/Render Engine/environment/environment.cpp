@@ -1,13 +1,17 @@
 #include "environment.h"
+
 #include "../toolbox/maths/maths_func.h"
+
 
 float EnvironmentVariables::GRAVITY				= -10.0f;
 float EnvironmentVariables::starBrightness		= 0;
 Color EnvironmentVariables::VOID_COLOUR			= Color(1.0f,0.87f,0.6f);
 Color EnvironmentVariables::horizonColour		= Color(1.0f, 0.87f, 0.6f);
 Color EnvironmentVariables::skyColour			= Color(0.6f, 0.9f, 1.0f);
+
 //vec3 EnvironmentVariables::VISIBLE_SUN_DIR		= vec3(1.0f,-0.08f,0.5f);
 vec3 EnvironmentVariables::VISIBLE_SUN_DIR		= vec3(0.0f, 0.5f, -0.5f);
+
 vec2 EnvironmentVariables::MIST_VALS			= vec2(20,120);
 Color EnvironmentVariables::MIST_COL			= Color(255, 220, 210, true);
 float EnvironmentVariables::SHADOW_DARKNESS		= 0.2f;
@@ -20,6 +24,7 @@ float EnvironmentVariables::ambientWeighting	= 0.6f;
 float EnvironmentVariables::diffuseWeighting	= 0.6f;
 
 float EnvironmentVariables::skyRotateSpeed		= 1.0f;
+
 
 vec2 * EnvironmentVariables::sunScreenCoords	= NULL;
 
@@ -52,7 +57,7 @@ float EnvironmentVariables::getSkyRotateSpeed() {
 }
 
 
-//¸ù¾Ý¾àÀë¼ÆËã¹âµÄÇ¿¶È
+//ï¿½ï¿½Ý¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¿ï¿½ï¿½
 float EnvironmentVariables::getSunEffectBrightness() {
 	return 1 - Maths::smoothStep(0.0f, 0.2f, VISIBLE_SUN_DIR.y);
 }
@@ -68,7 +73,7 @@ vec3 EnvironmentVariables::getSunPosition(vec3 sunDirection) {
 }
 
 vec2 * EnvironmentVariables::getSunScreenCoords() {
-	//TODO:ÕâÀïÃ»ÓÐÕæµÄ¶ÁÈëviewºÍproject¾ØÕó
+	//TODO:ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½viewï¿½ï¿½projectï¿½ï¿½ï¿½ï¿½
 	vec3 * pScreenCoords = Maths::converToScreenSpace(getSunPosition(VISIBLE_SUN_DIR), mat4(1), mat4::perspective(45, 1.78, 0.1, 300));
 //	vec3 * pScreenCoords = Maths::converToScreenSpace(getSunPosition(VISIBLE_SUN_DIR), mat4(1), mat4(1));
 	if (pScreenCoords == NULL) {
@@ -85,6 +90,7 @@ void EnvironmentVariables::update() {
 		delete sunScreenCoords;
 	}
 	sunScreenCoords = getSunScreenCoords();
-	//TODO:ÈÕÒ¹Ñ­»·Ã»ÓÐÊµÏÖ
+	//TODO:ï¿½ï¿½Ò¹Ñ­ï¿½ï¿½Ã»ï¿½ï¿½Êµï¿½ï¿½
 }
+
 

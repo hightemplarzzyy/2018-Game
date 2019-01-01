@@ -18,6 +18,7 @@ private:
 	static float DELTA;
 	static float TIME;
 
+
 	static long getCurrentTime();
 	static void updateDelta();
 

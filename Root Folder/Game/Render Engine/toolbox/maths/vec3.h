@@ -17,10 +17,9 @@ struct vec3 {
 	vec3& normalize();
 	vec3& negate();
 
+
 	float lengthSquared();
 	float length();
-
-
 
 	friend vec3 operator+(vec3 left, const vec3& right);
 	friend vec3 operator-(vec3 left, const vec3& right);
@@ -28,6 +27,7 @@ struct vec3 {
 	friend vec3 operator/(vec3 left, const vec3& right);
 
 	friend vec3 cross(const vec3 &left, const vec3 &right);
+
 	friend float dot(const vec3 &left, const vec3 &right);
 
 	vec3& operator+=(const vec3& other);

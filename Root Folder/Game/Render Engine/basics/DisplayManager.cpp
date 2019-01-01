@@ -30,6 +30,7 @@ bool DisplayManager::closedDisplay() {
 
 void DisplayManager::updateDisplay() {
 	updateDelta();
+
 	window->update();
 }
 

@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef _COLOR_CYCLE_H_
+#define _COLOR_CYCLE_H_
+
 #include "ColorCycle.h"
 
 class LightColorCycle :public ColorCycle {
@@ -21,6 +24,8 @@ public:
 	}
 };
 
+
+#endif // !_COLOR_CYCLE_H_
 
 
 
