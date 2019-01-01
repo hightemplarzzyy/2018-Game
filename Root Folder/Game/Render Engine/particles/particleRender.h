@@ -16,7 +16,7 @@
 class ParticleRender {
 private:
 	static int MAX_PARTICLES;
-	static int INSTANCE_DATA_SIZE;//记录世界矩阵，偏移量，透明度的数据长度 4*4+4+1
+	static int INSTANCE_DATA_SIZE;//璁板綍涓栫晫鐭╅樀锛屽亸绉婚噺锛岄�忔槑搴︾殑鏁版嵁闀垮害 4*4+4+1
 	static float vertices[8];
 
 	int m_point = 0;
@@ -38,7 +38,7 @@ public:
 		Camera &camera);
 
 
-	//TODO:临时渲染函数
+	//TODO:涓存椂娓叉煋鍑芥暟
 	void render(std::map<ParticleTexture, std::vector<Particle>> & particles, Camera & camera) {
 
 		prepare();
@@ -47,7 +47,7 @@ public:
 		std::map<ParticleTexture, std::vector<Particle>>::iterator it;
 		for (it = particles.begin(); it != particles.end(); it++) {
 			ParticleTexture temp = it->first;
-			//TODO:不应该这里更新的，但是管理粒子的还没写，暂时顶替，演示用
+			//TODO:涓嶅簲璇ヨ繖閲屾洿鏂扮殑锛屼絾鏄鐞嗙矑瀛愮殑杩樻病鍐欙紝鏆傛椂椤舵浛锛屾紨绀虹敤
 			for (int i = 0; i < it->second.size(); i++) {
 				it->second[i].update(camera);
 			}

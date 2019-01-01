@@ -65,6 +65,14 @@ vec3& vec3::normalize() {
 	return *this;
 }
 
+
+vec3& vec3::negate() {
+	x = -x;
+	y = -y;
+	z = -z;
+	return *this;
+}
+
 float vec3::lengthSquared() {
 	return x * x + y * y + z * z;
 }
@@ -110,6 +118,12 @@ vec3 cross(const vec3 &left, const vec3 &right) {
 		left.z * right.x - left.x * right.z,
 		left.x * right.y - left.y * right.x);
 }
+
+
+float dot(const vec3 &left, const vec3 &right) {
+	return left.x * right.x + left.y * right.y + left.z * right.z;
+}
+
 
 bool vec3::operator==(const vec3& other) {
 	return  x == other.x && y == other.y && z == other.z;

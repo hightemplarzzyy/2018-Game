@@ -2,7 +2,7 @@
 #include "../basics/DIsplayManager.h"
 
 
-//TODO:ĞèÒªÊÖ¶¯Ìí¼Óµ½Á£×ÓÁĞ±íÖĞ
+//TODO:éœ€è¦æ‰‹åŠ¨æ·»åŠ åˆ°ç²’å­åˆ—è¡¨ä¸­
 
 
 Particle::Particle(ParticleTexture texture, vec3 position, vec3 velocity,
@@ -35,7 +35,7 @@ Particle::Particle(ParticleTexture texture, float scale, float deathAnimationTim
 	m_heightOffset = heightOffset;
 	m_rotation = 0;
 	m_gravityEffect = 0;
-	//TODO:tansformÃ»ÓĞ
+	//TODO:tansformæ²¡æœ‰
 	//ParticleMaster.addParticle(this);
 }
 
@@ -53,7 +53,7 @@ Particle::Particle(Color colour, bool additive, vec3 position, vec3 velocity,
 }
 
 
-//TODO£ºÃ»ÓĞÉè¼ÆºÃ
+//TODOï¼šæ²¡æœ‰è®¾è®¡å¥½
 bool Particle::update(Camera camera) {
 	if (m_parent == nullptr) {
 		moveParticleNaturally();
@@ -71,38 +71,38 @@ bool Particle::update(Camera camera) {
 		vdistance.y * vdistance.y +
 		vdistance.z * vdistance.z;
 	if (m_decays) {
-		//TODO£ºÁÙÊ±ÓÃgetDelta´úÌæ£¬ºóÃæÔÙÌæ»»³É¶ÔÓ¦µÄÖµ
+		//TODOï¼šä¸´æ—¶ç”¨getDeltaä»£æ›¿ï¼Œåé¢å†æ›¿æ¢æˆå¯¹åº”çš„å€¼
 		m_elapsedTime += DisplayManager::getDelta();
 	}
-	//²»ĞèÒªÍ¸Ã÷±ä»¯·µ»ØÕæ
-	//»¹Ã»ÓĞÏÔÊ¾Íê·µ»ØÕæ
+	//ä¸éœ€è¦é€æ˜å˜åŒ–è¿”å›çœŸ
+	//è¿˜æ²¡æœ‰æ˜¾ç¤ºå®Œè¿”å›çœŸ
 	return !m_decays || m_elapsedTime < m_lifeLength;
 }
 
 float Particle::getTransparency() {
 
-	//Ê±¼äÁ÷ÊÅ°Ù·Ö±È
+	//æ—¶é—´æµé€ç™¾åˆ†æ¯”
 	float lightFactor = m_elapsedTime / m_lifeLength;
 
-	if (lightFactor < m_fadeIn) {//»¹Ã»ÓĞÍêÈ«ÏÔÊ¾
+	if (lightFactor < m_fadeIn) {//è¿˜æ²¡æœ‰å®Œå…¨æ˜¾ç¤º
 		float factor = lightFactor / m_fadeIn;
 		return factor * m_normalAlpha;
 	}
-	else if (lightFactor > m_fadeOut) {//ÒÑ¾­ÍêÈ«ÏÔÊ¾¿ªÊ¼ÏûÊ§Í¸Ã÷
+	else if (lightFactor > m_fadeOut) {//å·²ç»å®Œå…¨æ˜¾ç¤ºå¼€å§‹æ¶ˆå¤±é€æ˜
 		float factor = 1 - (lightFactor - m_fadeOut) / (1 - m_fadeOut);
 		return factor * m_normalAlpha;
 	}
-	else {//ÆäÓàÊ±ºòÍêÈ«ÏÔÊ¾
+	else {//å…¶ä½™æ—¶å€™å®Œå…¨æ˜¾ç¤º
 		return 1;
 	}
 }
 
-void Particle::moveParticleNaturally(){//×ÔÓÉÂäÌå
-	//ÊÜµ½ÖØÁ¦Ó°Ïì yÖáµÄËÙ¶È³¯ÖØÁ¦·½Ïò±ä»¯
+void Particle::moveParticleNaturally(){//è‡ªç”±è½ä½“
+	//å—åˆ°é‡åŠ›å½±å“ yè½´çš„é€Ÿåº¦æœé‡åŠ›æ–¹å‘å˜åŒ–
 	m_velocity.y += EnvironmentVariables::GRAVITY * m_gravityEffect * DisplayManager::getDelta();
 
-	//¼ÆËãÒÆ¶¯ºóµÄÎ»ÖÃ
-	//TODO£ºÁÙÊ±ÓÃgetDelta´úÌæ£¬ºóÃæÔÙÌæ»»³É¶ÔÓ¦µÄÖµ
+	//è®¡ç®—ç§»åŠ¨åçš„ä½ç½®
+	//TODOï¼šä¸´æ—¶ç”¨getDeltaä»£æ›¿ï¼Œåé¢å†æ›¿æ¢æˆå¯¹åº”çš„å€¼
 	m_position.x += m_velocity.x * DisplayManager::getDelta();
 	m_position.y += m_velocity.y * DisplayManager::getDelta();
 	m_position.z += m_velocity.z * DisplayManager::getDelta();
@@ -116,27 +116,29 @@ void Particle::rotate() {
 }
 
 void Particle::followParent() {
-	//TODO:Ã»ÓĞÊµÏÖ£¬ĞèÒªtransformation
+	//TODO:æ²¡æœ‰å®ç°ï¼Œéœ€è¦transformation
 }
 
 
-//Á£×ÓµÄÌùÍ¼Îªn*nµÄÎÆÀíÌùÍ¼£¬Ã¿´ÎÈ¡ÆäÖĞµÄÒ»¸öĞ¡¿é£¬¸üĞÂÈ¡µÃ×ø±ê
+//ç²’å­çš„è´´å›¾ä¸ºn*nçš„çº¹ç†è´´å›¾ï¼Œæ¯æ¬¡å–å…¶ä¸­çš„ä¸€ä¸ªå°å—ï¼Œæ›´æ–°å–å¾—åæ ‡
 void Particle::updateTextureCoordInfo() {
 	float lifeFactor = m_elapsedTime / m_lifeLength; 
-	printf(" m_elapsedTime = %f ,m_lifeLength = %f , lifeFactor = %f\n", m_elapsedTime, m_lifeLength, lifeFactor);
+
+	//printf(" m_elapsedTime = %f ,m_lifeLength = %f , lifeFactor = %f\n", m_elapsedTime, m_lifeLength, lifeFactor);
+
 	if (lifeFactor >= 1.0f) {
 		m_elapsedTime = 0;
 	}
-	int stageCount = m_texture.getNumberOfRows() * m_texture.getNumberOfRows();//×ÜÎÆÀíÊı
-	float atlasProgression = lifeFactor * stageCount;//ÏÖÔÚ¶ÔÓ¦ÎÆÀí
-	int index1 = floor(atlasProgression);//ÏòÏÂÈ¡Õû
+	int stageCount = m_texture.getNumberOfRows() * m_texture.getNumberOfRows();//æ€»çº¹ç†æ•°
+	float atlasProgression = lifeFactor * stageCount;//ç°åœ¨å¯¹åº”çº¹ç†
+	int index1 = floor(atlasProgression);//å‘ä¸‹å–æ•´
 	int index2 = index1 < stageCount - 1 ? index1 + 1 : index1;
 	m_blend = fmod(atlasProgression, 1);
 	setTextureOffset(m_texOffset1, index1);
 	setTextureOffset(m_texOffset2, index2);
 }
 
-//¼ÆËã³öµ±Ç°Á£×Ó¶ÔÓÚ²ÄÖÊĞ¡¿éµÄ×óÉÏ½Ç×ø±ê
+//è®¡ç®—å‡ºå½“å‰ç²’å­å¯¹äºæè´¨å°å—çš„å·¦ä¸Šè§’åæ ‡
 void Particle::setTextureOffset(vec2 & offset, int index) {
 	int column = index % m_texture.getNumberOfRows();
 	int row = index / m_texture.getNumberOfRows();

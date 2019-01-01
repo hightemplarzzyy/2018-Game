@@ -108,7 +108,7 @@ public:
 	}
 
 	bool isLoaded()  { return m_Loaded; }
-	int getID() { return m_TextureID; }
+	int getID() const { return m_TextureID; }
 
 	~Texture();
 

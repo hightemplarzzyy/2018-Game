@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef _COLOR_CYCLE_H_
 #define _COLOR_CYCLE_H_
 
@@ -22,7 +24,9 @@ public:
 	}
 };
 
+
 #endif // !_COLOR_CYCLE_H_
+
 
 
 

@@ -14,6 +14,7 @@ uniform vec3 light_colour;
 void main(){
   textureCoords = position + vec2(0.5,0.5);
   textureCoords.y = 1.0f - textureCoords.y;
+  
   pass_colour = vec4(colour.rgb * light_colour,alpha);
 
   gl_Position = projection_matrix * model_matrix * vec4(position,0.0,1.0);

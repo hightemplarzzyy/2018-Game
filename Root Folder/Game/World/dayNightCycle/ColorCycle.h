@@ -8,8 +8,8 @@ class ColorCycle {
 private:
 	Color m_nightColor;
 	Color m_dayColor;
-	Color m_dawnColor;	//ÀèÃ÷
-	Color m_duskColor;	//»Æ»è
+	Color m_dawnColor;	//Å”ÄÄ‚Ã·
+	Color m_duskColor;	//Å¥Ä†Å¥Ä
 
 	float m_midnightEnd;
 	float m_middayStart;
@@ -44,7 +44,8 @@ public:
 
 	Color getColor(float time) {
 		std::map<float, Color> ::iterator it;
-		float pre, next;
+		float pre = 0, next = 0;
+
 		for (it = m_colors.begin(); it != m_colors.end(); it++) {
 			if (it->first > time) {
 				next = it->first;

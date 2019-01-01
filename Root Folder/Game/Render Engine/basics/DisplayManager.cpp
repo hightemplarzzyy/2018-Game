@@ -30,7 +30,7 @@ bool DisplayManager::closedDisplay() {
 
 void DisplayManager::updateDisplay() {
 	updateDelta();
-//	printf("Time: %f, Delta: %f\n", TIME, DELTA);
+
 	window->update();
 }
 

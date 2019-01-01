@@ -5,10 +5,11 @@
 #include "../shaders/uniformmat4.h"
 #include "../shaders/uniformvec3.h"
 
-//и╚©И╣даёвс
+//ц┴б╚б©ц╘б╣ц└ц│бёц≈ц⌠
 class ParticleColourShader :public Shader {
 public:
 	UniformMat4 * projection_matrix = new UniformMat4("projection_matrix");
+	UniformVec3 * light_colour = new UniformVec3("light_colour");
 	UniformVec3 * light_colour = new UniformVec3("light_position");
 
 	ParticleColourShader(const char * vertexPath, const char * fragmentPath) :

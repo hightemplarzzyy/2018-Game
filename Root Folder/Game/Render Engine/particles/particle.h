@@ -14,19 +14,19 @@
 
 class Particle {
 private:
-	//Á£×Ó»ù±¾ÊôĞÔ
+	//ç²’å­åŸºæœ¬å±æ€§
 	vec3 m_position;
 	vec3 m_velocity;
 	float m_gravityEffect;
-	float m_lifeLength;				//×ÜµÄÊ±¼ä
+	float m_lifeLength;				//æ€»çš„æ—¶é—´
 	float m_rotation;
 	float m_scale;
 
-	//ÏÔÊ¾Ğ§¹û£ºÍ¸Ã÷------ÏÔÊ¾------------ÏÔÊ¾-----Í¸Ã÷
-	//Ê±¼äÖá£º-----------m_fadeIn-------m_fadeOut------
-	float m_fadeIn = 0;				//´Ó¿ªÊ¼Í¸Ã÷µ½ÍêÈ«ÏÔÊ¾µÄÊ±¿Ì(°Ù·Ö±È£©0~1
-	float m_fadeOut = 1;			//´ÓÍêÈ«ÏÔÊ¾µ½¿ªÊ¼Í¸Ã÷µÄÊ±¿Ì(°Ù·Ö±È£©0~1
-	float m_normalAlpha = 1;		//±ê×¼Í¸Ã÷¶È
+	//æ˜¾ç¤ºæ•ˆæœï¼šé€æ˜------æ˜¾ç¤º------------æ˜¾ç¤º-----é€æ˜
+	//æ—¶é—´è½´ï¼š-----------m_fadeIn-------m_fadeOut------
+	float m_fadeIn = 0;				//ä»å¼€å§‹é€æ˜åˆ°å®Œå…¨æ˜¾ç¤ºçš„æ—¶åˆ»(ç™¾åˆ†æ¯”ï¼‰0~1
+	float m_fadeOut = 1;			//ä»å®Œå…¨æ˜¾ç¤ºåˆ°å¼€å§‹é€æ˜çš„æ—¶åˆ»(ç™¾åˆ†æ¯”ï¼‰0~1
+	float m_normalAlpha = 1;		//æ ‡å‡†é€æ˜åº¦
 	
 	Color m_color;
 	bool m_isColor = false;
@@ -35,7 +35,7 @@ private:
 	float m_rotX = 0;
 	float m_rotXSpeed = 0;
 
-	float m_elapsedTime =0 ;		//ÒÑ¾­¹ıÈ¥µÄÊ±¼ä
+	float m_elapsedTime =0 ;		//å·²ç»è¿‡å»çš„æ—¶é—´
 
 	ParticleTexture m_texture;
 
@@ -45,24 +45,24 @@ private:
 	float m_distance;
 	bool m_manualStages = false;
 
-	bool m_decays = true;			//Ë¥¼õ¶È
+	bool m_decays = true;			//è¡°å‡åº¦
 	
-	//TODO£ºÃ»ÓĞ×ö
+	//TODOï¼šæ²¡æœ‰åš
 	Transformation * m_parent= nullptr;		
 
 	float m_heightOffset = 0;
 
 public:
 	Particle() = default;
-	//ÎÆÀíÀàÁ£×Ó
+	//çº¹ç†ç±»ç²’å­
 	Particle(ParticleTexture texture, vec3 position, vec3 velocity, float gravityEffect,
 		float lifeLength, float rotation, float scale);
-	//ÎÆÀíÀàÁ£×Ó
+	//çº¹ç†ç±»ç²’å­
 	Particle(ParticleTexture texture, vec3 position, float scale, float deathAnimationTime);
-	//ÎÆÀíÀàÁ£×Ó
+	//çº¹ç†ç±»ç²’å­
 	Particle(ParticleTexture texture, float scale, float deathAnimationTime, Transformation transform,
 		float heightOffset);
-	//ÑÕÉ«ÀàÁ£×Ó
+	//é¢œè‰²ç±»ç²’å­
 	Particle(Color colour, bool additive, vec3 position, vec3 velocity, float gravityEffec,
 		float lifeLength, float rotation, float scale);
 
@@ -72,7 +72,9 @@ public:
 
 	void set3dRotation(float speed) {
 		m_rotate3D = true;
-		m_rotX = rand() % 360;
+
+		m_rotX = float(rand() % 360);
+
 		m_rotXSpeed = speed;
 	}
 
@@ -149,8 +151,8 @@ public:
 
 	bool update(Camera camera);
 
-	//¼ÆËãÍ¸Ã÷¶È
-	//Ëæ×ÅÁ÷ÊÅÊ±¼äÁ£×ÓµÄÍ¸Ã÷¶È²»¶Ï±ä»¯
+	//è®¡ç®—é€æ˜åº¦
+	//éšç€æµé€æ—¶é—´ç²’å­çš„é€æ˜åº¦ä¸æ–­å˜åŒ–
 	float getTransparency();
 
 private:
@@ -159,7 +161,7 @@ private:
 	void followParent();
 	void updateTextureCoordInfo();
 	void setTextureOffset(vec2 & offset, int index);
-	//TODO£ºÌí¼ÓÌí¼ÓÁ£×ÓµÄ·½·¨
+	//TODOï¼šæ·»åŠ æ·»åŠ ç²’å­çš„æ–¹æ³•
 	
 };
 

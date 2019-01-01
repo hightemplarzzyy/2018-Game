@@ -1,5 +1,8 @@
 #include "particleRender.h"
 #include "../environment/environment.h"
+#include "../../Resource Management/resourceManagement/ParticleAtlasCache.h"
+
+#include <ostream>
 
 int ParticleRender::MAX_PARTICLES = 10000;
 int ParticleRender::INSTANCE_DATA_SIZE = 21;
@@ -7,7 +10,7 @@ GLfloat ParticleRender::vertices[8] = { -0.5f, 0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0
 
 
 ParticleRender::ParticleRender(const mat4 & projectionMatrix) {
-	//Ìí¼Ó²ÄÖÊÌùÍ¼¶¥µã
+	//æ·»åŠ æè´¨è´´å›¾é¡¶ç‚¹
 	m_vao = new VertexArray;
 	m_vao->addBuffer(new Buffer(&vertices[0], 8, 2), 0);
 	initShaders(projectionMatrix);
@@ -31,11 +34,12 @@ void ParticleRender::initShaders(const mat4 & projectionMatrix) {
 
 void ParticleRender::bindTexture(ParticleTexture & texture) {
 	bindTexture(texture.getTextureID(), texture.isAdditive(), texture.getGlows());
-	m_shader->numberOfRaws->load(texture.getNumberOfRows());
+
+	m_shader->numberOfRaws->load(float(texture.getNumberOfRows()));
 }
 
 void ParticleRender::bindTexture(int textureId, bool additive, bool glow) {
-	if (additive) {//ĞèÒª»ìÏıÑÕÉ«
+	if (additive) {//éœ€è¦æ··æ·†é¢œè‰²
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 		m_shader->light_colour->load(m_lightGlowColour);
 	}
@@ -60,25 +64,25 @@ void ParticleRender::renderTexturedParticles(ParticleTexture & texture,
 
 	bindTexture(texture);
 
-	//ËùÓĞÁ£×ÓµÄĞÅÏ¢·ÅÔÚ»º´æÖĞ
+	//æ‰€æœ‰ç²’å­çš„ä¿¡æ¯æ”¾åœ¨ç¼“å­˜ä¸­
 	std::vector <GLfloat> buf;
 	buf.resize(particles[texture].size() * INSTANCE_DATA_SIZE);
 
 	m_point = 0;
 	for (int i = 0; i < particles[texture].size(); i++) {
 
-		//´«Èë¾ØÕó
+		//ä¼ å…¥çŸ©é˜µ
 		mat4 model = mat4::translation(vec3(particles[texture][i].getPosition()));
 		float scaleSize = particles[texture][i].getScale();
 		model *= mat4::scale(vec3(scaleSize, scaleSize, scaleSize));
-		//TODO:ÕâÀïÃ»ÓĞ³Ëview¾ØÕó ÒòÎªÔÚ×ÅÉ«Æ÷ÀïÃæÓĞÒ»¸ö
+		//TODO:è¿™é‡Œæ²¡æœ‰ä¹˜viewçŸ©é˜µ å› ä¸ºåœ¨ç€è‰²å™¨é‡Œé¢æœ‰ä¸€ä¸ª
 		model *= mat4::rotation(particles[texture][i].getRotation(), vec3(0, 0, 1));
 		model *= mat4::rotation(particles[texture][i].getRotX(), vec3(0, 1, 0));
 		for (int j = 0; j < 16; j++) {
 			buf[m_point++] = model.elements[j];
 		}
 
-		//´«ÈëÆ«ÒÆ×ø±ê
+		//ä¼ å…¥åç§»åæ ‡
 		vec2 offset1 = particles[texture][i].getTexOffset1();
 		vec2 offset2 = particles[texture][i].getTexOffset2();
 
@@ -87,16 +91,17 @@ void ParticleRender::renderTexturedParticles(ParticleTexture & texture,
 		buf[m_point++] = offset2.x;
 		buf[m_point++] = offset2.y;
 
-		//´«Èë»ìºÏÖµ
+		//ä¼ å…¥æ··åˆå€¼
 		buf[m_point++] = particles[texture][i].getBlend();
 	}
 
-	//°ó¶¨Êı¾İ¸ñÊ½
+	//ç»‘å®šæ•°æ®æ ¼å¼
 	std::vector<int> textureFormate = { 4,4,4,4,4,1 };
 	m_vao->addInterLeavedBuffer(new Buffer(&buf[0], particles[texture].size() * INSTANCE_DATA_SIZE, 4), 1, textureFormate);
-	m_shader->numberOfRaws->load(texture.getNumberOfRows());
+	m_shader->numberOfRaws->load(float(texture.getNumberOfRows()));
 
-	//»æÖÆÁ£×Ó
+
+	//ç»˜åˆ¶ç²’å­
 	m_vao->bind();
 	glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, particles[texture].size());
 	m_vao->unbind();
@@ -113,34 +118,34 @@ void ParticleRender::renderColourParticles(std::vector<Particle> & colourParticl
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 
-	//ËùÓĞÁ£×ÓµÄĞÅÏ¢·ÅÔÚ»º´æÖĞ
+	//æ‰€æœ‰ç²’å­çš„ä¿¡æ¯æ”¾åœ¨ç¼“å­˜ä¸­
 	std::vector <GLfloat> buf;
 	buf.resize(colourParticles.size() * INSTANCE_DATA_SIZE);
 
 	m_point = 0;
 	for (int i = 0; i < colourParticles.size(); i++) {
-		//´«Èë¾ØÕó
+		//ä¼ å…¥çŸ©é˜µ
 		mat4 model = mat4::translation(vec3(colourParticles[i].getPosition()));
 		float scaleSize = colourParticles[i].getScale();
 		model *= mat4::scale(vec3(scaleSize, scaleSize, scaleSize));
-		//TODO:ÕâÀïÃ»ÓĞ³Ëview¾ØÕó ÒòÎªÔÚ×ÅÉ«Æ÷ÀïÃæÓĞÒ»¸ö
+		//TODO:è¿™é‡Œæ²¡æœ‰ä¹˜viewçŸ©é˜µ å› ä¸ºåœ¨ç€è‰²å™¨é‡Œé¢æœ‰ä¸€ä¸ª
 		model *= mat4::rotation(colourParticles[i].getRotation(), vec3(0, 0, 1));
 		model *= mat4::rotation(colourParticles[i].getRotX(), vec3(0, 1, 0));
 		for (int j = 0; j < 16; j++) {
 			buf[m_point++] = model.elements[j];
 		}
 
-		//´«ÈëÆ«ÒÆ×ø±ê
-		vec2 offset1 = colourParticles[i].getTexOffset1();
-		vec2 offset2 = colourParticles[i].getTexOffset2();
-
-		buf[m_point++] = offset1.x;
-		buf[m_point++] = offset1.y;
-		buf[m_point++] = offset2.x;
-		buf[m_point++] = offset2.y;
-
-		//´«Èë»ìºÏÖµ
+		//ä¼ å…¥é¢œè‰²
+		Color color = colourParticles[i].getColour();
+		//printf("%f %f %f\n", color.getR(), color.getG(), color.getB());
+		buf[m_point++] = color.getR();
+		buf[m_point++] = color.getG();
+		buf[m_point++] = color.getB();
 		buf[m_point++] = 1;
+		
+		//ä¼ å…¥æ··åˆå€¼
+		buf[m_point++] = colourParticles[i].getTransparency();
+
 	}
 
 	std::vector <int> colourFormate = { 4,4,4,4,4,1 };
@@ -153,21 +158,17 @@ void ParticleRender::renderColourParticles(std::vector<Particle> & colourParticl
 
 void ParticleRender::calculateLightingFactor() {
 
-	vec3 lightDir = EnvironmentVariables::lightDirection;
+	vec3 lightDir = EnvironmentVariables::getLightDirection();
 
 	float brightness = 0 > -lightDir.y ? 0 : -lightDir.y;
 
-	vec3 diffuse = EnvironmentVariables::lightColor.getColor();
+	vec3 diffuse = EnvironmentVariables::getLightColor().getColor();
+	float factor = EnvironmentVariables::getDiffuseWeighting() * brightness;
+	diffuse.scale(factor);
 
-	float factor = EnvironmentVariables::diffuseWeighting * brightness;
-	diffuse.x *= factor;
-	diffuse.y *= factor;
-	diffuse.z *= factor;
+	vec3 ambient = EnvironmentVariables::getLightColor().getColor();
+	ambient.scale(EnvironmentVariables::getAmbientWeighting());
 
-	vec3 ambient = EnvironmentVariables::lightColor.getColor();
-	ambient.x *= EnvironmentVariables::ambientWeighting;
-	ambient.y *= EnvironmentVariables::ambientWeighting;
-	ambient.z *= EnvironmentVariables::ambientWeighting;
 
 	m_lightColour = diffuse + ambient;
 }
@@ -191,23 +192,31 @@ void ParticleRender::render(std::map<ParticleTexture, std::vector<Particle>> & p
 	std::vector<Particle> & colourParticles, std::vector<Particle> & additiveColourParticles, Camera & camera) {
 
 	mat4 viewMatrix = camera.CreateViewMatrix();
-	
+
 	prepare();
 
 	m_shader->enable();
+
 	std::map<ParticleTexture, std::vector<Particle>>::iterator it;
 	for (it = particles.begin(); it != particles.end(); it++) {
+		//TODO:æœ‰ç²’å­ä¸èƒ½æ›´æ–°çš„é£é™©
 		ParticleTexture temp = it->first;
 		renderTexturedParticles(temp, particles, viewMatrix);
 	}
+
 	m_shader->disable();
 
 	m_colourShader->enable();
 	glActiveTexture(GL_TEXTURE0);
-	//TODO:¼ÓÔØÈı½ÇĞÎÌùÍ¼
-	//glBindTexture()
-	renderColourParticles(colourParticles, viewMatrix, false);
-	renderColourParticles(additiveColourParticles, viewMatrix, true);
+  
+	glBindTexture(GL_TEXTURE_2D, ParticleAtlasCache::TRIANGLE.getID());
+	if (colourParticles.size() != 0) {
+		renderColourParticles(colourParticles, viewMatrix, false);
+	}
+	if (additiveColourParticles.size() != 0) {
+		renderColourParticles(additiveColourParticles, viewMatrix, true);
+	}
+
 	m_colourShader->disable();
 
 	finishRendering();
