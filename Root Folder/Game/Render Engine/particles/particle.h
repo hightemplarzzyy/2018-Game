@@ -15,42 +15,42 @@
 class Particle {
 private:
 	//粒子基本属性
-	vec3 m_position;
-	vec3 m_velocity;
-	float m_gravityEffect;
-	float m_lifeLength;				//总的时间
-	float m_rotation;
-	float m_scale;
+	vec3 m_Position;
+	vec3 m_Velocity;
+	float m_GravityEffect;
+	float m_LifeLength;				//总的时间
+	float m_Rotation;
+	float m_Scale;
 
 	//显示效果：透明------显示------------显示-----透明
 	//时间轴：-----------m_fadeIn-------m_fadeOut------
-	float m_fadeIn = 0;				//从开始透明到完全显示的时刻(百分比）0~1
-	float m_fadeOut = 1;			//从完全显示到开始透明的时刻(百分比）0~1
-	float m_normalAlpha = 1;		//标准透明度
+	float m_FadeIn = 0;				//从开始透明到完全显示的时刻(百分比）0~1
+	float m_FadeOut = 1;			//从完全显示到开始透明的时刻(百分比）0~1
+	float m_NormalAlpha = 1;		//标准透明度
 	
-	Color m_color;
-	bool m_isColor = false;
+	Color m_Color;
+	bool m_IsColor = false;
 
-	bool m_rotate3D = false;
-	float m_rotX = 0;
-	float m_rotXSpeed = 0;
+	bool m_Rotate3D = false;
+	float m_RotX = 0;
+	float m_RotXSpeed = 0;
 
-	float m_elapsedTime =0 ;		//已经过去的时间
+	float m_ElapsedTime =0 ;		//已经过去的时间
 
-	ParticleTexture m_texture;
+	ParticleTexture m_Texture;
 
-	vec2 m_texOffset1;
-	vec2 m_texOffset2;
-	float m_blend;
-	float m_distance;
-	bool m_manualStages = false;
+	vec2 m_TexOffset1;
+	vec2 m_TexOffset2;
+	float m_Blend;
+	float m_Distance;
+	bool m_ManualStages = false;
 
-	bool m_decays = true;			//衰减度
+	bool m_Decays = true;			//衰减度
 	
 	//TODO：没有做
-	Transformation * m_parent= nullptr;		
+	Transformation * m_Parent= nullptr;		
 
-	float m_heightOffset = 0;
+	float m_HeightOffset = 0;
 
 public:
 	Particle() = default;
@@ -67,86 +67,86 @@ public:
 		float lifeLength, float rotation, float scale);
 
 	void setHeighOffset(float offset) {
-		m_heightOffset = offset; 
+		m_HeightOffset = offset; 
 	}
 
 	void set3dRotation(float speed) {
-		m_rotate3D = true;
+		m_Rotate3D = true;
 
-		m_rotX = float(rand() % 360);
+		m_RotX = float(rand() % 360);
 
-		m_rotXSpeed = speed;
+		m_RotXSpeed = speed;
 	}
 
 	void setPosition(vec3 pos) {
-		m_position = pos;
+		m_Position = pos;
 	}
 
 	void kill() {
-		m_decays = true;
+		m_Decays = true;
 	}
 
 	void setFade(float normalAlpha, float fadeIn, float fadeOut) {
-		m_normalAlpha = normalAlpha;
-		m_fadeIn = fadeIn;
-		m_fadeOut = fadeOut;
+		m_NormalAlpha = normalAlpha;
+		m_FadeIn = fadeIn;
+		m_FadeOut = fadeOut;
 	}
 
 	void setManualStage(bool manual) {
-		m_manualStages = manual;
+		m_ManualStages = manual;
 	}
 
 	void setStage(int index) {
-		m_manualStages = true;
-		setTextureOffset(m_texOffset1, index);
-		setTextureOffset(m_texOffset2, index);
+		m_ManualStages = true;
+		setTextureOffset(m_TexOffset1, index);
+		setTextureOffset(m_TexOffset2, index);
 	}
 
 	void setStages(int preIndex, int nextIndex, float blend) {
-		m_manualStages = true;
-		setTextureOffset(m_texOffset1, preIndex);
-		setTextureOffset(m_texOffset2, nextIndex);
-		m_blend = blend;
+		m_ManualStages = true;
+		setTextureOffset(m_TexOffset1, preIndex);
+		setTextureOffset(m_TexOffset2, nextIndex);
+		m_Blend = blend;
 	}
 
 	Color getColour() {
-		return m_color;
+		return m_Color;
 	}
 
 	float getDistance() {
-		return m_distance;
+		return m_Distance;
 	}
 
 	vec2 getTexOffset1() {
-		return m_texOffset1;
+		return m_TexOffset1;
 	}
 
 	vec2 getTexOffset2() {
-		return m_texOffset2;
+		return m_TexOffset2;
 	}
 
 	float getBlend() {
-		return m_blend;
+		return m_Blend;
 	}
 
 	ParticleTexture getTexture() {
-		return m_texture;
+		return m_Texture;
 	}
 
 	vec3 getPosition() {
-		return m_position;
+		return m_Position;
 	}
 
 	float getRotation() {
-		return m_rotation;
+		return m_Rotation;
 	}
 
 	float getRotX() {
-		return m_rotX;
+		return m_RotX;
 	}
 
 	float getScale() {
-		return m_scale;
+		return m_Scale;
 	}
 
 	bool update(Camera camera);

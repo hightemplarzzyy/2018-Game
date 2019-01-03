@@ -7,9 +7,9 @@
 #include "../buffers/vertexarray.h"
 
 #include "particle.h"
-#include "particleShader.h"
-#include "particleColourShader.h"
-#include "ParticleTexture.h"
+#include "particleshader.h"
+#include "particlecolorshader.h"
+#include "particletexture.h"
 #include "../toolbox/OpenglUtils.h"
 
 

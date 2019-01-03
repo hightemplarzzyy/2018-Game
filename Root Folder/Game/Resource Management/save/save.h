@@ -3,7 +3,7 @@
 #include<io.h>
 #include<list>
 #include"saveslot.h"
-const string SAVES_FOLDER = "E:\\Data_Saves2\\";
+const string SAVES_FOLDER = "..\\Data_Saves\\";
  class Saves {
  public:
 	 vector<SaveSlot> slots;

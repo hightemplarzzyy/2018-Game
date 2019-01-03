@@ -1,6 +1,6 @@
 #include "particleRender.h"
 #include "../environment/environment.h"
-#include "../../Resource Management/resourceManagement/ParticleAtlasCache.h"
+#include "../../Resource Management/resource management/particleatlascache.h"
 
 #include <ostream>
 

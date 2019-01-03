@@ -3,7 +3,7 @@
 #include "../toolbox/maths/maths_func.h"
 #include "../toolbox/Color.h"
 #include "particleTexture.h"
-#include "../particleSpawns/ParticleSpawn.h"
+#include "../particle spawns/particlespawn.h"
 
 
 //ВњЩњСЃзг

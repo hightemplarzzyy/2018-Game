@@ -2,7 +2,7 @@
 
 #include <vector>
 #include "../toolbox/maths/vec2.h"
-#include "FlareRender.h"
+#include "flarerenderer.h"
 
 class FlareManager {
 private:
@@ -15,11 +15,11 @@ public:
 	static float MIDDLE_SIZE;
 	static float GAP;
 
-	std::vector<FlareTexture> m_flareTexture;
-	int m_middleIndex;
+	std::vector<FlareTexture> m_FlareTexture;
+	int m_MiddleIndex;
 
-	std::vector<vec3> m_flareCoordinates;
-	FlareRender m_render;
+	std::vector<vec3> m_FlareCoordinates;
+	FlareRenderer m_Renderer;
 
 public:
 	FlareManager(int middleIndex, std::vector<FlareTexture> flares);

@@ -6,8 +6,8 @@
 
 class BloomCombineShader :public Shader {
 public:
-	UniformSampler * originalTexture = new UniformSampler("originalTexture");
-	UniformSampler * blurredTexture = new UniformSampler("bloomTexture");
+	UniformSampler * m_OriginalTexture = new UniformSampler("originalTexture");
+	UniformSampler * m_BlurredTexture = new UniformSampler("bloomTexture");
 
 	BloomCombineShader(const char * vertexPath, const char * fragmentPath) :
 		Shader(vertexPath, fragmentPath) {
@@ -15,8 +15,8 @@ public:
 	}
 
 	virtual void storeAllUniformLocation() {
-		originalTexture->storeLocation(m_ShaderID);
-		blurredTexture->storeLocation(m_ShaderID);
+		m_OriginalTexture->storeLocation(m_ShaderID);
+		m_BlurredTexture->storeLocation(m_ShaderID);
 	}
 	
 };

@@ -1,5 +1,5 @@
-#include "LenseFlare.h"
-#include "FlareTexture.h"
+#include "lenseflare.h"
+#include "flaretexture.h"
 
 int LenseFlare::MIDDLE_INDEX = 4;
 
@@ -38,23 +38,23 @@ LenseFlare::LenseFlare(mat4 projectionMartrix, mat4 viewMatrix) {
 		FlareTexture(rainbow2,1.2f)
 	};
 
-	m_flareManager = new FlareManager(MIDDLE_INDEX, list);
+	m_FlareManager = new FlareManager(MIDDLE_INDEX, list);
 }
 
 LenseFlare::~LenseFlare(){
-	delete m_flareManager;
+	delete m_FlareManager;
 }
 
 void LenseFlare::render(vec3 lightDirection, bool sunVisible) {
 	if (sunVisible) {
-		m_flareManager->render(lightDirection);
+		m_FlareManager->render(lightDirection);
 	}
 }
 
 void LenseFlare::doOcclusionTest() {
-	m_flareManager->doOcclusionTest();
+	m_FlareManager->doOcclusionTest();
 }
 
 void LenseFlare::cleanUp() {
-	m_flareManager->cleanUp();
+	m_FlareManager->cleanUp();
 }

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../textures/texture.h"
-#include "FlareManager.h"
+#include "flaremanager.h"
 
 class LenseFlare {
 private:
@@ -16,7 +16,7 @@ private:
 	static Texture redDot;
 	static Texture rainbow2;
 
-	FlareManager * m_flareManager;
+	FlareManager * m_FlareManager;
 
 private:
 	static Texture loadTexture(const char * Path);

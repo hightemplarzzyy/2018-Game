@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../Resource Management/glRequestProcessing/glrequest.h"
+#include "../../Resource Management/gl request processing/glrequest.h"
 #include "texturemanager.h"
 
 class TextureDeleteRequest : public GlRequest

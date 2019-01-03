@@ -7,9 +7,22 @@
 
 #define _USE_MATH_DEFINES
 #include <math.h>
+#include <time.h>
 
 class Maths {
 public:
+
+	static int randomInt(int nextInt) {
+		srand((int)time(0));
+		return rand() % nextInt;
+	}
+
+	static float randomFloat(int seed) {
+		srand(seed);
+		float m1 = (float)(rand() / float(RAND_MAX));
+		return m1;
+	}
+
 	static float getDistanceBetweenPoints(float x1, float y1, float x2, float y2) {
 		float dx = x2 - x1;
 		float dy = y2 - y1;
@@ -27,8 +40,6 @@ public:
 	}
 
 	//产生一个垂直于法线的圆上的向量
-=======
-	//产生一个
 
 	static vec3 randomPointOnCircle(const vec3 & normal, float radius) {
 		vec3 randomPerpendicular; 
@@ -98,9 +109,5 @@ public:
 	static float smoothStep(float edge0, float edge1, float x) {
 		float t = clamp((x - edge0) / (edge1 - edge0), 0.0f, 1.0f);
 		return t * t *(3.0f - 2.0f*t);
-
-		float factor = dis * radius;
-		randomPerpendicular.scale(factor);
-
 	}
 };

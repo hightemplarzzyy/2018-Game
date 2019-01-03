@@ -1,59 +1,59 @@
 #ifndef _BLOOM_EFFECT_H_
 #define _BLOOM_EFFECT_H_
 
-#include "../postProcessing/PostProcessingPipeline.h"
-#include "../postProcessing/PostProcessingFilter.h"
-#include "../postProcessing/GaussianBlur/GaussianBlur.h"
+#include "../post processing/postprocessingpipeline.h"
+#include "../post processing/postprocessingfilter.h"
+#include "../post processing/gaussian blur/gaussianblur.h"
 #include "BloomCombineShader.h"
 
 //不要当作参数传入，请使用引用
 class BloomEffect :public PostProcessingPipeline {
 private:
-	PostProcessingFilter * m_brightFilter;
-	PostProcessingFilter * m_combineFilter;
-	GaussianBlur * m_gaussian;
-	BloomCombineShader * m_bloomshader;
-	BloomCombineShader * m_brightpassshader;
+	PostProcessingFilter * m_BrightFilter;
+	PostProcessingFilter * m_CombineFilter;
+	GaussianBlur * m_GaussianBlur;
+	BloomCombineShader * m_BloomShader;
+	BloomCombineShader * m_BrightPassShader;
 
 public:
 
 	BloomEffect(int blurWidth, int blurHeight) {
-		m_bloomshader = new BloomCombineShader(
-			"Render Engine/postProcessing/basicPostProcessing.vert",
+		m_BloomShader = new BloomCombineShader(
+			"Render Engine/post processing/basicpostprocessing.vert",
 			"Render Engine/bloom/combine.frag"
 		);
-		m_brightpassshader = new BloomCombineShader(
-			"Render Engine/postProcessing/basicPostProcessing.vert",
+		m_BrightPassShader = new BloomCombineShader(
+			"Render Engine/post processing/basicpostprocessing.vert",
 			"Render Engine/bloom/brightPass.frag"
 		);
 
-		m_brightFilter = new PostProcessingFilter(m_brightpassshader);
-		m_gaussian = new GaussianBlur(blurWidth, blurHeight);
-		m_combineFilter = new PostProcessingFilter(m_bloomshader);
+		m_BrightFilter = new PostProcessingFilter(m_BrightPassShader);
+		m_GaussianBlur = new GaussianBlur(blurWidth, blurHeight);
+		m_CombineFilter = new PostProcessingFilter(m_BloomShader);
 	}
 
 	~BloomEffect() {
-		delete m_brightFilter;
-		delete m_combineFilter;
-		delete m_gaussian;
-		delete m_bloomshader;
-		delete m_brightpassshader;
+		delete m_BrightFilter;
+		delete m_CombineFilter;
+		delete m_GaussianBlur;
+		delete m_BloomShader;
+		delete m_BrightPassShader;
 	}
 
 	virtual void carryOutProcessing(GLuint colourTextture, GLuint depthTexture, bool renderToScreen) {
-		m_brightFilter->applyFilter(false, { colourTextture });
-		m_gaussian->carryOutProcessing(m_brightFilter->getOutputTexture(), depthTexture, false);
-		GLuint gaussianTexture = m_gaussian->getOutputTexture();
-		m_combineFilter->applyFilter(renderToScreen, { colourTextture,gaussianTexture });
+		m_BrightFilter->applyFilter(false, { colourTextture });
+		m_GaussianBlur->carryOutProcessing(m_BrightFilter->getOutputTexture(), depthTexture, false);
+		GLuint gaussianTexture = m_GaussianBlur->getOutputTexture();
+		m_CombineFilter->applyFilter(renderToScreen, { colourTextture,gaussianTexture });
 	}
 
 	virtual GLuint getOutputTexture() {
-		return m_combineFilter->getOutputTexture();
+		return m_CombineFilter->getOutputTexture();
 	}
 
 	virtual void cleanUp() {
-		m_brightFilter->cleanUp();
-		m_combineFilter->cleanUp();
+		m_BrightFilter->cleanUp();
+		m_CombineFilter->cleanUp();
 	}
 	
 };

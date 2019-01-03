@@ -1,4 +1,4 @@
-#include "FlareManager.h"
+#include "flaremanager.h"
 
 #include "../environment/environment.h"
 
@@ -10,13 +10,13 @@ float FlareManager::MAX_SCREEN_DIS = 0.6f;
 vec2 FlareManager::CENTER_SCREEN = vec2(0.5f, 0.5f);
 
 FlareManager::FlareManager(int middleIndex, std::vector<FlareTexture> flares) {
-	m_middleIndex = middleIndex;
-	m_flareTexture = flares;
+	m_MiddleIndex = middleIndex;
+	m_FlareTexture = flares;
 	initCoords();
 }
 
 void FlareManager::doOcclusionTest() {
-	m_render.doOcclusionTest(EnvironmentVariables::getSunScreenPosition());
+	m_Renderer.doOcclusionTest(EnvironmentVariables::getSunScreenPosition());
 }
 
 void FlareManager::calculatePosition(vec2 toCenter, vec2 sunPos, vec3 & flareData) {
@@ -28,18 +28,18 @@ void FlareManager::calculatePosition(vec2 toCenter, vec2 sunPos, vec3 & flareDat
 }
 
 void FlareManager::updateFlarePositions(vec2 toCenter, vec2 sunScreenCoords) {
-	for (int i = 0; i < m_flareCoordinates.size(); i++) {
-		calculatePosition(toCenter, sunScreenCoords, m_flareCoordinates[i]);
+	for (int i = 0; i < m_FlareCoordinates.size(); i++) {
+		calculatePosition(toCenter, sunScreenCoords, m_FlareCoordinates[i]);
 	}
 }
 
 void FlareManager::initCoords() {
-	int count = m_flareTexture.size();
-	m_flareCoordinates.resize(count);
+	int count = m_FlareTexture.size();
+	m_FlareCoordinates.resize(count);
 	for (int i = 0; i < count; i++) {
-		int absDifference = i - m_middleIndex;
-		float sizeFactor = (float)absDifference / float(m_middleIndex);
-		m_flareCoordinates[i] = vec3(0.0f, 0.0f, sizeFactor);
+		int absDifference = i - m_MiddleIndex;
+		float sizeFactor = (float)absDifference / float(m_MiddleIndex);
+		m_FlareCoordinates[i] = vec3(0.0f, 0.0f, sizeFactor);
 	}
 }
 
@@ -58,9 +58,9 @@ void FlareManager::render(vec3 sunDirection) {
 		return;
 	}
 	updateFlarePositions(toCenter, *pSunCoords);
-	m_render.render(m_flareTexture, m_flareCoordinates, brightness);
+	m_Renderer.render(m_FlareTexture, m_FlareCoordinates, brightness);
 }
 
 void FlareManager::cleanUp() {
-	m_render.cleanUp();
+	m_Renderer.cleanUp();
 }

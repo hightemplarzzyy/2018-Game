@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../Resource Management/glRequestProcessing/glrequest.h"
-#include "../../Resource Management/glRequestProcessing/glrequestprocessor.h"
+#include "../../Resource Management/gl request processing/glrequest.h"
+#include "../../Resource Management/gl request processing/glrequestprocessor.h"
 #include "texture.h"
 #include "texturemanager.h"
 

@@ -6,7 +6,7 @@ int DisplayManager::SCREEN_HEIGHT = 720;
 const char * DisplayManager::SCREEN_TITLE = "Game";
 float DisplayManager::ASPECTRATIO;
 
-int DisplayManager::FPS_CAP = 100;
+int DisplayManager::FPS_CAP = 120;
 float DisplayManager::MAX_DELTA = 0.2f;
 float DisplayManager::STABLE_DELTA_TIME = 2.0f;
 
@@ -16,7 +16,7 @@ float DisplayManager::TIME = 0;
 
 Window * DisplayManager::window;
 
-void DisplayManager::cretaDisplay() {
+void DisplayManager::createDisplay() {
 	window = new Window(SCREEN_TITLE, SCREEN_WIDTH, SCREEN_HEIGHT);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	ASPECTRATIO = (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT;

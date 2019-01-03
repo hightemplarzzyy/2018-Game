@@ -1,7 +1,7 @@
 #ifndef _BLOOM_COMBINE_FILTER_
 #define _BLOOM_COMBINE_FILTER_
 
-#include "../postProcessing/PostProcessingFilter.h"
+#include "../post processing/postprocessingfilter.h"
 #include "../basics/window.h"
 #include "BloomCombineShader.h"
 

@@ -26,7 +26,7 @@ public:
 
 	static Window * window;
 
-	static void cretaDisplay();
+	static void createDisplay();
 
 	static bool closedDisplay();
 	static void updateDisplay();

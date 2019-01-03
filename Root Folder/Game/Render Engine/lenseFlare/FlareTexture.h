@@ -5,30 +5,30 @@
 class FlareTexture {
 
 protected:
-	Texture m_texture;
-	float m_relativeScale;
+	Texture m_Texture;
+	float m_RelativeScale;
 
 public:
 	FlareTexture(Texture texture) {
-		m_texture = texture;
-		m_relativeScale = 1;
+		m_Texture = texture;
+		m_RelativeScale = 1;
 	}
 
 	FlareTexture(Texture texture, float relativeScale) {
-		m_texture = texture;
-		m_relativeScale = relativeScale;
+		m_Texture = texture;
+		m_RelativeScale = relativeScale;
 	}
 
 	bool isLoaded() {
-		return m_texture.isLoaded();
+		return m_Texture.isLoaded();
 	}
 
 	int getID() {
-		return m_texture.getID();
+		return m_Texture.getID();
 	}
 
 	float getRelativeScale() {
-		return m_relativeScale;
+		return m_RelativeScale;
 	}
 
 };

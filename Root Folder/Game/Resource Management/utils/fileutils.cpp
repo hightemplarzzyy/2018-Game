@@ -15,6 +15,7 @@ std::string FileUtils::read_file(const char * filepath)
 	delete[] data;
 	return result;
 }
+
 void FileUtils::write_file_a(const char * filepath, const char * content)
 {
 	FILE* file;
