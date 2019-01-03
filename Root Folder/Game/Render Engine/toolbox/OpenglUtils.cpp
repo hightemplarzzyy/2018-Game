@@ -17,7 +17,7 @@ void OpenglUtils::prepareNewRenderPass(Color skyColour) {
 
 //为新的渲染做准备，重置背景颜色
 void OpenglUtils::prepareNewRenderPass(Color skyColour, float alpha) {
-	glClearColor(skyColour.getR(), skyColour.getG(), skyColour.getR(), alpha);
+	glClearColor(skyColour.m_RGB.x, skyColour.m_RGB.y, skyColour.m_RGB.z, alpha);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	disabaleBlending();
@@ -26,7 +26,7 @@ void OpenglUtils::prepareNewRenderPass(Color skyColour, float alpha) {
 }
 
 void OpenglUtils::prepareNewRenderParse(Color skyColour, float alpha) {
-	glClearColor(skyColour.getR(), skyColour.getG(), skyColour.getR(), alpha);
+	glClearColor(skyColour.m_RGB.x, skyColour.m_RGB.y, skyColour.m_RGB.z, alpha);
 	//清除深度缓冲区
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	disabaleBlending();

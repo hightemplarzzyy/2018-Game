@@ -138,9 +138,9 @@ void ParticleRender::renderColourParticles(std::vector<Particle> & colourParticl
 		//传入颜色
 		Color color = colourParticles[i].getColour();
 		//printf("%f %f %f\n", color.getR(), color.getG(), color.getB());
-		buf[m_point++] = color.getR();
-		buf[m_point++] = color.getG();
-		buf[m_point++] = color.getB();
+		buf[m_point++] = color.channel[0];
+		buf[m_point++] = color.channel[1];
+		buf[m_point++] = color.channel[2];
 		buf[m_point++] = 1;
 		
 		//传入混合值
@@ -162,11 +162,11 @@ void ParticleRender::calculateLightingFactor() {
 
 	float brightness = 0 > -lightDir.y ? 0 : -lightDir.y;
 
-	vec3 diffuse = EnvironmentVariables::getLightColor().getColor();
+	vec3 diffuse = EnvironmentVariables::getLightColor().m_RGB;
 	float factor = EnvironmentVariables::getDiffuseWeighting() * brightness;
 	diffuse.scale(factor);
 
-	vec3 ambient = EnvironmentVariables::getLightColor().getColor();
+	vec3 ambient = EnvironmentVariables::getLightColor().m_RGB;
 	ambient.scale(EnvironmentVariables::getAmbientWeighting());
 
 

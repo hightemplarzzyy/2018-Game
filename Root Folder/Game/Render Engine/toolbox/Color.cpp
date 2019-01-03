@@ -1,159 +1,122 @@
 #include "Color.h"
 
 Color::Color() {
-	color = vec3();
+	m_A = 1.0f;
 }
 
 Color::Color(float r, float g, float b) {
-	color = vec3(r, g, b);
+	channel[0] = r;
+	channel[1] = g;
+	channel[2] = b;
+	m_A = 1.0f;
 }
 
 Color::Color(float r, float g, float b, bool convert) {
-	if (convert) {
-		color = vec3(r / 255.0f, g / 255.0f, b / 255.0f);
-	}
-	else {
-		color = vec3(r, g, b);
-	}
+	channel[0] = r / 255.0f;
+	channel[1] = g / 255.0f;
+	channel[2] = b / 255.0f;
+	m_A = 1.0f;
 }
 
-Color::Color(vec3 col) {
-	color = vec3(col);
+Color::Color(const vec3 &color) {
+	m_RGB = color;
+	m_A = 1.0f;
 }
 
 Color::Color(float r, float g, float b, float a) {
-	color = vec3(r, g, b);
-	this->a = a;
+	channel[0] = r;
+	channel[1] = g;
+	channel[2] = b;
+	m_A = a;
 }
 
-vec3 Color::getColor() {
-	return color;
-}
-
-float Color::getR() {
-	return color.x;
-}
-
-float Color::getG() {
-	return color.y;
-}
-
-float Color::getB() {
-	return color.z;
-}
-
-void Color::setColor(float r, float g, float b) {
-	color = vec3(r, g, b);
-}
-
-void Color::setColor(float r, float g, float b, float a) {
-	color = vec3(r, g, b);
-	this->a = a;
-}
-
-void Color::setColor(vec3 col) {
-	color = vec3(col);
-}
-
-void Color::setR(float r) {
-	color.x = r;
-}
-
-void Color::setG(float g) {
-	color.y = g;
-}
-
-void Color::setB(float b) {
-	color.z = b;
-}
-
-Color Color::interpolateColors(Color color1, Color color2, float blend) {
+Color Color::interpolateColors(const Color &maincolor, const Color &subcolor, float blend) {
 	Color result;
 
-	float r = (1 - blend) * color1.getR() + blend * color2.getR();
-	float g = (1 - blend) * color1.getG() + blend * color2.getG();
-	float b = (1 - blend) * color1.getB() + blend * color2.getB();
+	result.channel[0] = (1 - blend) * subcolor.channel[0] + blend * maincolor.channel[0];
+	result.channel[1] = (1 - blend) * subcolor.channel[1] + blend * maincolor.channel[1];
+	result.channel[2] = (1 - blend) * subcolor.channel[2] + blend * maincolor.channel[2];
 
-	result.setColor(r, g, b);
 	return result;
 }
 
-Color operator+(Color leftColor, Color &rightColor) {
-	float r = leftColor.getR() + rightColor.getR();
-	float g = leftColor.getG() + rightColor.getG();
-	float b = leftColor.getB() + rightColor.getB();
+void Color::interpolate(const Color &subcolor, float blend) {
 
-	return Color(r, g, b);
+	channel[0] = (1 - blend) * subcolor.channel[0] + blend * channel[0];
+	channel[1] = (1 - blend) * subcolor.channel[1] + blend * channel[1];
+	channel[2] = (1 - blend) * subcolor.channel[2] + blend * channel[2];
+	return;
+}
+
+
+Color& Color::add(const Color &other) {
+	channel[0] += other.channel[0];
+	channel[1] += other.channel[1];
+	channel[2] += other.channel[2];
+
+	return *this;
+}
+
+Color& Color::subtract(const Color &other) {
+	channel[0] -= other.channel[0];
+	channel[1] -= other.channel[1];
+	channel[2] -= other.channel[2];
+
+	return *this;
+}
+
+Color& Color::multiply(const Color &other) {
+	channel[0] *= other.channel[0];
+	channel[1] *= other.channel[1];
+	channel[2] *= other.channel[2];
+
+	return *this;
+}
+
+Color& Color::divide(const Color &other) {
+	channel[0] /= other.channel[0];
+	channel[1] /= other.channel[1];
+	channel[2] /= other.channel[2];
+
+	return *this;
+}
+
+Color operator+(Color leftColor, Color &rightColor) {
+	return leftColor.add(rightColor);
 }
 
 Color operator-(Color leftColor, Color &rightColor) {
-	float r = leftColor.getR() - rightColor.getR();
-	float g = leftColor.getG() - rightColor.getG();
-	float b = leftColor.getB() - rightColor.getB();
-
-	return Color(r, g, b);
+	return leftColor.subtract(rightColor);
 }
 
 Color operator*(Color leftColor, Color &rightColor) {
-	float r = leftColor.getR() * rightColor.getR();
-	float g = leftColor.getG() * rightColor.getG();
-	float b = leftColor.getB() * rightColor.getB();
-
-	return Color(r, g, b);
+	return leftColor.multiply(rightColor);
 }
 
 Color operator/(Color leftColor, Color &rightColor) {
-	float r = leftColor.getR() / rightColor.getR();
-	float g = leftColor.getG() / rightColor.getG();
-	float b = leftColor.getB() / rightColor.getB();
-
-	return Color(r, g, b);
+	return leftColor.divide(rightColor);
 }
 
-Color Color::add(Color col) {
-	color.x = color.x + col.getR();
-	color.y = color.y + col.getG();
-	color.z = color.z + col.getB();
-
-	return *this;
+Color& Color::operator+=(const Color& other) {
+	return add(other);
 }
 
-Color Color::sub(Color col) {
-	color.x = color.x - col.getR();
-	color.y = color.y - col.getG();
-	color.z = color.z - col.getB();
-
-	return *this;
+Color& Color::operator-=(const Color& other) {
+	return subtract(other);
 }
 
-Color Color::multiply(Color col) {
-	color.x = color.x * col.getR();
-	color.y = color.y * col.getG();
-	color.z = color.z * col.getB();
-
-	return *this;
+Color& Color::operator*=(const Color& other) {
+	return multiply(other);
 }
 
-Color Color::div(Color col) {
-	color.x = color.x / col.getR();
-	color.y = color.y / col.getG();
-	color.z = color.z / col.getB();
-
-	return *this;
+Color& Color::operator/=(const Color& other) {
+	return divide(other);
 }
 
-void Color::operator+=(Color col) {
-	this->add(col);
+bool Color::operator==(const Color& other) {
+	return m_RGB == other.m_RGB;
 }
 
-void Color::operator-=(Color col) {
-	this->sub(col);
-}
-
-void Color::operator*=(Color col) {
-	this->multiply(col);
-}
-
-void Color::operator/=(Color col) {
-	this->div(col);
+bool Color::operator!=(const Color& other) {
+	return m_RGB != other.m_RGB;
 }

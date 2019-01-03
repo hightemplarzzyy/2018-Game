@@ -16,7 +16,7 @@ ParticleSystem::ParticleSystem(ParticleTexture texture, ParticleSpawn * spawn,
 
 ParticleSystem::ParticleSystem(Color color, bool additive, ParticleSpawn * spawn,
 	float pps, float speed, float gravityComplient, float lifeLength, float scale) {
-	m_color = new Color(color.getColor());
+	m_color = new Color(color.m_RGB);
 	m_additive = additive;
 	m_spawn = spawn;
 	m_pps = pps;

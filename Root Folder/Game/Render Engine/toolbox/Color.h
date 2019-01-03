@@ -3,42 +3,38 @@
 
 
 class Color {
-private:
-	vec3 color;
-	float a = 1.0f;
+public:
+	union {
+		float channel[3];
+		vec3 m_RGB;
+	};
+	float m_A;
+
 public:
 	Color();
 	Color(float r, float g, float b);
 	Color(float r, float g, float b, bool convert);
 	Color(float r, float g, float b, float a);
-	Color(vec3 col);
+	Color(const vec3 &color);
 
-	vec3 getColor();
-	float getR();
-	float getG();
-	float getB();
+	static Color interpolateColors(const Color &maincolor, const Color &subcolor, float blend);
+	void interpolate(const Color &subcolor, float blend);
 
-	void setColor(float r, float g, float b);
-	void setColor(float r, float g, float b, float a);
-	void setColor(vec3 col);
-	void setR(float r);
-	void setG(float g);
-	void setB(float b);
+	Color& add(const Color &other);
+	Color& subtract(const Color &other);
+	Color& multiply(const Color &other);
+	Color& divide(const Color &other);
 
-	static Color interpolateColors(Color color1, Color color2, float blend);
+	friend Color operator+(Color leftColor, const Color &rightColor);
+	friend Color operator-(Color leftColor, const Color &rightColor);
+	friend Color operator*(Color leftColor, const Color &rightColor);
+	friend Color operator/(Color leftColor, const Color &rightColor);
 
-	friend Color operator+(Color leftColor, Color &rightColor);
-	friend Color operator-(Color leftColor, Color &rightColor);
-	friend Color operator*(Color leftColor, Color &rightColor);
-	friend Color operator/(Color leftColor, Color &rightColor);
+	Color& operator+=(const Color &other);
+	Color& operator-=(const Color &other);
+	Color& operator*=(const Color &other);
+	Color& operator/=(const Color &other);
+	bool operator==(const Color &other);
+	bool operator!=(const Color &other);
 
-	Color add(Color col);
-	Color sub(Color col);
-	Color multiply(Color col);
-	Color div(Color col);
-
-	void operator+=(Color col);
-	void operator-=(Color col);
-	void operator*=(Color col);
-	void operator/=(Color col);
 };

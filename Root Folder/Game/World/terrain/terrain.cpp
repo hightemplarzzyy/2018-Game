@@ -63,9 +63,9 @@ vector<vec3> Terrain::generateColorsVector(int gridX, int gridZ, const vector<ve
 	for (int z = 0; z < _colors.size(); z++) {
 		for (int x = 0; x < _colors.size(); x++) {
 			Color color = _colors[z][x];
-			colors[pointer].x = color.getR();
-			colors[pointer].y = color.getG();
-			colors[pointer].z = color.getB();
+			colors[pointer].x = color.channel[0];
+			colors[pointer].y = color.channel[1];
+			colors[pointer].z = color.channel[2];
 			pointer++;
 		}
 	}
