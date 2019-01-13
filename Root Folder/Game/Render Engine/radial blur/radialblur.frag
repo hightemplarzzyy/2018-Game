@@ -24,8 +24,8 @@ void main(){
   out_colour = vec4(0.0,0.0,0.0,1.0);
 
   for(int i = 0; i < NUM_SAMPLES ;i++){
-    vec4 sample = texture(originalTexture,textureCoords);
-    out_colour += (sample * illuminationDecay * weight) / NUM_SAMPLES;
+    vec4 sampler = texture(originalTexture,textureCoords);
+    out_colour += (sampler * illuminationDecay * weight) / NUM_SAMPLES;
     illuminationDecay *= decay;//离的越远影响越小
     textureCoords += toLight;//延径向移动
   }

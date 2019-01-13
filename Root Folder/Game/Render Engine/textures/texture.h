@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "../../Resource Management/utils/fileutils.h"
 #include "../toolbox/maths/maths_func.h"

@@ -1,35 +1,29 @@
 #include <iostream>
 
-#include "Render Engine/basics/window.h"
-#include "Source/main/camera.h"
+#include "Render Engine/basics/DIsplayManager.h"
 #include "Render Engine/demo renderer/demobatchrenderer.h"
+#include "World/day night cycle/daynightcycle.h"
+#include "Render Engine/lenseFlare/LenseFlare.h"
+#include "Resource Management/resource management/particleatlascache.h"
+#include "Render Engine/particles/ParticleSystem.h"
+#include "Render Engine/particle spawns/circlespawn.h"
+#include "Render Engine/particle spawns/pointspawn.h"
+#include "Render Engine/particles/particleMaster.h"
+#include "Source/entity/models.h"
+#include "Source/main/CamerManager.h"
 
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720
 
 
-
 int main() {
-	Window window("Game", WINDOW_WIDTH, WINDOW_HEIGHT);
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-	DemoBatchRenderer demobatchrenderer;
 	
-
-	double x, y;
-
-
-	Camera camera(&window);
-
-	while (!window.closed()) {
-		window.clear();
-		window.getMousePosition(x, y);
-
-		demobatchrenderer.getShader()->light_position->load(x * 16.0f / 1280.0f, 9.0f - y * 9.0f / 720.0f);
-		demobatchrenderer.render();
-
-		window.update();
-	}
-
 	return 0;
 }
+
+
+
+
+
+

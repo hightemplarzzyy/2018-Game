@@ -1,4 +1,4 @@
-#include "particleRender.h"
+﻿#include "particleRender.h"
 #include "../environment/environment.h"
 #include "../../Resource Management/resource management/particleatlascache.h"
 
@@ -24,7 +24,7 @@ void ParticleRender::initShaders(const mat4 & projectionMatrix) {
 	m_shader->projection_matrix->load(projectionMatrix);
 	m_shader->disable();
 
-	m_colourShader = new ParticleColourShader("Render Engine/particles/particleColour.vert", "Render Engine/particles/particleColour.frag");
+	m_colourShader = new ParticleColourShader("Render Engine/particles/particlecolor.vert", "Render Engine/particles/particlecolor.frag");
 	
 	m_colourShader->enable();
 	m_colourShader->projection_matrix->load(projectionMatrix);
@@ -73,15 +73,24 @@ void ParticleRender::renderTexturedParticles(ParticleTexture & texture,
 
 		//传入矩阵
 		mat4 model = mat4::translation(vec3(particles[texture][i].getPosition()));
-		float scaleSize = particles[texture][i].getScale();
-		model *= mat4::scale(vec3(scaleSize, scaleSize, scaleSize));
-		//TODO:这里没有乘view矩阵 因为在着色器里面有一个
+		//保证始终朝向屏幕
+		model.elements[0 * 4 + 0] = viewMatrix.elements[0 * 4 + 0];
+		model.elements[0 * 4 + 1] = viewMatrix.elements[1 * 4 + 0];
+		model.elements[0 * 4 + 2] = viewMatrix.elements[2 * 4 + 0];
+		model.elements[1 * 4 + 0] = viewMatrix.elements[0 * 4 + 1];
+		model.elements[1 * 4 + 1] = viewMatrix.elements[1 * 4 + 1];
+		model.elements[1 * 4 + 2] = viewMatrix.elements[2 * 4 + 1];
+		model.elements[2 * 4 + 0] = viewMatrix.elements[0 * 4 + 2];
+		model.elements[2 * 4 + 1] = viewMatrix.elements[1 * 4 + 2];
+		model.elements[2 * 4 + 2] = viewMatrix.elements[2 * 4 + 2];
+		model *= viewMatrix;
 		model *= mat4::rotation(particles[texture][i].getRotation(), vec3(0, 0, 1));
 		model *= mat4::rotation(particles[texture][i].getRotX(), vec3(0, 1, 0));
+		float scaleSize = particles[texture][i].getScale();
+		model *= mat4::scale(vec3(scaleSize, scaleSize, scaleSize));
 		for (int j = 0; j < 16; j++) {
 			buf[m_point++] = model.elements[j];
 		}
-
 		//传入偏移坐标
 		vec2 offset1 = particles[texture][i].getTexOffset1();
 		vec2 offset2 = particles[texture][i].getTexOffset2();
@@ -126,11 +135,21 @@ void ParticleRender::renderColourParticles(std::vector<Particle> & colourParticl
 	for (int i = 0; i < colourParticles.size(); i++) {
 		//传入矩阵
 		mat4 model = mat4::translation(vec3(colourParticles[i].getPosition()));
-		float scaleSize = colourParticles[i].getScale();
-		model *= mat4::scale(vec3(scaleSize, scaleSize, scaleSize));
-		//TODO:这里没有乘view矩阵 因为在着色器里面有一个
+		//保证始终朝向屏幕
+		model.elements[0 * 4 + 0] = viewMatrix.elements[0 * 4 + 0];
+		model.elements[0 * 4 + 1] = viewMatrix.elements[1 * 4 + 0];
+		model.elements[0 * 4 + 2] = viewMatrix.elements[2 * 4 + 0];
+		model.elements[1 * 4 + 0] = viewMatrix.elements[0 * 4 + 1];
+		model.elements[1 * 4 + 1] = viewMatrix.elements[1 * 4 + 1];
+		model.elements[1 * 4 + 2] = viewMatrix.elements[2 * 4 + 1];
+		model.elements[2 * 4 + 0] = viewMatrix.elements[0 * 4 + 2];
+		model.elements[2 * 4 + 1] = viewMatrix.elements[1 * 4 + 2];
+		model.elements[2 * 4 + 2] = viewMatrix.elements[2 * 4 + 2];
+		model *= viewMatrix;
 		model *= mat4::rotation(colourParticles[i].getRotation(), vec3(0, 0, 1));
 		model *= mat4::rotation(colourParticles[i].getRotX(), vec3(0, 1, 0));
+		float scaleSize = colourParticles[i].getScale();
+		model *= mat4::scale(vec3(scaleSize, scaleSize, scaleSize));
 		for (int j = 0; j < 16; j++) {
 			buf[m_point++] = model.elements[j];
 		}

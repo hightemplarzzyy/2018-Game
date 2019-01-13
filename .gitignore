@@ -37,3 +37,15 @@ test/
 *.exe
 *.out
 *.app
+/Root Folder/Game.sln
+/Root Folder/Game/Game.vcxproj
+/Root Folder/Game/Game.vcxproj.filters
+/Root Folder/Game/Game.vcxproj.user
+/Root Folder/Game/temp/terrainShader1.h
+/Root Folder/Game/temp/terrain1.h
+/Root Folder/Game/temp/terrain1.cpp
+/Root Folder/Game/temp/terrain.vert
+/Root Folder/Game/temp/terrain.frag
+/Root Folder/Game/temp/PostProcessSelection.h
+/Root Folder/Game/temp/Perlin.h
+/Root Folder/Game/temp/Perlin.cpp

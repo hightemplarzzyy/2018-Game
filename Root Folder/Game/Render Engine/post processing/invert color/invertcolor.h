@@ -12,8 +12,8 @@ private:
 
 public:
 	InvertColor(int width, int heigh) {
-		ishader = new InvertColorShader("Render Engine/postProcessing/InvertColor/InvertColor.vert",
-			"Render Engine/postProcessing/InvertColor/InvertColor.frag");
+		ishader = new InvertColorShader("Render Engine/post processing/invert color/InvertColor.vert",
+			"Render Engine/post processing/invert color/InvertColor.frag");
 		iFilter = new PostProcessingFilter(ishader, width, heigh,false);
 	}
 

@@ -1,4 +1,4 @@
-#include "particle.h"
+﻿#include "particle.h"
 #include "../basics/displaymanager.h"
 
 

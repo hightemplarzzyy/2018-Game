@@ -16,7 +16,7 @@ FlareRenderer::FlareRenderer() {
 	TOTAL_SAMPLES = pow(TEST_BOX_WIDTH * DisplayManager::getScreenWidth(), 2) * 4.0f;
 
 	m_Query = new Query(GL_SAMPLES_PASSED);
-	m_Shader = new GuiShader("Render Engine/guiRendering/gui.vert", "Render Engine/guiRendering/gui.frag");
+	m_Shader = new GuiShader("Render Engine/gui rendering/gui.vert", "Render Engine/gui rendering/gui.frag");
 	m_Vao.addBuffer(new Buffer(POSITIONS, 8, 2), 0);
 	initShader();
 }

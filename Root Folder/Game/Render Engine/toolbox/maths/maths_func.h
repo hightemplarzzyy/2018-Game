@@ -29,7 +29,7 @@ public:
 		return sqrt(dx * dx + dy * dy);
 	}
 
-	//äº§ç”Ÿä¸€ä¸ªå•ä½éšæœºå‘é‡
+	//²úÉúÒ»¸öµ¥Î»Ëæ»úÏòÁ¿
 	static vec3 generteRandomUnitVector() {
 		float theta = float(rand() % 100) / 50.0f * M_PI;
 		float z = float(rand() % 100) / 100.0f;
@@ -39,25 +39,24 @@ public:
 		return vec3(x, y, z);
 	}
 
-	//äº§ç”Ÿä¸€ä¸ªå‚ç›´äºæ³•çº¿çš„åœ†ä¸Šçš„å‘é‡
+	//²úÉúÒ»¸ö´¹Ö±ÓÚ·¨ÏßµÄÔ²ÉÏµÄÏòÁ¿
 
 	static vec3 randomPointOnCircle(const vec3 & normal, float radius) {
-		vec3 randomPerpendicular; 
+		vec3 randomPerpendicular;
 		do {
 			vec3 randomVector = generteRandomUnitVector();
 			randomPerpendicular = cross(randomVector, normal);
 		} while (randomPerpendicular.lengthSquared() == 0);
 		randomPerpendicular.normalize();
-		//TODO:åŸå‡½æ•°æ“ä½œæœ‰ç‚¹è¿·
+		//TODO:Ô­º¯Êı²Ù×÷ÓĞµãÃÔ
 		float dis = float(rand() % 100) / 100;
-  
-//		float dis = 1;
+
 		float factor = dis * radius;
 		randomPerpendicular.scale(factor);
 		return randomPerpendicular;
 	}
 
-	//äº§ç”Ÿåœ†é”¥æ–¹å‘çš„å‘é‡
+	//²úÉúÔ²×¶·½ÏòµÄÏòÁ¿
 	static vec3 generateRandomUnitVectorWithinCone(vec3 coneDirection, float angle) {
 		float cosAngle = cos(angle / 180.0f * M_PI);
 		float theta = float(rand() % 100) / 50.0f * M_PI;
@@ -67,8 +66,8 @@ public:
 		float y = rootOneMinusZSqured * sin(theta);
 
 		vec4 direction = vec4(x, y, z, 1.0f);
-		//å¦‚æœconeDirectionä¸æ˜¯zè½´
-		if (coneDirection.x != 0 || coneDirection.y != 0 || 
+		//Èç¹ûconeDirection²»ÊÇzÖá
+		if (coneDirection.x != 0 || coneDirection.y != 0 ||
 			(coneDirection.z != 1 && coneDirection.z != -1)) {
 			vec3 rotateAxis = cross(coneDirection, vec3(0, 0, 1));
 			rotateAxis.normalize();
@@ -83,14 +82,14 @@ public:
 		return vec3(direction.x, direction.y, direction.z);
 	}
 
-	//è®°å¾—deleteåˆ›å»ºçš„å‘é‡
+	//¼ÇµÃdelete´´½¨µÄÏòÁ¿
 	static vec3 * converToScreenSpace(vec3 position, mat4 viewMatrix, mat4 projMatrix) {
 		vec4 coords = vec4(position.x, position.y, position.z, 1.0f);
 		coords = coords * viewMatrix * projMatrix;
 		return clipSpaceToScreenSpace(coords);
 	}
 
-	//è®°å¾—deleteåˆ›å»ºçš„å‘é‡
+	//¼ÇµÃdelete´´½¨µÄÏòÁ¿
 	static vec3 * clipSpaceToScreenSpace(vec4 coords) {
 		if (coords.w < 0) {
 			return NULL;

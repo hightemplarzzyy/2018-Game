@@ -17,6 +17,7 @@ struct mat4 {
 	mat4& multiply(const mat4 &other);
 	friend mat4 operator*(mat4 left, mat4 &right);
 	friend vec4 operator*(vec4 left, mat4 & right);
+	friend vec3 operator*(vec3 left, mat4 right);
 	mat4& operator*=(const mat4& other);
 
 	static mat4 orthographic(float left, float right, float bottom, float top, float near, float far);

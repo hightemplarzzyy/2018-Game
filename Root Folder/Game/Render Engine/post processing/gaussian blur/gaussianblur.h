@@ -18,11 +18,11 @@ private:
 
 public:
 	GaussianBlur(int width, int heigh) {
-		vshader = new VerticalBlurShader("Render Engine/postProcessing/GaussianBlur/verticalBlur.vert", "Render Engine/postProcessing/GaussianBlur/blur.frag");
+		vshader = new VerticalBlurShader("Render Engine/post processing/gaussian blur/verticalblur.vert", "Render Engine/post processing/Gaussian Blur/blur.frag");
 		vshader->enable();
 		vshader->height->load(float(heigh));
 		vshader->disable();
-		hshader = new HorizontalBlurShader("Render Engine/postProcessing/GaussianBlur/horizontalBlur.vert", "Render Engine/postProcessing/GaussianBlur/blur.frag");
+		hshader = new HorizontalBlurShader("Render Engine/post processing/gaussian blur/horizontalblur.vert", "Render Engine/post processing/Gaussian Blur/blur.frag");
 		hshader->enable();
 		hshader->width->load(float(width));
 		hshader->disable();

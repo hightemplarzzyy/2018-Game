@@ -1,4 +1,4 @@
-#ifndef _ENVIRONMENT_VARIABLES_H_
+﻿#ifndef _ENVIRONMENT_VARIABLES_H_
 #define _ENVIRONMENT_VARIABLES_H_
 
 #include "../toolbox/Color.h"
@@ -12,12 +12,9 @@ public:
 	static Color horizonColour;
 	static Color skyColour;
 	static vec3 VISIBLE_SUN_DIR;
-	static vec2 MIST_VALS;			//Îí
+	static vec2 MIST_VALS;			//雾
 	static Color MIST_COL;
 	static float SHADOW_DARKNESS;
-
-
-	//TODO£ºÈÕÒ¹Ñ­»·
 
 private:
 	static float LARGE_NUMBER;

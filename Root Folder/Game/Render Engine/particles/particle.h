@@ -1,4 +1,4 @@
-#ifndef _PARTICLES_H_
+﻿#ifndef _PARTICLES_H_
 #define _PARTICLES_H_
 
 #include "../toolbox/maths/maths_func.h"

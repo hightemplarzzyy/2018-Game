@@ -17,7 +17,8 @@ void SunCycle::addSun() {
 
 void SunCycle::update(float time) {
 	double theta = (time - MIDNIGHT) * 2 * M_PI;
-	//TODO:标记透视矩阵改动x,y取反
+	//标记透视矩阵改动x,y取反
+	//xy平面是个椭圆 xz平面是个圆 
 	m_lightSourcePos.x = -sin(theta);
 	m_lightSourcePos.y = -cos(theta) * STEEPNESS + DAY_BIAS;
 	m_lightSourcePos.z = cos(theta);

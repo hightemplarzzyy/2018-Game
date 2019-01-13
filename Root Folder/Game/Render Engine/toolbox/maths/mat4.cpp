@@ -75,6 +75,20 @@ vec4 operator*(vec4 left, mat4 & right) {
 	return ans;
 }
 
+vec3 operator*(vec3 left, mat4 right) {
+	vec3 result;
+	result.x = left.x * right.elements[4 * 0 + 0] +
+		left.y * right.elements[4 * 1 + 0] +
+		left.z * right.elements[4 * 2 + 0];
+	result.y = left.x * right.elements[4 * 0 + 1] +
+		left.y * right.elements[4 * 1 + 1] +
+		left.z * right.elements[4 * 2 + 1];
+	result.z = left.x * right.elements[4 * 0 + 2] +
+		left.y * right.elements[4 * 1 + 2] +
+		left.z * right.elements[4 * 2 + 2];
+	return result;
+}
+
 mat4& mat4::operator*=(const mat4& other) {
 	return multiply(other);
 }

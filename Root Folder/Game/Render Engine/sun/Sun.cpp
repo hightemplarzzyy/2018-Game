@@ -1,7 +1,8 @@
 #include "Sun.h"
 #include "cfloat"
+#include "../../Source/main/CamerManager.h"
 
-float Sun::DISTANCE = 180;
+float Sun::DISTANCE = 20;
 
 Sun::Sun(ParticleTexture texture, float scale, vec3 direction) :
 	Particle(texture, vec3(), vec3(), 0, FLT_MAX, 0, scale) {
@@ -21,6 +22,5 @@ void Sun::update(vec3 direction) {
 }
 
 vec3 Sun::getPosition() {
-	//TODO:相机位置不能获取
-	return m_offset;
+	return m_offset + CameraManager::pcamera->getPosition();
 }

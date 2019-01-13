@@ -2,7 +2,7 @@
 
 #include "../environment/environment.h"
 
-float FlareManager::BRIGHTNESS = 0.5f;
+float FlareManager::BRIGHTNESS = 0.8f;
 float FlareManager::FIRST_SIZE = 0.4f;
 float FlareManager::MIDDLE_SIZE = 0.07f;
 float FlareManager::GAP = FIRST_SIZE - MIDDLE_SIZE;
@@ -49,11 +49,10 @@ void FlareManager::render(vec3 sunDirection) {
 		return;
 	}
 	vec2 toCenter = CENTER_SCREEN - *pSunCoords;
-	//TODO:光线较暗不便于显示暂时屏蔽
-	//float brightness = 1 - (sqrt(toCenter.x * toCenter.x + toCenter.y * toCenter.y) / MAX_SCREEN_DIS);
-	//float dirBrgihtness = EnvironmentVariables::getSunEffectBrightness();
-	//brightness *= dirBrgihtness;
-	float brightness = 1;
+	float brightness = 1 - (sqrt(toCenter.x*toCenter.x + toCenter.y*toCenter.y) / MAX_SCREEN_DIS);
+	float dirBrgihtness = EnvironmentVariables::getSunEffectBrightness();
+	brightness *= dirBrgihtness;
+	//printf("%f,%f,,%f\n", pSunCoords->x, pSunCoords->y, brightness);
 	if (brightness <= 0) {
 		return;
 	}

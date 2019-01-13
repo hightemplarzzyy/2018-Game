@@ -6,6 +6,7 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
 void mouse_button_callback(GLFWwindow *window, int button, int action, int mods);
 void cursor_position_callback(GLFWwindow *window, double xpos, double ypos);
 void window_resize(GLFWwindow *window, int width, int height);
+void scroll_callback(GLFWwindow *Window, double xoffset, double yoffet);
 void APIENTRY glDebugOutput(GLenum source,
 	GLenum type,
 	GLuint id,
@@ -88,7 +89,7 @@ bool Window::init() {
 	glfwSetKeyCallback(m_Window, key_callback);
 	glfwSetMouseButtonCallback(m_Window, mouse_button_callback);
 	glfwSetCursorPosCallback(m_Window, cursor_position_callback);
-
+	glfwSetScrollCallback(m_Window, scroll_callback);
 	if (glewInit() != GLEW_OK) {
 		std::cout << "GLEW fail" << std::endl;
 		return false;
@@ -139,6 +140,19 @@ void cursor_position_callback(GLFWwindow *window, double xpos, double ypos) {
 	win->m_X = xpos;
 	win->m_Y = ypos;
 	//std::cout << "x: " << xpos << " y: " << ypos << std::endl;
+}
+
+void scroll_callback(GLFWwindow * window, double xoffset, double yoffset) {
+	Window * win = (Window*)glfwGetWindowUserPointer(window);
+	if (win->m_DisDelta >= -30.0f && win->m_DisDelta <= 40.0f) {
+		win->m_DisDelta -= yoffset;
+	}
+	if (win->m_DisDelta < -30.0f) {
+		win->m_DisDelta = -30.0f;
+	}
+	if (win->m_DisDelta > 40.0f) {
+		win->m_DisDelta = 40.0f;
+	}
 }
 
 
