@@ -13,6 +13,7 @@ protected:
 	const char *m_VertPath, *m_FragPath;
 	
 public:
+	Shader() = default;
 	Shader(const char* vertexPath, const char* fragmentPath);
 	~Shader();
 

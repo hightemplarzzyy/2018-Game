@@ -20,7 +20,6 @@ private:
 
 
 	static long getCurrentTime();
-	static void updateDelta();
 
 public:
 
@@ -42,7 +41,7 @@ public:
 	static bool isMouseButtonPressed(unsigned int button);
 	static void getMousePosition(double &x, double &y);
 
-
+	static void updateDelta();
 	
 
 };

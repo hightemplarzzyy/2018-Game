@@ -10,11 +10,18 @@ private:
 	float m_Pitch;
 	float m_Yaw;
 	Window *m_Window;
+	float m_Near;
+	float m_Far;
+	float m_Fov;
+	mat4 m_ViewMatrix;
 
 public:
 	Camera(Window *w) {
 		m_Window = w;
-		m_Position.x = m_Position.y = m_Position.z = m_Pitch = m_Yaw  = 0;
+		m_Near = 0.15f;
+		m_Far = 2000.0f;
+		m_Fov = 35.0f;
+		m_Position.x = m_Position.y = m_Position.z = m_Pitch = m_Yaw = 0.0f;
 	};
 
 	void move() {
@@ -47,6 +54,36 @@ public:
 	vec3 getPosition() {
 		return vec3();
 	}
+
+	float getNearPlane() {
+		return m_Near;
+	};
+
+	float getFarPlane() {
+		return m_Far;
+	};
+
+	float getFOV() {
+		return m_Fov;
+	};
+
+	mat4 getViewMatrix() {
+		m_ViewMatrix = CreateViewMatrix();
+		return m_ViewMatrix;
+	};
+
+	void reflect(float waterHeight) {
+		m_Position.y -= 2 * (m_Position.y - waterHeight);
+		m_Pitch = -m_Pitch;
+	};
+
+	float getPitch() {
+		return m_Pitch;
+	};
+
+	float getYaw() {
+		return m_Yaw;
+	};
 
 	mat4 CreateViewMatrix() {
 		mat4 view_matrix(1.0);
