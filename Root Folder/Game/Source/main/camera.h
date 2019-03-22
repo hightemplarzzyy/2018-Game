@@ -52,7 +52,7 @@ public:
 	};
 
 	vec3 getPosition() {
-		return vec3();
+		return m_Position;
 	}
 
 	float getNearPlane() {
