@@ -42,6 +42,7 @@ public:
 	vec3 getPosition();
 	vec3 getTargetPosition();
 	mat4 CreateViewMatrix();
+	void reflect(vec3 waterNormal);
 
 	//static Camera & getCamera();
 };

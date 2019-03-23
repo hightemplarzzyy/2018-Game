@@ -185,6 +185,12 @@ mat4  Camera::lookAt(const vec3 & cameraPos, const vec3 & cameraTarget, const ve
 	return ans;
 }
 
+void Camera::reflect(vec3 waterNormal){
+	m_Offset = waterNormal * 2 * dot(waterNormal, m_Offset) - m_Offset;
+	m_Offset = vec3(0.0, 0.0, 0.0) - m_Offset;
+	m_Pitch = -m_Pitch;
+}
+
 //Camera & Camera::getCamera() {
 //	static Camera  * camear;
 //	if (camear == nullptr) {
