@@ -10,9 +10,6 @@
 class WaterHdRenderer 
 {
 private:
-	static int REFLECTION_TEX_UNIT;
-	static int DEPTH_TEX_UNIT;
-
 	static float WAVE_PERIOD;
 
 	WaterFrameBuffers fbos;
